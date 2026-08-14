@@ -88,7 +88,7 @@ const NavBar: React.FC<{
         {!isSticky && (
           <div className="hidden md:block md:px-4 lg:p-0">
             <div className="relative flex items-center">
-              <div className="absolute h-20 w-20 rounded-lg bg-bg backdrop-blur-[30px]"></div>
+              <div className="absolute h-20 w-20 rounded-lg"></div>
               <Image
                 draggable="false"
                 src="/NeonStyles.png"
@@ -115,8 +115,12 @@ const NavBar: React.FC<{
             {navLinks.map(({ label, ref }) => (
               <CustomNavLink
                 key={label}
-                scrollTo={() =>
-                  ref.current?.scrollIntoView({ behavior: "smooth" })
+                scrollTo={
+                  label === "Home"
+                    ? () => {
+                        window.location.href = "/";
+                      }
+                    : () => ref.current?.scrollIntoView({ behavior: "smooth" })
                 }
               >
                 {label}
