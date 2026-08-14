@@ -50,7 +50,7 @@ const HeroSection = () => {
   };
 
   return (
-    <main className="container z-10 mx-auto flex max-h-full w-full items-center justify-center">
+    <main className="container z-10 mx-auto flex h-full w-full items-center justify-center pt-10">
       <div className="flex flex-row items-center max-sm:flex-col">
         <div className="relative">
           <div className="relative -top-[6rem] z-10 h-[480px] w-[480px] scale-50 items-center justify-center sm:scale-[97rem] md:-top-[20px]">

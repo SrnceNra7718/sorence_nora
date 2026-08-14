@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
 
 const iconMap: { [key: string]: string } = {
@@ -11,84 +10,118 @@ const iconMap: { [key: string]: string } = {
   Contact: "mail",
 };
 
-const CustomNavLink: React.FC<{ link: string; children: React.ReactNode }> = ({
-  link,
-  children,
-}) => {
+const CustomNavLink: React.FC<{
+  scrollTo: () => void;
+  children: React.ReactNode;
+}> = ({ scrollTo, children }) => {
   const [isHovered, setIsHovered] = useState(false);
 
-  const linkClasses = `transition-all duration-200 ${
+  const linkClasses = `transition-all duration-200 outline-none ring-0 focus:outline-none focus:ring-0 ${
     isHovered
       ? "text-foregroundparchment"
       : "text-foregroundlightcyan opacity-30"
   }`;
 
-  const leftArrow = isHovered && (
-    <span className="absolute -left-3 top-0 hidden md:block">&lt;</span>
-  );
-
-  const rightArrow = isHovered && (
-    <span className="absolute -right-6 top-0 hidden md:block">/&gt;</span>
-  );
-
   const iconName = iconMap[children as string];
 
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    scrollTo();
+  };
+
   return (
-    <Link
-      href={link}
+    <a
+      href="#"
+      onClick={handleClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className={linkClasses}
     >
       <span className="relative flex flex-row items-center">
-        {leftArrow}
+        {isHovered && (
+          <span className="absolute -left-3 top-0 hidden md:block">&lt;</span>
+        )}
         <span className="material-symbols-outlined block max-sm:h-6 max-sm:w-6">
           {iconName}
-        </span>{" "}
-        {/* Always show icon */}
-        <span className={`hidden md:inline`}>{children}</span>{" "}
-        {/* Hide text on smaller screens */}
-        {rightArrow}
+        </span>
+        <span className={`hidden md:inline`}>{children}</span>
+        {isHovered && (
+          <span className="absolute -right-6 top-0 hidden md:block">/&gt;</span>
+        )}
       </span>
-    </Link>
+    </a>
   );
 };
 
-const NavBar = () => {
+const NavBar: React.FC<{
+  isSticky: boolean;
+  refs: {
+    homeRef: React.RefObject<HTMLDivElement>;
+    skillsRef: React.RefObject<HTMLDivElement>;
+    projectsRef: React.RefObject<HTMLDivElement>;
+    resumeRef: React.RefObject<HTMLDivElement>;
+    contactRef: React.RefObject<HTMLDivElement>;
+  };
+}> = ({ isSticky, refs }) => {
+  const navLinks = [
+    { label: "Home", ref: refs.homeRef },
+    { label: "Skills", ref: refs.skillsRef },
+    { label: "Projects", ref: refs.projectsRef },
+    { label: "Resume", ref: refs.resumeRef },
+    { label: "Contact", ref: refs.contactRef },
+  ];
+
   return (
     <>
       <link
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,600,1,0"
       />
-      <div className="mx-auto my-4 flex max-w-4xl items-center justify-between">
-        {/* Logo Image */}
-        <div className="hidden md:block md:px-4 lg:p-0">
-          <div className="relative flex items-center">
-            {/* Box behind the image with background blur */}
-            <div className="absolute h-20 w-20 rounded-lg bg-bg backdrop-blur-[30px]"></div>
-
-            {/* Image */}
-            <Image
-              draggable="false" // Prevent image dragging
-              src="/logo.svg"
-              alt="Logo"
-              width={50}
-              height={50}
-              className="relative mr-6 h-20 w-20"
-            />
+      <div
+        className={`mx-auto my-4 flex max-w-4xl items-center justify-between rounded-[50px] border-[1px] outline-none ring-0 transition-all duration-300 focus:outline-none focus:ring-0 ${
+          isSticky
+            ? "border-[#00FFFF] bg-[#00FFFF] bg-opacity-5 px-5 py-3 backdrop-blur-[5px]"
+            : "border-transparent bg-transparent px-4"
+        }`}
+      >
+        {/* Logo – hidden when sticky */}
+        {!isSticky && (
+          <div className="hidden md:block md:px-4 lg:p-0">
+            <div className="relative flex items-center">
+              <div className="absolute h-20 w-20 rounded-lg bg-bg backdrop-blur-[30px]"></div>
+              <Image
+                draggable="false"
+                src="/NeonStyles.png"
+                alt="Logo"
+                width={50}
+                height={50}
+                className="relative mr-6 h-20 w-20"
+              />
+            </div>
           </div>
-        </div>
+        )}
 
-        <nav className="fixed bottom-0 left-0 z-50 flex w-full flex-1 items-center justify-center rounded-[50px] pb-3 pt-2 font-sans font-semibold backdrop-blur-[5px] md:static md:w-auto md:px-5 md:py-3">
-          <div className="flex space-x-4 text-sm md:space-x-8 md:text-xl lg:space-x-16">
-            {["Home", "Skills", "Projects", "Resume", "Contact"].map(
-              (section, index) => (
-                <CustomNavLink key={index} link={`#${section.toLowerCase()}`}>
-                  {section}
-                </CustomNavLink>
-              ),
-            )}
+        {/* Nav links – always centered */}
+        <nav
+          className={`flex flex-1 items-center justify-center font-sans font-semibold ${
+            isSticky ? "" : "md:justify-end"
+          }`}
+        >
+          <div
+            className={`flex space-x-4 text-sm md:space-x-8 md:text-xl ${
+              isSticky ? "lg:space-x-16" : "lg:space-x-16"
+            }`}
+          >
+            {navLinks.map(({ label, ref }) => (
+              <CustomNavLink
+                key={label}
+                scrollTo={() =>
+                  ref.current?.scrollIntoView({ behavior: "smooth" })
+                }
+              >
+                {label}
+              </CustomNavLink>
+            ))}
           </div>
         </nav>
       </div>
