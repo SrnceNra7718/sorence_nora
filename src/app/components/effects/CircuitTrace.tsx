@@ -32,8 +32,8 @@ const CircuitTrace = () => {
     }
     layer.style.display = "";
 
-    const traceX = Math.round(wrapLeft - 62);
-    const branchX = Math.round(wrapLeft - 20);
+    const traceX = Math.round(wrapLeft - 78);
+    const branchX = Math.round(wrapLeft - 35);
 
     svg.innerHTML = "";
     progressPathRef.current = null;
@@ -47,12 +47,22 @@ const CircuitTrace = () => {
     layer.style.height = `${docHeight}px`;
 
     const targets = Array.prototype.slice.call(
-      document.querySelectorAll("[data-circuit-node]")
+      document.querySelectorAll("[data-circuit-node]"),
     );
     const points = targets.map((t) => {
       const r = t.getBoundingClientRect();
       const mainRect = mainEl.getBoundingClientRect();
-      const y = r.top - mainRect.top + r.height / 2;
+      let y = r.top - mainRect.top + r.height / 2;
+
+      const section = t.closest("section");
+      if (section) {
+        const heading = section.querySelector("h1, h2, h3");
+        if (heading) {
+          const hr = heading.getBoundingClientRect();
+          y = hr.top - mainRect.top + hr.height / 2;
+        }
+      }
+
       return { y, id: t.dataset.circuitNode || "" };
     });
 
@@ -153,12 +163,12 @@ const CircuitTrace = () => {
       }
     };
 
-    const handleResize = () => buildCircuit();
+    const handleResize = () => { buildCircuit(); updateProgress(); };
 
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", handleResize);
-    window.addEventListener("load", buildCircuit);
-    const timeout = setTimeout(buildCircuit, 200);
+    window.addEventListener("load", () => { buildCircuit(); updateProgress(); });
+    const timeout = setTimeout(() => { buildCircuit(); updateProgress(); }, 200);
 
     const handleIntersection = (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {
@@ -171,7 +181,7 @@ const CircuitTrace = () => {
     };
 
     const sections = ["hero", "stack", "work", "about", "contact"].map((id) =>
-      document.getElementById(id)
+      document.getElementById(id),
     );
     const observer = new IntersectionObserver(handleIntersection, {
       rootMargin: "-45% 0px -50% 0px",

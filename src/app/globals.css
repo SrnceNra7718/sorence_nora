@@ -306,13 +306,7 @@
     background: radial-gradient(closest-side, rgba(232, 163, 61, 0.2), rgba(232, 163, 61, 0.05) 45%, transparent 72%);
   }
 
-  @media (max-width: 900px) {
-    .circuit-layer {
-      display: none;
-    }
-  }
-
-   @media (hover: none), (pointer: coarse) {
+  @media (hover: none), (pointer: coarse) {
      .cursor-dot,
      .cursor-ring,
      .cursor-coord,

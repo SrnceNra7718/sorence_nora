@@ -1,24 +1,13 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import Image from "next/image";
-import Reveal from "@/app/components/effects/Reveal";
 import Badge from "@/app/components/ui/Badge";
 import { project } from "@/lib/projects";
-import { CAROUSEL_INTERVAL } from "@/lib/motion";
 
 const Work = () => {
   const [current, setCurrent] = useState(0);
-  const [reduceMotion, setReduceMotion] = useState(false);
   const total = project.images.length;
-
-  useEffect(() => {
-    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReduceMotion(motionQuery.matches);
-    const handleChange = (e: MediaQueryListEvent) => setReduceMotion(e.matches);
-    motionQuery.addEventListener("change", handleChange);
-    return () => motionQuery.removeEventListener("change", handleChange);
-  }, []);
 
   const showFrame = useCallback(
     (i: number) => {
@@ -26,14 +15,6 @@ const Work = () => {
     },
     [total]
   );
-
-  useEffect(() => {
-    if (reduceMotion) return;
-    const timer = setInterval(() => {
-      showFrame(current + 1);
-    }, CAROUSEL_INTERVAL);
-    return () => clearInterval(timer);
-  }, [current, reduceMotion, showFrame]);
 
   return (
     <section className="section-pad" id="work">

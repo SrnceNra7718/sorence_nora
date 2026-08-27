@@ -1,4 +1,5 @@
 import CustomCursor from "@/app/components/effects/CustomCursor";
+import ScrollReveal from "@/app/components/effects/ScrollReveal";
 import CircuitTrace from "@/app/components/effects/CircuitTrace";
 import Navbar from "@/app/components/layout/Navbar";
 import Footer from "@/app/components/layout/Footer";
@@ -12,14 +13,15 @@ import Contact from "@/app/sections/Contact";
 export default function Home() {
   return (
     <>
-      <main id="top" className="relative">
+      <main id="top" className="circuit-main">
         <div className="bg-grid" aria-hidden="true" />
         <div className="bg-glow" aria-hidden="true" />
-        <div className="ruler-v hidden md:flex" aria-hidden="true">
+        <div className="ruler-v circuit-ruler" aria-hidden="true">
           <span>0000 — 0100</span>
           <span>0100 — 0200</span>
         </div>
         <CustomCursor />
+        <ScrollReveal />
         <CircuitTrace />
         <Navbar />
         <Hero />
