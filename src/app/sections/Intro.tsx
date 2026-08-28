@@ -8,7 +8,12 @@ const Intro = () => {
       </div>
       <div className="wrap pt-[80px]">
         <div className="grid grid-cols-[0.6fr_1fr] items-start gap-[60px]">
-          <p className="eyebrow reveal">Approach</p>
+          <div>
+            <p className="eyebrow reveal">Intro</p>
+            <h2 className="reveal reveal-d1 font-display text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.02] tracking-[-0.01em] text-ink-0">
+              Approach
+            </h2>
+          </div>
           <div>
             <p className="reveal reveal-d1 font-display text-[clamp(1.5rem,3vw,2.2rem)] font-medium leading-[1.35] text-ink-0">
               Frontend development focused on building modern, responsive, and

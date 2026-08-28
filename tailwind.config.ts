@@ -30,9 +30,9 @@ const config: Config = {
         danger: "#C4634A",
       },
       fontFamily: {
-        display: ["Space Grotesk", "sans-serif"],
-        body: ["Inter", "sans-serif"],
-        mono: ["JetBrains Mono", "monospace"],
+        display: "var(--font-display)",
+        body: "var(--font-body)",
+        mono: "var(--font-mono)",
       },
       maxWidth: {
         content: "1280px",

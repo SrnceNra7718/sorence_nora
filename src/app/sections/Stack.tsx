@@ -19,17 +19,15 @@ const Stack = () => {
           {stackCategories.map((cat, idx) => (
             <div
               key={cat.category}
-              className="stack-row reveal border-t border-line py-[26px]"
+              className={`stack-row reveal border-t border-line py-[26px]${idx === stackCategories.length - 1 ? "border-b" : ""}`}
             >
-              <div className="flex items-center gap-[12px] md:contents">
-                <span className="idx pt-[4px] font-mono text-[12px] text-ink-2">
-                  {String(idx + 1).padStart(2, "0")}
-                </span>
-                <span className="cat pt-[4px] font-mono text-[12px] uppercase tracking-[0.08em] text-ink-1">
-                  {cat.category}
-                </span>
-              </div>
-              <div className="stack-items flex flex-wrap gap-[10px_28px] md:contents">
+              <span className="idx pt-[4px] font-mono text-[12px] text-ink-2">
+                {String(idx + 1).padStart(2, "0")}
+              </span>
+              <span className="cat pt-[4px] font-mono text-[12px] uppercase tracking-[0.08em] text-ink-1">
+                {cat.category}
+              </span>
+              <div className="stack-items flex flex-wrap gap-[10px_28px]">
                 {cat.items.map((item) => (
                   <span
                     key={item}

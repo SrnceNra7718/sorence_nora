@@ -32,8 +32,8 @@ const CircuitTrace = () => {
     }
     layer.style.display = "";
 
-    const traceX = Math.round(wrapLeft - 78);
-    const branchX = Math.round(wrapLeft - 35);
+    const traceX = Math.round(wrapLeft - 62);
+    const branchX = Math.round(wrapLeft - 20);
 
     svg.innerHTML = "";
     progressPathRef.current = null;
@@ -163,12 +163,21 @@ const CircuitTrace = () => {
       }
     };
 
-    const handleResize = () => { buildCircuit(); updateProgress(); };
+    const handleResize = () => {
+      buildCircuit();
+      updateProgress();
+    };
 
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", handleResize);
-    window.addEventListener("load", () => { buildCircuit(); updateProgress(); });
-    const timeout = setTimeout(() => { buildCircuit(); updateProgress(); }, 200);
+    window.addEventListener("load", () => {
+      buildCircuit();
+      updateProgress();
+    });
+    const timeout = setTimeout(() => {
+      buildCircuit();
+      updateProgress();
+    }, 200);
 
     const handleIntersection = (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {
