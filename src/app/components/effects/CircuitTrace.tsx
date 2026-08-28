@@ -26,14 +26,8 @@ const CircuitTrace = () => {
     if (!wrapEl) return;
     const wrapLeft = wrapEl.getBoundingClientRect().left;
 
-    if (wrapLeft < 90) {
-      layer.style.display = "none";
-      return;
-    }
-    layer.style.display = "";
-
-    const traceX = Math.round(wrapLeft - 62);
-    const branchX = Math.round(wrapLeft - 20);
+    const traceX = Math.max(14, Math.round(wrapLeft - 62));
+    const branchX = Math.max(34, Math.round(wrapLeft - 20));
 
     svg.innerHTML = "";
     progressPathRef.current = null;
