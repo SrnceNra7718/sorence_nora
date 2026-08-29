@@ -41,7 +41,7 @@ const Contact = () => {
   };
 
   return (
-    <section className="section-pad" id="contact" data-circuit-node="contact">
+    <section className="section-pad" id="contact">
       <div className="wrap">
         <div className="hr mb-[80px]" />
         <div className="grid grid-cols-1 items-start gap-[70px] lg:grid-cols-2">

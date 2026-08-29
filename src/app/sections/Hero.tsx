@@ -34,7 +34,7 @@ const Hero = () => {
   }, [reduceMotion]);
 
   return (
-    <section className="hero flex min-h-[100svh] items-start pb-[80px] pt-[150px]">
+    <section className="hero flex min-h-[100svh] items-start pb-[80px] pt-[150px]" id="hero">
       <div className="wrap">
         <div className="grid grid-cols-1 items-center gap-[48px] md:grid-cols-[1.15fr_0.85fr] md:gap-[60px]">
           <div>

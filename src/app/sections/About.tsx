@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import Reveal from "@/app/components/effects/Reveal";
 import SectionEyebrow from "@/app/components/ui/SectionEyebrow";
 import Timeline from "@/app/components/ui/Timeline";
@@ -17,10 +18,18 @@ const About = () => {
             >
               03 / About
             </div>
-            <h2 className="reveal reveal-d1 font-display text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.02] tracking-[-0.01em] text-ink-0">
-              Sorence
-              <br />
-              Nora.
+            <h2 className="reveal reveal-d1 flex items-center gap-[18px] font-display text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.02] tracking-[-0.01em] text-ink-0">
+              <Image
+                src="/favicon.ico"
+                alt="Sorence Nora"
+                width={90}
+                height={90}
+              />
+              <span>
+                Sorence
+                <br />
+                Nora.
+              </span>
             </h2>
           </div>
           <div>

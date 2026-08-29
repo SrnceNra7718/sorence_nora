@@ -7,8 +7,8 @@ const CircuitTrace = () => {
   const layerRef = useRef<HTMLDivElement>(null);
   const progressPathRef = useRef<SVGPathElement | null>(null);
   const [reduceMotion, setReduceMotion] = useState(false);
-  const [activeNode, setActiveNode] = useState<string | null>(null);
 
+  // Detect prefers-reduced-motion
   useEffect(() => {
     const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     setReduceMotion(motionQuery.matches);
@@ -17,6 +17,7 @@ const CircuitTrace = () => {
     return () => motionQuery.removeEventListener("change", handleChange);
   }, []);
 
+  // Build the SVG paths and circles from DOM positions
   const buildCircuit = useCallback(() => {
     const svg = svgRef.current;
     const layer = layerRef.current;
@@ -29,6 +30,7 @@ const CircuitTrace = () => {
     const traceX = Math.max(14, Math.round(wrapLeft - 62));
     const branchX = Math.max(34, Math.round(wrapLeft - 20));
 
+    // Clear previous SVG content and reset ref
     svg.innerHTML = "";
     progressPathRef.current = null;
 
@@ -40,6 +42,7 @@ const CircuitTrace = () => {
     svg.setAttribute("viewBox", `0 0 ${pageWidth} ${docHeight}`);
     layer.style.height = `${docHeight}px`;
 
+    // Gather all data-circuit-node elements and compute their Y positions
     const targets = Array.prototype.slice.call(
       document.querySelectorAll("[data-circuit-node]"),
     );
@@ -48,6 +51,7 @@ const CircuitTrace = () => {
       const mainRect = mainEl.getBoundingClientRect();
       let y = r.top - mainRect.top + r.height / 2;
 
+      // Prefer the heading inside the section for better vertical alignment
       const section = t.closest("section");
       if (section) {
         const heading = section.querySelector("h1, h2, h3");
@@ -60,6 +64,7 @@ const CircuitTrace = () => {
       return { y, id: t.dataset.circuitNode || "" };
     });
 
+    // Build the path string (zig-zag trace)
     let d = `M ${traceX} 0`;
     points.forEach((p) => {
       d += ` L ${traceX} ${p.y - 26}`;
@@ -70,27 +75,33 @@ const CircuitTrace = () => {
 
     const NS = "http://www.w3.org/2000/svg";
 
+    // Base path (static background)
     const basePath = document.createElementNS(NS, "path");
     basePath.setAttribute("d", d);
     basePath.setAttribute("class", "circuit-base");
     svg.appendChild(basePath);
 
+    // Progress path (animated with stroke-dashoffset)
     const progressPath = document.createElementNS(NS, "path");
     progressPath.setAttribute("d", d);
     progressPath.setAttribute("class", "circuit-progress");
     svg.appendChild(progressPath);
     progressPathRef.current = progressPath;
 
+    // Set up dasharray/dashoffset for scroll-driven animation
     const len = progressPath.getTotalLength();
     progressPath.style.strokeDasharray = `${len}`;
     progressPath.style.strokeDashoffset = `${len}`;
 
+    // Create circles: glow (large) then node (small) for each point
     points.forEach((p) => {
       const glowC = document.createElementNS(NS, "circle");
       glowC.setAttribute("cx", `${branchX}`);
       glowC.setAttribute("cy", `${p.y}`);
       glowC.setAttribute("r", "9");
       glowC.setAttribute("class", "circuit-node-glow");
+      // Store the id on the glow as well, to easily find it later
+      glowC.dataset.id = p.id;
 
       const nodeC = document.createElementNS(NS, "circle");
       nodeC.setAttribute("cx", `${branchX}`);
@@ -104,29 +115,8 @@ const CircuitTrace = () => {
     });
   }, []);
 
-  const updateActiveNode = useCallback((id: string | null) => {
-    const svg = svgRef.current;
-    if (!svg) return;
-    const nodes = svg.querySelectorAll(".circuit-node");
-    nodes.forEach((node) => {
-      const el = node as SVGElement;
-      const nodeId = el.dataset.id || "";
-      if (nodeId === id) {
-        el.classList.add("active");
-        const glow = el.nextElementSibling;
-        if (glow && glow.classList.contains("circuit-node-glow")) {
-          glow.classList.add("pulse");
-        }
-      } else {
-        el.classList.remove("active");
-        const glow = el.nextElementSibling;
-        if (glow && glow.classList.contains("circuit-node-glow")) {
-          glow.classList.remove("pulse");
-        }
-      }
-    });
-  }, []);
-
+  // Update the progress path offset based on scroll position
+  // and highlight nodes that the trace has reached
   const updateProgress = useCallback(() => {
     const progressPath = progressPathRef.current;
     if (!progressPath) return;
@@ -138,14 +128,41 @@ const CircuitTrace = () => {
     const winH = window.innerHeight;
     const p = Math.min(1, Math.max(0, (scrollTop + winH * 0.5) / docH));
     progressPath.style.strokeDashoffset = `${len - len * p}`;
+
+    const currentLength = len * p;
+    const tipPoint = progressPath.getPointAtLength(currentLength);
+    const tipY = tipPoint.y;
+
+    const svg = svgRef.current;
+    if (!svg) return;
+    const nodes = svg.querySelectorAll(".circuit-node");
+    nodes.forEach((node) => {
+      const el = node as SVGElement;
+      const cy = parseFloat(el.getAttribute("cy") || "0");
+      const shouldBeActive = cy <= tipY;
+      const isActive = el.classList.contains("active");
+      if (shouldBeActive !== isActive) {
+        el.classList.toggle("active", shouldBeActive);
+        const glow = el.previousElementSibling;
+        if (glow && glow.classList.contains("circuit-node-glow")) {
+          glow.classList.toggle("pulse", shouldBeActive);
+        }
+      }
+    });
+
+    if (scrollTop + winH >= docH - 2) {
+      progressPath.style.strokeDashoffset = "0";
+    }
   }, []);
 
+  // Main effect: set up scroll, resize, and initial build
   useEffect(() => {
     if (reduceMotion) return;
 
     buildCircuit();
     updateProgress();
 
+    // Throttled scroll handler using requestAnimationFrame
     let ticking = false;
     const onScroll = () => {
       if (!ticking) {
@@ -173,34 +190,12 @@ const CircuitTrace = () => {
       updateProgress();
     }, 200);
 
-    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const id = entry.target.id;
-          setActiveNode(id);
-          updateActiveNode(id);
-        }
-      });
-    };
-
-    const sections = ["hero", "stack", "work", "about", "contact"].map((id) =>
-      document.getElementById(id),
-    );
-    const observer = new IntersectionObserver(handleIntersection, {
-      rootMargin: "-45% 0px -50% 0px",
-      threshold: 0,
-    });
-    sections.forEach((s) => {
-      if (s) observer.observe(s);
-    });
-
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", handleResize);
       clearTimeout(timeout);
-      observer.disconnect();
     };
-  }, [reduceMotion, buildCircuit, updateProgress, updateActiveNode]);
+  }, [reduceMotion, buildCircuit, updateProgress]);
 
   if (reduceMotion) return null;
 

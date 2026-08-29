@@ -56,12 +56,7 @@ export const metadata: Metadata = {
       "Frontend web developer based in the Philippines, specializing in modern, responsive web applications.",
   },
   icons: {
-    icon: [
-      {
-        url: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2308090B'/%3E%3Ctext x='32' y='42' font-family='monospace' font-size='26' fill='%23E8A33D' text-anchor='middle'%3ESN%3C/text%3E%3C/svg%3E",
-        type: "image/svg+xml",
-      },
-    ],
+    icon: "/favicon.ico",
   },
 };
 

@@ -4,7 +4,7 @@ import { stackCategories } from "@/lib/stack";
 
 const Stack = () => {
   return (
-    <section className="section-pad" id="stack" data-circuit-node="stack">
+    <section className="section-pad" id="stack">
       <div className="wrap">
         <div className="eyebrow reveal" data-circuit-node="stack">
           01 / Stack
