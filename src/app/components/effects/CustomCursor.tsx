@@ -13,12 +13,16 @@ const CustomCursor = () => {
 
   useEffect(() => {
     const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const pointerQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const pointerQuery = window.matchMedia(
+      "(hover: hover) and (pointer: fine)",
+    );
     setReduceMotion(motionQuery.matches);
     setIsFinePointer(pointerQuery.matches);
 
-    const handleMotionChange = (e: MediaQueryListEvent) => setReduceMotion(e.matches);
-    const handlePointerChange = (e: MediaQueryListEvent) => setIsFinePointer(e.matches);
+    const handleMotionChange = (e: MediaQueryListEvent) =>
+      setReduceMotion(e.matches);
+    const handlePointerChange = (e: MediaQueryListEvent) =>
+      setIsFinePointer(e.matches);
 
     motionQuery.addEventListener("change", handleMotionChange);
     pointerQuery.addEventListener("change", handlePointerChange);
@@ -41,15 +45,26 @@ const CustomCursor = () => {
     let rx = 0,
       ry = 0,
       gx = 0,
-      gy = 0,
-      dx = 0,
+      gy = 0;
+    let dx = 0,
       dy = 0;
+
+    // Apply centering transform once
+    const centerStyle = "translate(-50%, -50%)";
+    dot.style.transform = centerStyle;
+    ring.style.transform = centerStyle;
+    glow.style.transform = centerStyle;
+    coord.style.transform = centerStyle;
 
     const handleMouseMove = (e: MouseEvent) => {
       dx = e.clientX;
       dy = e.clientY;
-      dot.style.transform = `translate(${dx}px, ${dy}px)`;
-      coord.style.transform = `translate(${dx}px, ${dy}px)`;
+      // Dot follows instantly
+      dot.style.left = dx + "px";
+      dot.style.top = dy + "px";
+      // Coord follows instantly (position and text)
+      coord.style.left = dx + "px";
+      coord.style.top = dy + "px";
       coord.textContent = `X:${Math.round(e.clientX)} Y:${Math.round(e.clientY)}`;
       glow.classList.add("visible");
     };
@@ -59,12 +74,17 @@ const CustomCursor = () => {
     };
 
     const animateRing = () => {
+      // Smooth interpolation
       rx += (dx - rx) * 0.18;
       ry += (dy - ry) * 0.18;
       gx += (dx - gx) * 0.09;
       gy += (dy - gy) * 0.09;
-      ring.style.transform = `translate(${rx}px, ${ry}px)`;
-      glow.style.transform = `translate(${gx}px, ${gy}px)`;
+
+      ring.style.left = rx + "px";
+      ring.style.top = ry + "px";
+      glow.style.left = gx + "px";
+      glow.style.top = gy + "px";
+
       requestAnimationFrame(animateRing);
     };
 
