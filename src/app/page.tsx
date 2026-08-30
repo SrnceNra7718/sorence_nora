@@ -1,73 +1,37 @@
-"use client";
-
-import React, { useRef, useState } from "react";
-import Background from "./components/Background";
-import HeroSection from "./containers/hero/HeroSection";
-import SkillSection from "./containers/skills/SkillSection";
-import ProjectsSection from "./containers/projects/ProjectsSection";
-import ResumeSection from "./containers/resume/ResumeSection";
-import ContactSection from "./containers/contact/ContactSection";
-import NavBar from "./components/NavBar";
-import Footer from "./components/Footer";
+import CustomCursor from "@/app/components/effects/CustomCursor";
+import ScrollReveal from "@/app/components/effects/ScrollReveal";
+import CircuitTrace from "@/app/components/effects/CircuitTrace";
+import Navbar from "@/app/components/layout/Navbar";
+import Footer from "@/app/components/layout/Footer";
+import Hero from "@/app/sections/Hero";
+import Intro from "@/app/sections/Intro";
+import Stack from "@/app/sections/Stack";
+import Work from "@/app/sections/Work";
+import About from "@/app/sections/About";
+import Contact from "@/app/sections/Contact";
 
 export default function Home() {
-  const homeRef = useRef<HTMLDivElement>(null);
-  const skillsRef = useRef<HTMLDivElement>(null);
-  const projectsRef = useRef<HTMLDivElement>(null);
-  const resumeRef = useRef<HTMLDivElement>(null);
-  const contactRef = useRef<HTMLDivElement>(null);
-
-  const [isScrolledPastHero, setIsScrolledPastHero] = useState(false);
-
-  const handleScroll = (e: React.UIEvent<HTMLElement>) => {
-    const scrollTop = e.currentTarget.scrollTop;
-
-    // Change navbar immediately when scrolling starts
-    setIsScrolledPastHero(scrollTop > 0);
-  };
-
-  const refs = {
-    homeRef,
-    skillsRef,
-    projectsRef,
-    resumeRef,
-    contactRef,
-  };
-
   return (
-    <main
-      draggable="false"
-      onScroll={handleScroll}
-      className="relative z-10 h-screen w-full items-center justify-center overflow-y-auto overflow-x-hidden text-center font-sans text-foregroundparchment"
-      style={{ userSelect: "none" }}
-      ref={homeRef}
-    >
-      {/* Navbar changes immediately when scrolling starts */}
-      <div className="sticky top-0 z-20" ref={homeRef}>
-        <NavBar isSticky={isScrolledPastHero} refs={refs} />
-      </div>
-      {/* Hero */}
-      <div>
-        <HeroSection />
-      </div>
-      {/* Skills */}
-      <div ref={skillsRef}>
-        <SkillSection />
-      </div>
-      {/* Projects */}
-      <div ref={projectsRef}>
-        <ProjectsSection />
-      </div>
-      {/* Resume */}
-      <div ref={resumeRef}>
-        <ResumeSection />
-      </div>
-      {/* Contact */}
-      <div ref={contactRef}>
-        <ContactSection />
-      </div>
+    <>
+      <main id="top" className="circuit-main">
+        <div className="bg-grid" aria-hidden="true" />
+        <div className="bg-glow" aria-hidden="true" />
+        <div className="ruler-v circuit-ruler" aria-hidden="true">
+          <span>0000 — 0100</span>
+          <span>0100 — 0200</span>
+        </div>
+        <CustomCursor />
+        <ScrollReveal />
+        <CircuitTrace />
+        <Navbar />
+        <Hero />
+        <Intro />
+        <Stack />
+        <Work />
+        <About />
+        <Contact />
+      </main>
       <Footer />
-      <Background />
-    </main>
+    </>
   );
 }

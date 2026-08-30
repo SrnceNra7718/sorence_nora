@@ -1,4 +1,3 @@
-import {nextui} from '@nextui-org/theme';
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -6,58 +5,58 @@ const config: Config = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@nextui-org/theme/dist/components/[object Object].js"
   ],
   theme: {
     extend: {
       colors: {
-        bg: "rgba(0, 14, 16, 1)",
-        foregroundlightcyan: "rgba(210, 239, 239, 1)",
-        foregroundparchment: "rgba(239, 232, 210, 1)",
-        forbentobg: "rgba(0, 40, 46, 1)",
-        bgimage: "rgba(0, 14, 16, 1)",
-      },
-      typography: {
-        DEFAULT: {
-          css: {
-            color: "rgba(239, 232, 210, 1)",
-            fontFamily: "cursive, sans-serif", // Apply Poppins globally in typography
-          },
+        bg: {
+          0: "#08090B",
+          1: "#0D0F12",
+          2: "#141619",
         },
-      },
-      fontSize: {
-        heroheading7rem: "7rem",
-        headingedu2_5rem: "2.5rem",
-        subheadingpoppins3rem: "3rem",
-        subheadingpoppins2rem: "2rem",
-        poppins1_5rem: "1.5rem",
-        headingpoppins4rem: "4rem",
-        poppins1rem: "1rem",
-        footerpoppins0_5rem: "0.5rem",
-        subheadingpoppins2_5rem: "2.5rem",
-      },
-      fontWeight: {
-        heroheading7rem: "700",
-        headingedu2_5rem: "700",
-        subheadingpoppins3rem: "700",
-        subheadingpoppins2rem: "700",
-        poppins1_5rem: "700",
-        headingpoppins4rem: "700",
-        poppins1rem: "700",
-        footerpoppins0_5rem: "700",
-        subheadingpoppins2_5rem: "700",
+        ink: {
+          0: "#F3F1EC",
+          1: "#A6A39B",
+          2: "#706D66",
+        },
+        line: "rgba(243,241,236,0.10)",
+        "line-strong": "rgba(243,241,236,0.18)",
+        accent: {
+          DEFAULT: "#E8A33D",
+          dim: "#B97F2C",
+          ink: "#1A1200",
+        },
+        secondary: "#6E86A6",
+        danger: "#C4634A",
       },
       fontFamily: {
-        edu: ["cursive", "sans-serif"],
+        display: "var(--font-display)",
+        body: "var(--font-body)",
+        mono: "var(--font-mono)",
       },
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      maxWidth: {
+        content: "1280px",
+      },
+      borderRadius: {
+        DEFAULT: "2px",
+      },
+      keyframes: {
+        circuitPulse: {
+          "0%, 100%": { opacity: "0.18", r: "9" },
+          "50%": { opacity: "0.4", r: "13" },
+        },
+        fadeInUp: {
+          "0%": { opacity: "0", transform: "translateY(22px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+      },
+      animation: {
+        circuitPulse: "circuitPulse 2.2s ease-in-out infinite",
+        fadeInUp: "fadeInUp 0.8s cubic-bezier(.16,.84,.32,1) forwards",
       },
     },
   },
-  plugins: [nextui()],
+  plugins: [],
 };
 
 export default config;

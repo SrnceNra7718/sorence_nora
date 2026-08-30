@@ -1,0 +1,115 @@
+"use client";
+
+import React, { useEffect, useRef, useState } from "react";
+
+const CustomCursor = () => {
+  const dotRef = useRef<HTMLDivElement>(null);
+  const ringRef = useRef<HTMLDivElement>(null);
+  const coordRef = useRef<HTMLDivElement>(null);
+  const glowRef = useRef<HTMLDivElement>(null);
+
+  const [reduceMotion, setReduceMotion] = useState(false);
+  const [isFinePointer, setIsFinePointer] = useState(false);
+
+  useEffect(() => {
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const pointerQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
+    setReduceMotion(motionQuery.matches);
+    setIsFinePointer(pointerQuery.matches);
+
+    const handleMotionChange = (e: MediaQueryListEvent) => setReduceMotion(e.matches);
+    const handlePointerChange = (e: MediaQueryListEvent) => setIsFinePointer(e.matches);
+
+    motionQuery.addEventListener("change", handleMotionChange);
+    pointerQuery.addEventListener("change", handlePointerChange);
+
+    return () => {
+      motionQuery.removeEventListener("change", handleMotionChange);
+      pointerQuery.removeEventListener("change", handlePointerChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (reduceMotion || !isFinePointer) return;
+
+    const dot = dotRef.current;
+    const ring = ringRef.current;
+    const coord = coordRef.current;
+    const glow = glowRef.current;
+    if (!dot || !ring || !coord || !glow) return;
+
+    let rx = 0,
+      ry = 0,
+      gx = 0,
+      gy = 0,
+      dx = 0,
+      dy = 0;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      dx = e.clientX;
+      dy = e.clientY;
+      dot.style.transform = `translate(${dx}px, ${dy}px)`;
+      coord.style.transform = `translate(${dx}px, ${dy}px)`;
+      coord.textContent = `X:${Math.round(e.clientX)} Y:${Math.round(e.clientY)}`;
+      glow.classList.add("visible");
+    };
+
+    const handleMouseLeave = () => {
+      glow.classList.remove("visible");
+    };
+
+    const animateRing = () => {
+      rx += (dx - rx) * 0.18;
+      ry += (dy - ry) * 0.18;
+      gx += (dx - gx) * 0.09;
+      gy += (dy - gy) * 0.09;
+      ring.style.transform = `translate(${rx}px, ${ry}px)`;
+      glow.style.transform = `translate(${gx}px, ${gy}px)`;
+      requestAnimationFrame(animateRing);
+    };
+
+    const handleEnter = () => {
+      ring.classList.add("hover");
+      glow.classList.add("hover");
+    };
+    const handleLeave = () => {
+      ring.classList.remove("hover");
+      glow.classList.remove("hover");
+    };
+
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseleave", handleMouseLeave);
+    animateRing();
+
+    document
+      .querySelectorAll("a, button, .stack-item, input, textarea")
+      .forEach((el) => {
+        el.addEventListener("mouseenter", handleEnter);
+        el.addEventListener("mouseleave", handleLeave);
+      });
+
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseleave", handleMouseLeave);
+      document
+        .querySelectorAll("a, button, .stack-item, input, textarea")
+        .forEach((el) => {
+          el.removeEventListener("mouseenter", handleEnter);
+          el.removeEventListener("mouseleave", handleLeave);
+        });
+    };
+  }, [reduceMotion, isFinePointer]);
+
+  if (reduceMotion || !isFinePointer) return null;
+
+  return (
+    <>
+      <div ref={glowRef} className="cursor-glow" aria-hidden="true" />
+      <div ref={dotRef} className="cursor-dot" aria-hidden="true" />
+      <div ref={ringRef} className="cursor-ring" aria-hidden="true" />
+      <div ref={coordRef} className="cursor-coord" aria-hidden="true" />
+    </>
+  );
+};
+
+export default CustomCursor;
