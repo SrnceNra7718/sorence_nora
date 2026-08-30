@@ -101,7 +101,9 @@ const Navbar = () => {
           className="flex items-center gap-[10px] font-display text-[15px] font-semibold tracking-[0.01em]"
         >
           <Image
-            className="flex h-[28px] w-[28px] items-center justify-center"
+            className={`flex items-center justify-center transition-all duration-300 ${
+              scrolled ? "h-[28px] w-[28px]" : "h-[56px] w-[56px]"
+            }`}
             src="/favicon.ico"
             alt="Sorence Nora"
             width={90}
