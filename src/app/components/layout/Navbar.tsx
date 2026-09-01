@@ -12,10 +12,19 @@ const navLinks = [
   { label: "CONTACT", target: "contact", num: "04" },
 ];
 
+const iconMap: Record<string, string> = {
+  HOME: "home",
+  STACK: "stacks",
+  WORK: "deployed_code",
+  ABOUT: "person",
+  CONTACT: "mail",
+};
+
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeTarget, setActiveTarget] = useState("hero");
+  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const navRef = useRef<HTMLElement>(null);
   const highlightRef = useRef<HTMLSpanElement>(null);
   const linksContainerRef = useRef<HTMLUListElement>(null);
@@ -116,24 +125,40 @@ const Navbar = () => {
 
         <ul
           ref={linksContainerRef}
-          className="relative hidden list-none items-center gap-[28px] lg:flex"
+          className="relative hidden list-none items-center gap-[28px] lg:flex nav-links"
         >
-          <span
+           <span
             ref={highlightRef}
-            className="pointer-events-none absolute bottom-[-8px] left-0 top-[-8px] -z-10 w-0 rounded-[999px] border border-[rgba(232,163,61,0.22)] bg-[rgba(232,163,61,0.08)] opacity-0 transition-all duration-[400ms]"
+            className="pointer-events-none absolute bottom-[-8px] left-0 top-[-8px] -z-10 w-0 rounded-[999px] border border-[rgba(232,163,61,0.22)] bg-[rgba(232,163,61,0.08)] nav-highlight"
             aria-hidden="true"
           />
-          {navLinks.map(({ label, target, num }) => (
+          {navLinks.map(({ label, target }) => (
             <li key={target}>
               <Link
                 href={`#${target}`}
                 data-target={target}
-                className={`relative flex items-baseline gap-[6px] py-[4px] font-mono text-[12px] tracking-[0.03em] text-ink-1 transition-colors duration-[250ms] ${
-                  activeTarget === target ? "text-accent" : ""
+                className={`relative flex items-baseline gap-[6px] py-[4px] font-mono text-[12px] tracking-[0.03em] text-ink-1 ${
+                  activeTarget === target ? "text-accent active" : ""
                 }`}
+                onMouseEnter={() => setHoveredLink(target)}
+                onMouseLeave={() => setHoveredLink(null)}
               >
-                <span className="text-[10px] text-ink-2">{num}</span>
-                {label}
+                <span className="relative flex flex-row items-center gap-[6px]">
+                  {hoveredLink === target && (
+                    <span className="absolute -left-3 top-0 hidden md:block">
+                      &lt;
+                    </span>
+                  )}
+                  <span className="material-symbols-outlined block text-[14px]">
+                    {iconMap[label]}
+                  </span>
+                  <span className="hidden md:inline">{label}</span>
+                  {hoveredLink === target && (
+                    <span className="absolute -right-6 top-0 hidden md:block">
+                      /&gt;
+                    </span>
+                  )}
+                </span>
               </Link>
             </li>
           ))}
@@ -183,6 +208,9 @@ const Navbar = () => {
             onClick={closeDrawer}
             className="flex items-baseline gap-[16px] border-b border-line py-[14px] font-display text-[clamp(2rem,10vw,3rem)] font-semibold text-ink-0"
           >
+            <span className="material-symbols-outlined text-[24px]">
+              {iconMap[label]}
+            </span>
             <span className="font-mono text-[14px] text-accent">{num}</span>
             {label}
           </Link>

@@ -1,7 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import Reveal from "@/app/components/effects/Reveal";
-import SectionEyebrow from "@/app/components/ui/SectionEyebrow";
 import Timeline from "@/app/components/ui/Timeline";
 import { education, certifications } from "@/lib/timeline";
 
@@ -16,7 +14,18 @@ const About = () => {
               data-circuit-node="about"
               style={{ marginBottom: "14px" }}
             >
-              03 / About
+              <span className="relative flex flex-row items-center gap-[6px]">
+                <span className="absolute -left-3 top-0 hidden md:block">
+                  &lt;
+                </span>
+                <span className="material-symbols-outlined block text-[14px]">
+                  {"person"}
+                </span>
+                <span className="hidden md:inline">{"About"}</span>
+                <span className="absolute -right-6 top-0 hidden md:block">
+                  /&gt;
+                </span>
+              </span>
             </div>
             <h2 className="reveal reveal-d1 flex items-center gap-[18px] font-display text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.02] tracking-[-0.01em] text-ink-0">
               <Image

@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,600,1,0&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -128,13 +130,6 @@
     color: var(--accent);
     text-transform: uppercase;
     margin-bottom: 18px;
-  }
-
-  .eyebrow::before {
-    content: "";
-    width: 22px;
-    height: 1px;
-    background: var(--accent);
   }
 
   .section-pad {
@@ -521,12 +516,21 @@
     z-index: 2;
   }
 
+  .nav-highlight {
+    opacity: 0;
+    transition:
+      transform 400ms var(--ease),
+      width 400ms var(--ease),
+      opacity 300ms var(--ease);
+  }
+
   .nav-highlight.visible {
     opacity: 1;
   }
 
   .nav-links a {
     position: relative;
+    transition: color 250ms var(--ease);
   }
 
   .nav-links a::after {
