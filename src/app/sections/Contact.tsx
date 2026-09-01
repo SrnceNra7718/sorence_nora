@@ -51,7 +51,18 @@ const Contact = () => {
               data-circuit-node="contact"
               style={{ marginBottom: "14px" }}
             >
-              04 / Contact
+              <span className="relative flex flex-row items-center gap-[6px]">
+                <span className="absolute -left-3 top-0 hidden md:block">
+                  &lt;
+                </span>
+                <span className="material-symbols-outlined block text-[14px]">
+                  {"mail"}
+                </span>
+                <span className="hidden md:inline">{"Contact"}</span>
+                <span className="absolute -right-6 top-0 hidden md:block">
+                  /&gt;
+                </span>
+              </span>
             </div>
             <h2 className="font-display text-[clamp(2.4rem,6vw,4.2rem)] font-semibold leading-[1.02] tracking-[-0.01em] text-ink-0">
               Have a project

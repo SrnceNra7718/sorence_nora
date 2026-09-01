@@ -1,5 +1,4 @@
 import React from "react";
-import Reveal from "@/app/components/effects/Reveal";
 import { stackCategories } from "@/lib/stack";
 
 const Stack = () => {
@@ -7,7 +6,16 @@ const Stack = () => {
     <section className="section-pad" id="stack">
       <div className="wrap">
         <div className="eyebrow reveal" data-circuit-node="stack">
-          01 / Stack
+          <span className="relative flex flex-row items-center gap-[6px]">
+            <span className="absolute -left-3 top-0 hidden md:block">&lt;</span>
+            <span className="material-symbols-outlined block text-[14px]">
+              {"stacks"}
+            </span>
+            <span className="hidden md:inline">{"Stack"}</span>
+            <span className="absolute -right-6 top-0 hidden md:block">
+              /&gt;
+            </span>
+          </span>
         </div>
         <h2 className="reveal reveal-d1 font-display text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.02] tracking-[-0.01em] text-ink-0">
           Technology
