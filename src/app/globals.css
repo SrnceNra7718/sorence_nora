@@ -442,6 +442,124 @@
     z-index: 2;
   }
 
+  /* Cosmic code snippet portal */
+  .code-portal {
+    position: relative;
+    border-radius: 10px;
+    background: radial-gradient(
+        120% 80% at 0% 0%,
+        rgba(232, 163, 61, 0.08),
+        transparent 60%
+      ),
+      radial-gradient(
+        120% 80% at 100% 100%,
+        rgba(110, 134, 166, 0.1),
+        transparent 60%
+      ),
+      #0a0c10;
+    border: 1px solid rgba(232, 163, 61, 0.35);
+    box-shadow:
+      0 30px 80px -20px rgba(232, 163, 61, 0.2),
+      0 30px 60px -30px rgba(0, 0, 0, 0.9),
+      inset 0 0 0 1px rgba(232, 163, 61, 0.08);
+    transition:
+      box-shadow 0.4s var(--ease),
+      border-color 0.4s var(--ease),
+      transform 0.4s var(--ease);
+    overflow: hidden;
+  }
+
+  .code-portal::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: conic-gradient(
+      from 0deg,
+      rgba(232, 163, 61, 0.55),
+      rgba(110, 134, 166, 0.45),
+      rgba(196, 99, 74, 0.45),
+      rgba(232, 163, 61, 0.55)
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    opacity: 1;
+    animation: portal-spin 8s linear infinite;
+    pointer-events: none;
+  }
+
+  .code-portal::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(
+        400px circle at var(--mx, 50%) var(--my, 0%),
+        rgba(232, 163, 61, 0.18),
+        transparent 40%
+      );
+    opacity: 1;
+    pointer-events: none;
+  }
+
+  .code-portal .code-glow {
+    color: #ffd089;
+    text-shadow:
+      0 0 1px rgba(255, 208, 137, 0.6),
+      0 0 12px rgba(232, 163, 61, 0.35);
+  }
+
+  @keyframes portal-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes twinkle {
+    0%,
+    100% {
+      opacity: 0.3;
+      transform: scale(0.85);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+  }
+
+  @keyframes orbit {
+    from {
+      transform: rotate(0deg) translateX(0);
+    }
+    to {
+      transform: rotate(360deg) translateX(0);
+    }
+  }
+
+  .twinkle {
+    animation: twinkle 2.4s ease-in-out infinite;
+  }
+
+  .twinkle-d1 {
+    animation-delay: 0.4s;
+  }
+  .twinkle-d2 {
+    animation-delay: 0.8s;
+  }
+  .twinkle-d3 {
+    animation-delay: 1.2s;
+  }
+  .twinkle-d4 {
+    animation-delay: 1.6s;
+  }
+
   /* Form invalid state */
   .field.invalid input,
   .field.invalid textarea {
