@@ -29,7 +29,7 @@ const About = () => {
             </div>
             <h2 className="reveal reveal-d1 flex items-center gap-[18px] font-display text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.02] tracking-[-0.01em] text-ink-0">
               <Image
-                src="/favicon.ico"
+                src="/SNLogo.png"
                 alt="Sorence Nora"
                 width={90}
                 height={90}

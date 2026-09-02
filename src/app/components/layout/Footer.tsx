@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -8,9 +9,17 @@ const Footer = () => {
       <div className="wrap">
         <div className="flex flex-wrap items-end justify-between gap-[28px]">
           <div>
-            <p className="font-display text-[1.3rem] font-semibold">
-              Sorence Nora
-            </p>
+            <div className="flex flex-wrap items-center gap-[12px]">
+              <Image
+                src="/SNLogo.png"
+                alt="Sorence Nora"
+                width={18}
+                height={18}
+              />
+              <p className="font-display text-[1.3rem] font-semibold">
+                Sorence Nora
+              </p>
+            </div>
             <p className="mt-[6px] font-mono text-[12px] text-ink-1">
               FRONTEND WEB DEVELOPER — PHILIPPINES
             </p>

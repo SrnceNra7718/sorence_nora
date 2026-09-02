@@ -113,7 +113,7 @@ const Navbar = () => {
             className={`flex items-center justify-center transition-all duration-300 ${
               scrolled ? "h-[28px] w-[28px]" : "h-[56px] w-[56px]"
             }`}
-            src="/favicon.ico"
+            src="/SNLogo.png"
             alt="Sorence Nora"
             width={90}
             height={90}
@@ -125,11 +125,11 @@ const Navbar = () => {
 
         <ul
           ref={linksContainerRef}
-          className="relative hidden list-none items-center gap-[28px] lg:flex nav-links"
+          className="nav-links relative hidden list-none items-center gap-[28px] lg:flex"
         >
-           <span
+          <span
             ref={highlightRef}
-            className="pointer-events-none absolute bottom-[-8px] left-0 top-[-8px] -z-10 w-0 rounded-[999px] border border-[rgba(232,163,61,0.22)] bg-[rgba(232,163,61,0.08)] nav-highlight"
+            className="nav-highlight pointer-events-none absolute bottom-[-8px] left-0 top-[-8px] -z-10 w-0 rounded-[999px] border border-[rgba(232,163,61,0.22)] bg-[rgba(232,163,61,0.08)]"
             aria-hidden="true"
           />
           {navLinks.map(({ label, target }) => (
@@ -138,7 +138,7 @@ const Navbar = () => {
                 href={`#${target}`}
                 data-target={target}
                 className={`relative flex items-baseline gap-[6px] py-[4px] font-mono text-[12px] tracking-[0.03em] text-ink-1 ${
-                  activeTarget === target ? "text-accent active" : ""
+                  activeTarget === target ? "active text-accent" : ""
                 }`}
                 onMouseEnter={() => setHoveredLink(target)}
                 onMouseLeave={() => setHoveredLink(null)}
