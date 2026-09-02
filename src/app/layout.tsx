@@ -51,9 +51,9 @@ export const metadata: Metadata = {
     url: "https://sorence-nora.vercel.app",
     images: [
       {
-        url: "https://sorence-nora.vercel.app/forGSearch.png",
-        width: 48,
-        height: 91,
+        url: "https://sorence-nora.vercel.app/favicon-v2.png",
+        width: 144,
+        height: 144,
         alt: "Sorence Nora — Frontend Web Developer",
       },
     ],
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     images: ["https://sorence-nora.vercel.app/forGSearch.png"],
   },
   icons: {
-    icon: "/forGSearch.png",
+    icon: "/favicon-v2.png",
   },
 };
 
