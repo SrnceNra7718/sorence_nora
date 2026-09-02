@@ -52,8 +52,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "https://sorence-nora.vercel.app/forGSearch.png",
-        width: 1200,
-        height: 630,
+        width: 48,
+        height: 91,
         alt: "Sorence Nora — Frontend Web Developer",
       },
     ],
