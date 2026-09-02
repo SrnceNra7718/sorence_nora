@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+// Global CSS is handled by Next.js at build time and has no TypeScript module declaration.
 import "./globals.css";
 
 const spaceGrotesk = localFont({
@@ -48,12 +49,21 @@ export const metadata: Metadata = {
       "Frontend web developer based in the Philippines, specializing in modern, responsive web applications.",
     type: "website",
     url: "https://sorence-nora.vercel.app",
+    images: [
+      {
+        url: "https://sorence-nora.vercel.app/forGSearch.png",
+        width: 1200,
+        height: 630,
+        alt: "Sorence Nora — Frontend Web Developer",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Sorence Nora — Frontend Web Developer",
     description:
       "Frontend web developer based in the Philippines, specializing in modern, responsive web applications.",
+    images: ["https://sorence-nora.vercel.app/forGSearch.png"],
   },
   icons: {
     icon: "/favicon.ico",
