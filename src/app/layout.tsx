@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 // Global CSS is handled by Next.js at build time and has no TypeScript module declaration.
-// @ts-expect-error -- Next.js processes this side-effect stylesheet import.
 import "./globals.css";
 
 const spaceGrotesk = localFont({
