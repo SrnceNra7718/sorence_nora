@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     images: ["https://sorence-nora.vercel.app/forGSearch.png"],
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: "/forGSearch.png",
   },
 };
 
