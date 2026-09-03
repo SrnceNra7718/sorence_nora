@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import Timeline from "@/app/components/ui/Timeline";
 import { education, certifications } from "@/lib/timeline";
 
@@ -56,6 +57,12 @@ const About = () => {
                 refining how I ship production-ready frontend work.
               </p>
             </div>
+            <Link
+              href="/about"
+              className="mt-[18px] inline-flex items-center gap-[6px] font-mono text-[12.5px] text-accent"
+            >
+              Read more about me →
+            </Link>
             <div className="reveal reveal-d2 mt-[36px] flex flex-wrap items-center gap-0">
               <span className="rounded-[999px] border border-line-strong px-[14px] py-[8px] font-mono text-[12px] text-ink-1">
                 Education

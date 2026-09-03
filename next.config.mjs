@@ -1,12 +1,36 @@
 /** @type {import('next').NextConfig} */
+
 const nextConfig = {
+  reactStrictMode: true,
+  experimental: {
+    optimizePackageImports: ["react-icons"],
+  },
   images: {
-    remotePatterns: [
+    formats: ["image/avif", "image/webp"],
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self' data:; img-src * data: blob:;",
+  },
+  async headers() {
+    return [
       {
-        protocol: "https",
-        hostname: "sorence-nora.vercel.app",
+        source: "/(.*)",
+        headers: [
+          {
+            key: "X-robots-tag",
+            value: "index, follow",
+          },
+        ],
       },
-    ],
+    ];
+  },
+  async redirects() {
+    return [
+      {
+        source: "/home",
+        destination: "/",
+        permanent: true,
+      },
+    ];
   },
 };
 

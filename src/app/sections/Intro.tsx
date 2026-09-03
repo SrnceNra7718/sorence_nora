@@ -1,4 +1,5 @@
 import Reveal from "@/app/components/effects/Reveal";
+import Link from "next/link";
 
 const Intro = () => {
   return (
@@ -27,6 +28,20 @@ const Intro = () => {
               people can actually use without thinking twice about it. Currently
               building with React, Next.js, TypeScript and Supabase.
             </p>
+            <div className="reveal reveal-d2 mt-[24px] flex flex-wrap gap-[16px]">
+              <Link
+                href="/skills"
+                className="font-mono text-[12.5px] text-accent hover:underline"
+              >
+                View technology stack →
+              </Link>
+              <Link
+                href="/blog"
+                className="font-mono text-[12.5px] text-accent hover:underline"
+              >
+                Read development notes →
+              </Link>
+            </div>
           </div>
         </div>
       </div>

@@ -1,0 +1,14 @@
+User-agent: Googlebot
+Allow: /
+Disallow: /api/
+Disallow: /_next/static/chunks/
+Disallow: /private/
+Disallow: /admin/
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /private/
+Disallow: /admin/
+
+Sitemap: https://sorence-nora.vercel.app/sitemap.xml

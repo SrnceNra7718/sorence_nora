@@ -2,6 +2,7 @@
 
 import React, { useState, useCallback } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import Badge from "@/app/components/ui/Badge";
 import { project } from "@/lib/projects";
 
@@ -19,36 +20,38 @@ const Work = () => {
   return (
     <section className="section-pad" id="work">
       <div className="wrap">
-        <div className="reveal mb-[56px] flex flex-wrap items-end justify-between gap-[20px]">
-          <div>
-            <div
-              className="eyebrow"
-              data-circuit-node="work"
-              style={{ marginBottom: "14px" }}
-            >
-              <span className="relative flex flex-row items-center gap-[6px]">
-                <span className="absolute -left-3 top-0 hidden md:block">
-                  &lt;
-                </span>
-                <span className="material-symbols-outlined block text-[14px]">
-                  {"deployed_code"}
-                </span>
-                <span className="hidden md:inline">{"Work"}</span>
-                <span className="absolute -right-6 top-0 hidden md:block">
-                  /&gt;
-                </span>
-              </span>
-            </div>
-            <h2 className="font-display text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.02] tracking-[-0.01em] text-ink-0">
-              Work that
-              <br />
-              shipped.
-            </h2>
-          </div>
-          <span className="font-mono text-[12px] text-ink-2">
-            01 OF 01 — MORE IN PROGRESS
-          </span>
-        </div>
+           <div className="reveal mb-[56px] flex flex-wrap items-end justify-between gap-[20px]">
+           <div>
+             <div
+               className="eyebrow"
+               data-circuit-node="work"
+               style={{ marginBottom: "14px" }}
+             >
+               <span className="relative flex flex-row items-center gap-[6px]">
+                 <span className="absolute -left-3 top-0 hidden md:block">
+                   &lt;
+                 </span>
+                 <span className="material-symbols-outlined block text-[14px]">
+                   {"deployed_code"}
+                 </span>
+                 <span className="hidden md:inline">{"Work"}</span>
+                 <span className="absolute -right-6 top-0 hidden md:block">
+                   /&gt;
+                 </span>
+               </span>
+             </div>
+             <h2 className="font-display text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.02] tracking-[-0.01em] text-ink-0">
+               Work that
+               <br />
+               shipped.
+             </h2>
+           </div>
+           <span className="font-mono text-[12px] text-ink-2">
+             <Link href="/projects" className="text-ink-2 hover:text-accent">
+               01 OF 01 — View all projects →
+             </Link>
+           </span>
+         </div>
 
         <div className="reveal reveal-d1 grid grid-cols-1 items-center gap-[32px] md:grid-cols-[1.1fr_0.9fr] md:gap-[56px]">
           <div className="project-visual">
@@ -56,7 +59,7 @@ const Work = () => {
               <Image
                 key={src}
                 src={src}
-                alt={`${project.title} — frame ${i + 1}`}
+                alt={project.imageAlt?.[src] ?? `${project.title} — frame ${i + 1}`}
                 fill
                 sizes="(max-width: 900px) 100vw, 60vw"
                 className={`proj-img object-cover object-top ${i === current ? "active" : ""}`}
@@ -121,11 +124,14 @@ const Work = () => {
               ))}
             </div>
 
-            <p className="mt-[24px] flex items-center gap-[8px] font-mono text-[12px] text-ink-2">
+            <p className="mt-[24px] flex items-center gap-[8px] font-mono text-[12.5px] text-ink-2">
               <span className="text-ink-2">—</span>
-              {project.liveUrl || project.githubUrl
-                ? "View case study"
-                : "Full case study & live links coming soon"}
+              <Link
+                href={`/projects/${project.slug}`}
+                className="text-accent hover:underline"
+              >
+                View case study
+              </Link>
             </p>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { stackCategories } from "@/lib/stack";
 
 const Stack = () => {
@@ -47,6 +48,15 @@ const Stack = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="reveal reveal-d2 mt-[40px]">
+          <Link
+            href="/skills"
+            className="inline-flex items-center gap-[6px] font-mono text-[12.5px] text-accent transition-colors hover:underline"
+          >
+            See detailed technology descriptions →
+          </Link>
         </div>
       </div>
     </section>
