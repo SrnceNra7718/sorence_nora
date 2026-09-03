@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#08090b"/>
+  <rect x="0" y="0" width="1200" height="8" fill="#e8a33d"/>
+  <g transform="translate(80, 120)">
+    <text x="0" y="120" font-family="monospace" font-size="32" font-weight="600" fill="#f3f1ec" letter-spacing="0.1em">SORENCE</text>
+    <text x="130" y="120" font-family="monospace" font-size="32" font-weight="500" fill="#a6a39b" letter-spacing="0.1em">NORA</text>
+  </g>
+  <text x="80" y="210" font-family="system-ui, -apple-system, sans-serif" font-size="64" font-weight="700" fill="#f3f1ec" letter-spacing="-0.02em">Frontend Web Developer</text>
+  <text x="80" y="290" font-family="monospace" font-size="20" fill="#a6a39b" letter-spacing="0.08em">React · Next.js · TypeScript · Tailwind CSS</text>
+  <text x="80" y="540" font-family="monospace" font-size="18" fill="#706d66">frontend developer — philippines</text>
+  <g transform="translate(920, 480)">
+    <rect width="240" height="120" rx="8" fill="#0d0f12" stroke="#e8a33d" stroke-width="1"/>
+    <text x="120" y="70" font-family="monospace" font-size="14" fill="#f3f1ec" text-anchor="middle">Student</text>
+    <text x="120" y="90" font-family="monospace" font-size="14" fill="#f3f1ec" text-anchor="middle">Clearance</text>
+    <text x="120" y="110" font-family="monospace" font-size="14" fill="#f3f1ec" text-anchor="middle">Monitor</text>
+    <text x="120" y="140" font-family="monospace" font-size="12" fill="#a6a39b" text-anchor="middle">case study</text>
+  </g>
+  <g transform="translate(560, 480)">
+    <circle cx="30" cy="30" r="6" fill="#e8a33d"/>
+    <circle cx="60" cy="30" r="6" fill="#6e86a6"/>
+    <circle cx="90" cy="30" r="6" fill="#c4634a"/>
+    <text x="120" y="38" font-family="monospace" font-size="14" fill="#a6a39b">React · TypeScript</text>
+  </g>
+</svg>

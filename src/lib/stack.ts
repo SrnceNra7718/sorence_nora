@@ -10,11 +10,18 @@ export const stackCategories: StackCategory[] = [
   },
   {
     category: "Styling",
-    items: ["Tailwind CSS", "Responsive Design"],
+    items: ["Tailwind CSS", "MUI", "Responsive Design"],
   },
   {
     category: "Backend & Data",
-    items: ["Supabase", "PostgreSQL"],
+    items: [
+      "Supabase",
+      "Terraform",
+      "Docker",
+      "PostgreSQL",
+      "NoSQL",
+      "AWS DynamoDB",
+    ],
   },
   {
     category: "Design Tools",

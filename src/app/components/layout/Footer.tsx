@@ -1,11 +1,21 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
+
+const footerNavLinks = [
+  { label: "HOME", href: "/" },
+  { label: "SKILLS", href: "/skills" },
+  { label: "WORK", href: "/projects" },
+  { label: "ABOUT", href: "/about" },
+  { label: "BLOG", href: "/blog" },
+  { label: "CONTACT", href: "/contact" },
+];
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-line pb-[40px] pt-[56px]">
+    <footer className="border-t border-line pb-[56px] pt-[56px]" role="contentinfo">
       <div className="wrap">
         <div className="flex flex-wrap items-end justify-between gap-[28px]">
           <div>
@@ -13,8 +23,8 @@ const Footer = () => {
               <Image
                 src="/SNLogo.png"
                 alt="Sorence Nora"
-                width={18}
-                height={18}
+                width={20}
+                height={20}
               />
               <p className="font-display text-[1.3rem] font-semibold">
                 Sorence Nora
@@ -24,29 +34,20 @@ const Footer = () => {
               FRONTEND WEB DEVELOPER — PHILIPPINES
             </p>
           </div>
+
           <div className="flex flex-wrap gap-[22px]">
-            <a
-              href="mailto:nora.sorence@gmail.com"
-              className="font-mono text-[12.5px] text-ink-1 transition-colors hover:text-accent"
-            >
-              Email
-            </a>
-            <a
-              href="https://drive.google.com/file/d/14s3Y6nlgkDAuJWRYq021temUH9k1tD1b/view?usp=sharing"
-              target="_blank"
-              rel="noopener"
-              className="font-mono text-[12.5px] text-ink-1 transition-colors hover:text-accent"
-            >
-              Resume
-            </a>
-            <a
-              href="#top"
-              className="font-mono text-[12.5px] text-ink-1 transition-colors hover:text-accent"
-            >
-              Back to top ↑
-            </a>
+            {footerNavLinks.map(({ label, href }) => (
+              <Link
+                key={href}
+                href={href}
+                className="font-mono text-[12.5px] text-ink-1 transition-colors hover:text-accent"
+              >
+                {label}
+              </Link>
+            ))}
           </div>
         </div>
+
         <div className="mt-[34px] flex flex-wrap justify-between gap-[10px] border-t border-line pt-[22px] font-mono text-[11px] text-ink-2">
           <span>© {currentYear} Sorence Nora. All rights reserved.</span>
           <span>Official website — built with HTML, CSS &amp; JavaScript</span>

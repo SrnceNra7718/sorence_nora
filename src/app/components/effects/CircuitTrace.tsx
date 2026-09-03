@@ -27,8 +27,8 @@ const CircuitTrace = () => {
     if (!wrapEl) return;
     const wrapLeft = wrapEl.getBoundingClientRect().left;
 
-    const traceX = Math.max(14, Math.round(wrapLeft - 62));
-    const branchX = Math.max(34, Math.round(wrapLeft - 20));
+    const traceX = Math.max(14, Math.round(wrapLeft - 72));
+    const branchX = Math.max(34, Math.round(wrapLeft - 30));
 
     // Clear previous SVG content and reset ref
     svg.innerHTML = "";

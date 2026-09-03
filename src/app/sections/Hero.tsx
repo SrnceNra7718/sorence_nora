@@ -34,7 +34,10 @@ const Hero = () => {
   }, [reduceMotion]);
 
   return (
-    <section className="hero flex min-h-[100svh] items-start pb-[80px] pt-[150px]" id="hero">
+    <section
+      className="hero flex min-h-[100svh] items-start pb-[80px] pt-[150px]"
+      id="hero"
+    >
       <div className="wrap">
         <div className="grid grid-cols-1 items-center gap-[48px] md:grid-cols-[1.15fr_0.85fr] md:gap-[60px]">
           <div>
@@ -51,17 +54,18 @@ const Hero = () => {
               <span>AVAILABLE FOR SELECT PROJECTS</span>
             </p>
             <h1 className="font-display text-[clamp(2.6rem,6.4vw,5.2rem)] font-semibold leading-[1.03] tracking-[-0.02em] text-ink-0">
-              I build interfaces
-              <br />
-              that hold up
-              <br />
+              <span className="sr-only">
+                Sorence Nora — Frontend Web Developer based in the Philippines
+              </span>
+              Scalable interfaces <br />
               <em className="text-accent" style={{ fontStyle: "normal" }}>
-                under real use.
+                built for real use.{" "}
               </em>
             </h1>
             <p className="mt-[26px] max-w-[46ch] text-[clamp(1rem,1.6vw,1.15rem)] leading-[1.7] text-ink-1">
-              Frontend web developer specializing in modern, responsive web
-              applications — from first component to production build.
+              Frontend web developer based in the Philippines, building modern,
+              responsive web applications with React, Next.js, TypeScript, and
+              Tailwind CSS — from first component to production build.
             </p>
             <div className="mt-[42px] flex flex-wrap items-center gap-[18px]">
               <Magnetic>
@@ -88,7 +92,7 @@ const Hero = () => {
               </Magnetic>
             </div>
             <a
-              href="https://drive.google.com/file/d/1_2AFU6mu0gYI23akwfE4JxWfK6lw1ITj/view?usp=sharing"
+              href="https://drive.google.com/file/d/14s3Y6nlgkDAuJWRYq021temUH9k1tD1b/view?usp=sharing"
               target="_blank"
               rel="noopener"
               className="mt-4 inline-flex items-center gap-[6px] border-b border-transparent pb-[2px] font-mono text-[12.5px] text-ink-1 transition-colors duration-300 hover:border-line-strong hover:text-ink-0"

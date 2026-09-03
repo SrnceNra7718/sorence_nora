@@ -3,13 +3,22 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
-const navLinks = [
-  { label: "HOME", target: "hero", num: "00" },
-  { label: "STACK", target: "stack", num: "01" },
-  { label: "WORK", target: "work", num: "02" },
-  { label: "ABOUT", target: "about", num: "03" },
-  { label: "CONTACT", target: "contact", num: "04" },
+interface NavLink {
+  label: string;
+  target: string;
+  path: string;
+  num: string;
+}
+
+const navLinks: NavLink[] = [
+  { label: "HOME", target: "hero", path: "/", num: "00" },
+  { label: "STACK", target: "stack", path: "/skills", num: "01" },
+  { label: "WORK", target: "work", path: "/projects", num: "02" },
+  { label: "ABOUT", target: "about", path: "/about", num: "03" },
+  { label: "BLOG", target: "blog", path: "/blog", num: "04" },
+  { label: "CONTACT", target: "contact", path: "/contact", num: "05" },
 ];
 
 const iconMap: Record<string, string> = {
@@ -17,10 +26,13 @@ const iconMap: Record<string, string> = {
   STACK: "stacks",
   WORK: "deployed_code",
   ABOUT: "person",
+  BLOG: "article",
   CONTACT: "mail",
 };
 
 const Navbar = () => {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeTarget, setActiveTarget] = useState("hero");
@@ -55,23 +67,25 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    const sections = navLinks
-      .map((l) => document.getElementById(l.target))
-      .filter((s): s is HTMLElement => s !== null);
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveTarget(entry.target.id);
-            moveHighlight(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: "-45% 0px -50% 0px", threshold: 0 },
-    );
-    sections.forEach((s) => observer.observe(s));
-    return () => observer.disconnect();
-  }, [moveHighlight]);
+    if (isHome) {
+      const sections = navLinks
+        .map((l) => document.getElementById(l.target))
+        .filter((s): s is HTMLElement => s !== null);
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setActiveTarget(entry.target.id);
+              moveHighlight(entry.target.id);
+            }
+          });
+        },
+        { rootMargin: "-45% 0px -50% 0px", threshold: 0 },
+      );
+      sections.forEach((s) => observer.observe(s));
+      return () => observer.disconnect();
+    }
+  }, [moveHighlight, isHome]);
 
   useEffect(() => {
     moveHighlight(activeTarget);
@@ -91,8 +105,29 @@ const Navbar = () => {
     }
   }, [mobileOpen]);
 
+  useEffect(() => {
+    if (!isHome) {
+      const path = pathname as string;
+      const matched = navLinks.find(
+        (l) =>
+          l.path === path ||
+          (path.startsWith("/projects/") && l.label === "WORK"),
+      );
+      if (matched) {
+        setActiveTarget(matched.target);
+      }
+    }
+  }, [pathname, isHome]);
+
   const closeDrawer = () => {
     setMobileOpen(false);
+  };
+
+  const getHref = (link: NavLink): string => {
+    if (isHome) {
+      return `#${link.target}`;
+    }
+    return link.path;
   };
 
   return (
@@ -106,7 +141,7 @@ const Navbar = () => {
         }`}
       >
         <Link
-          href="#top"
+          href={getHref(navLinks[0])}
           className="flex items-center gap-[10px] font-display text-[15px] font-semibold tracking-[0.01em]"
         >
           <Image
@@ -132,36 +167,43 @@ const Navbar = () => {
             className="nav-highlight pointer-events-none absolute bottom-[-8px] left-0 top-[-8px] -z-10 w-0 rounded-[999px] border border-[rgba(232,163,61,0.22)] bg-[rgba(232,163,61,0.08)]"
             aria-hidden="true"
           />
-          {navLinks.map(({ label, target }) => (
-            <li key={target}>
-              <Link
-                href={`#${target}`}
-                data-target={target}
-                className={`relative flex items-baseline gap-[6px] py-[4px] font-mono text-[12px] tracking-[0.03em] text-ink-1 ${
-                  activeTarget === target ? "active text-accent" : ""
-                }`}
-                onMouseEnter={() => setHoveredLink(target)}
-                onMouseLeave={() => setHoveredLink(null)}
-              >
-                <span className="relative flex flex-row items-center gap-[6px]">
-                  {hoveredLink === target && (
-                    <span className="absolute -left-3 top-0 hidden md:block">
-                      &lt;
+          {navLinks.map(({ label, target, path }) => {
+            const href = getHref({ label, target, path, num: "00" });
+            const isActive = isHome
+              ? activeTarget === target
+              : pathname === path ||
+                (path === "/projects" && pathname?.startsWith("/projects"));
+            return (
+              <li key={target}>
+                <Link
+                  href={href}
+                  data-target={target}
+                  className={`relative flex items-baseline gap-[6px] py-[4px] font-mono text-[12px] tracking-[0.03em] text-ink-1 ${
+                    isActive ? "active text-accent" : ""
+                  }`}
+                  onMouseEnter={() => setHoveredLink(target)}
+                  onMouseLeave={() => setHoveredLink(null)}
+                >
+                  <span className="relative flex flex-row items-center gap-[6px]">
+                    {hoveredLink === target && (
+                      <span className="absolute -left-3 top-0 hidden md:block">
+                        &lt;
+                      </span>
+                    )}
+                    <span className="material-symbols-outlined block text-[14px]">
+                      {iconMap[label]}
                     </span>
-                  )}
-                  <span className="material-symbols-outlined block text-[14px]">
-                    {iconMap[label]}
+                    <span className="hidden md:inline">{label}</span>
+                    {hoveredLink === target && (
+                      <span className="absolute -right-6 top-0 hidden md:block">
+                        /&gt;
+                      </span>
+                    )}
                   </span>
-                  <span className="hidden md:inline">{label}</span>
-                  {hoveredLink === target && (
-                    <span className="absolute -right-6 top-0 hidden md:block">
-                      /&gt;
-                    </span>
-                  )}
-                </span>
-              </Link>
-            </li>
-          ))}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
 
         <div className="flex items-center gap-[14px]">
@@ -200,23 +242,26 @@ const Navbar = () => {
             : "invisible -translate-y-[8px] opacity-0"
         }`}
       >
-        {navLinks.map(({ label, target, num }) => (
-          <Link
-            key={target}
-            href={`#${target}`}
-            data-target={target}
-            onClick={closeDrawer}
-            className="flex items-baseline gap-[16px] border-b border-line py-[14px] font-display text-[clamp(2rem,10vw,3rem)] font-semibold text-ink-0"
-          >
-            <span className="material-symbols-outlined text-[24px]">
-              {iconMap[label]}
-            </span>
-            <span className="font-mono text-[14px] text-accent">{num}</span>
-            {label}
-          </Link>
-        ))}
+        {navLinks.map(({ label, target, path, num }) => {
+          const href = getHref({ label, target, path, num });
+          return (
+            <Link
+              key={target}
+              href={href}
+              data-target={target}
+              onClick={closeDrawer}
+              className="flex items-baseline gap-[16px] border-b border-line py-[14px] font-display text-[clamp(2rem,10vw,3rem)] font-semibold text-ink-0"
+            >
+              <span className="material-symbols-outlined text-[24px]">
+                {iconMap[label]}
+              </span>
+              <span className="font-mono text-[14px] text-accent">{num}</span>
+              {label}
+            </Link>
+          );
+        })}
         <Link
-          href="https://drive.google.com/file/d/1_2AFU6mu0gYI23akwfE4JxWfK6lw1ITj/view?usp=sharing"
+          href="https://drive.google.com/file/d/14s3Y6nlgkDAuJWRYq021temUH9k1tD1b/view?usp=sharing"
           target="_blank"
           rel="noopener"
           onClick={closeDrawer}
