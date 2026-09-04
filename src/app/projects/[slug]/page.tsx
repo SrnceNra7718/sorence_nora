@@ -209,7 +209,7 @@ const ProjectPage = async ({ params }: ProjectPageProps) => {
                   alt={proj.imageAlt[img] || `${proj.title} — frame ${i + 1}`}
                   fill
                   sizes="(max-width: 640px) 100vw, 45vw"
-                  className="proj-img object-cover object-top"
+                  className="proj-img object-cover object-top active"
                   priority={i === 0}
                 />
                 <span className="project-frame-label mono">
