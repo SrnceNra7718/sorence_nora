@@ -106,7 +106,7 @@ const CertificatePage = async ({ params }: CertificatePageProps) => {
     { label: cert.title, href: `/about/certificates/${cert.slug}` },
   ];
 
-  const pdfUrl = decodeURIComponent(cert.pdf);
+  const pdfUrl = cert.pdf;
 
   return (
     <PageLayout>

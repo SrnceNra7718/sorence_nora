@@ -7,6 +7,12 @@
 - **Build**: `npx next build`
 - **Dev**: `npx next dev --experimental-https` (HTTPS enabled via `--experimental-https` flag using self-signed cert from mkcert, serves at `https://localhost:3000`)
 
+## Environment
+
+- **Node.js**: >=26.0.0 (specified in `engines.node` in `package.json`)
+- **HTTPS**: Development server runs over HTTPS to ensure secure context for PDF rendering
+- **PDF headers**: `next.config.mjs` sets `Content-Disposition: inline`, `Content-Type: application/pdf`, `X-Content-Type-Options: nosniff`, and `X-Frame-Options: SAMEORIGIN` for PDF files
+
 ## Project Structure
 
 ```
@@ -165,7 +171,7 @@ The homepage must **not** load any PDFs. Only text summaries and links are rende
 - The `pdfUrl(folder, filename)` helper in `certificates.ts` constructs URL-encoded paths
 - Spaces and special characters in folder/file names are encoded with `encodeURIComponent`
 - Certificate detail URLs use the `slug` field: `/about/certificates/{slug}`
-- Always use `decodeURIComponent(cert.pdf)` when placing the PDF URL in `href` or `src` attributes
+- Always use `cert.pdf` directly in `href` or `src` attributes (it is already URL-encoded)
 
 ### Adding a New Certificate
 
