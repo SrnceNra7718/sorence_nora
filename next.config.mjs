@@ -19,6 +19,27 @@ const nextConfig = {
             key: "X-robots-tag",
             value: "index, follow",
           },
+          {
+            key: "X-Frame-Options",
+            value: "SAMEORIGIN",
+          },
+        ],
+      },
+      {
+        source: "/certificates/:path*.pdf",
+        headers: [
+          {
+            key: "Content-Type",
+            value: "application/pdf",
+          },
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+          {
+            key: "Content-Disposition",
+            value: "inline",
+          },
         ],
       },
     ];

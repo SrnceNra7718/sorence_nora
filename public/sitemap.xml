@@ -8,9 +8,75 @@
   </url>
   <url>
     <loc>https://sorence-nora.vercel.app/about</loc>
-    <lastmod>2024-06-01</lastmod>
+    <lastmod>2025-09-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sorence-nora.vercel.app/about/certificates/react-nextjs-learning-path</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sorence-nora.vercel.app/about/certificates/complete-intro-to-react-v9</loc>
+    <lastmod>2025-12-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sorence-nora.vercel.app/about/certificates/intermediate-react-v6-rscs-hooks-performance</loc>
+    <lastmod>2026-01-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sorence-nora.vercel.app/about/certificates/nextjs-fundamentals-v4</loc>
+    <lastmod>2026-01-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sorence-nora.vercel.app/about/certificates/react-and-typescript-v3</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sorence-nora.vercel.app/about/certificates/enterprise-ui-development-testing-code-quality</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sorence-nora.vercel.app/about/certificates/enterprise-ui-development-microfrontends-testing-code-quality</loc>
+    <lastmod>2026-03-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sorence-nora.vercel.app/about/certificates/state-management-at-scale-in-react-nextjs</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sorence-nora.vercel.app/about/certificates/react-performance-v2</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sorence-nora.vercel.app/about/certificates/java-fundamentals</loc>
+    <lastmod>2023-06-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://sorence-nora.vercel.app/about/certificates/systems-administration</loc>
+    <lastmod>2023-06-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://sorence-nora.vercel.app/skills</loc>
