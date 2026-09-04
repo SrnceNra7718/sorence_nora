@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
+import { useMediaQuery } from "@/lib/useMediaQuery";
 
 interface MagneticProps {
   children: React.ReactNode;
@@ -9,15 +10,7 @@ interface MagneticProps {
 
 const Magnetic = ({ children, className = "" }: MagneticProps) => {
   const ref = useRef<HTMLDivElement>(null);
-  const [reduceMotion, setReduceMotion] = useState(false);
-
-  useEffect(() => {
-    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReduceMotion(motionQuery.matches);
-    const handleChange = (e: MediaQueryListEvent) => setReduceMotion(e.matches);
-    motionQuery.addEventListener("change", handleChange);
-    return () => motionQuery.removeEventListener("change", handleChange);
-  }, []);
+  const reduceMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
 
   useEffect(() => {
     if (reduceMotion) return;

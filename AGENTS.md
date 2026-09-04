@@ -3,7 +3,7 @@
 ## Commands
 
 - **Type check**: `npx tsc --noEmit`
-- **Lint**: `npx next lint`
+- **Lint**: `npx eslint .`
 - **Build**: `npx next build`
 - **Dev**: `npx next dev --experimental-https` (HTTPS enabled via `--experimental-https` flag using self-signed cert from mkcert, serves at `https://localhost:3000`)
 

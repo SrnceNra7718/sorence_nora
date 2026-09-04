@@ -116,6 +116,10 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}
     >
       <head>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,600,1,0&display=swap"
+        />
         <meta name="google-site-verification" content="uPh6m1Ga-x4ihr9btRQjfsVvir3KUKTCA3u4MJstUco" />
         <meta name="theme-color" content="#08090b" />
         <meta name="color-scheme" content="dark" />

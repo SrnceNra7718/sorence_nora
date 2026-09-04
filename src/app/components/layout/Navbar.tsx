@@ -114,10 +114,10 @@ const Navbar = () => {
           (path.startsWith("/projects/") && l.label === "WORK"),
       );
       if (matched) {
-        setActiveTarget(matched.target);
+        moveHighlight(matched.target);
       }
     }
-  }, [pathname, isHome]);
+  }, [pathname, isHome, moveHighlight]);
 
   const closeDrawer = () => {
     setMobileOpen(false);

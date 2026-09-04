@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
+import { useMediaQuery } from "@/lib/useMediaQuery";
 
 const CustomCursor = () => {
   const dotRef = useRef<HTMLDivElement>(null);
@@ -8,30 +9,8 @@ const CustomCursor = () => {
   const coordRef = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
 
-  const [reduceMotion, setReduceMotion] = useState(false);
-  const [isFinePointer, setIsFinePointer] = useState(false);
-
-  useEffect(() => {
-    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const pointerQuery = window.matchMedia(
-      "(hover: hover) and (pointer: fine)",
-    );
-    setReduceMotion(motionQuery.matches);
-    setIsFinePointer(pointerQuery.matches);
-
-    const handleMotionChange = (e: MediaQueryListEvent) =>
-      setReduceMotion(e.matches);
-    const handlePointerChange = (e: MediaQueryListEvent) =>
-      setIsFinePointer(e.matches);
-
-    motionQuery.addEventListener("change", handleMotionChange);
-    pointerQuery.addEventListener("change", handlePointerChange);
-
-    return () => {
-      motionQuery.removeEventListener("change", handleMotionChange);
-      pointerQuery.removeEventListener("change", handlePointerChange);
-    };
-  }, []);
+  const reduceMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
+  const isFinePointer = useMediaQuery("(hover: hover) and (pointer: fine)");
 
   useEffect(() => {
     if (reduceMotion || !isFinePointer) return;

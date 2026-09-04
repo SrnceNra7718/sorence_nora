@@ -2,9 +2,6 @@
 
 const nextConfig = {
   reactStrictMode: true,
-  experimental: {
-    optimizePackageImports: ["react-icons"],
-  },
   images: {
     formats: ["image/avif", "image/webp"],
     dangerouslyAllowSVG: true,
