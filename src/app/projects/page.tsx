@@ -90,7 +90,7 @@ const ProjectsPage = () => {
                       alt={proj.imageAlt[proj.images[0]] || proj.title}
                       fill
                       sizes="(max-width: 900px) 100vw, 55vw"
-                      className="proj-img object-cover object-top"
+                      className="proj-img object-cover object-top active"
                       priority={proj.slug === projects[0]?.slug}
                     />
                   </div>

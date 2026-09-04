@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Badge from "@/app/components/ui/Badge";
@@ -16,6 +16,14 @@ const Work = () => {
     },
     [total],
   );
+
+  useEffect(() => {
+    if (total <= 1) return;
+    const id = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % total);
+    }, 4000);
+    return () => clearInterval(id);
+  }, [total]);
 
   return (
     <section className="section-pad" id="work">
