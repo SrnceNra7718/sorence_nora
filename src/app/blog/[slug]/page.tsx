@@ -80,7 +80,7 @@ const renderBlock = (block: BlogContentBlock, index: number) => {
         3: "mb-[12px] mt-[24px] font-display text-[1.3rem] font-semibold text-ink-0",
         4: "mb-[10px] mt-[20px] font-display text-[1.1rem] font-semibold text-ink-0",
       };
-      const Tag = `h${block.level}` as keyof JSX.IntrinsicElements;
+      const Tag = `h${block.level}` as React.ElementType;
       return (
         <Tag key={key} className={headingClasses[block.level] as string}>
           {block.text}
