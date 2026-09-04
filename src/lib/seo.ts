@@ -230,3 +230,85 @@ export function profilePageJsonLd() {
     author: personJsonLd(),
   };
 }
+
+export function certificateJsonLd(certificate: {
+  title: string;
+  description?: string;
+  credentialId?: string;
+  dateISO?: string;
+  issueDate?: string;
+  courseType?: string;
+  issuer: string;
+  slug: string;
+  skills?: string[];
+  learningPath?: {
+    provider: string;
+    title: string;
+  };
+}): Record<string, unknown> {
+  const recognizedBy: Record<string, unknown> = {
+    "@type": "Organization",
+    name: certificate.issuer,
+  };
+  if (certificate.credentialId) {
+    recognizedBy.identifier = certificate.credentialId;
+  }
+
+  const credential: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "EducationalOccupationalCredential",
+    name: certificate.title,
+    credentialCategory: certificate.courseType ?? "Certificate",
+    recognizedBy,
+    url: `${siteConfig.siteUrl}/about/certificates/${certificate.slug}`,
+    inLanguage: "en",
+  };
+
+  if (certificate.description) {
+    credential.description = certificate.description;
+  }
+  if (certificate.dateISO) {
+    credential.dateCreated = certificate.dateISO;
+  }
+  if (certificate.skills && certificate.skills.length > 0) {
+    credential.educationalAlignment = certificate.skills;
+  }
+  if (certificate.learningPath) {
+    credential.partOf = {
+      "@type": "Course",
+      name: certificate.learningPath.title,
+      provider: {
+        "@type": "Organization",
+        name: certificate.learningPath.provider,
+      },
+    };
+  }
+
+  return credential;
+}
+
+export function certificateCollectionJsonLd(certificates: {
+  title: string;
+  issuer: string;
+  slug: string;
+}[]) {
+  const collection = certificates.map((cert) => ({
+    "@type": "EducationalOccupationalCredential",
+    name: cert.title,
+    recognizedBy: {
+      "@type": "Organization",
+      name: cert.issuer,
+    },
+    url: `${siteConfig.siteUrl}/about/certificates/${cert.slug}`,
+  }));
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Sorence Nora — Certifications",
+    description:
+      "Certificates and certifications earned by Sorence Nora, a frontend web developer.",
+    itemListElement: collection,
+    about: personJsonLd(),
+  };
+}

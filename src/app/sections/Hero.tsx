@@ -1,20 +1,13 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import Magnetic from "@/app/components/effects/Magnetic";
+import { useMediaQuery } from "@/lib/useMediaQuery";
 
 const Hero = () => {
   const cubeRef = useRef<SVGGElement>(null);
-  const [reduceMotion, setReduceMotion] = useState(false);
-
-  useEffect(() => {
-    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReduceMotion(motionQuery.matches);
-    const handleChange = (e: MediaQueryListEvent) => setReduceMotion(e.matches);
-    motionQuery.addEventListener("change", handleChange);
-    return () => motionQuery.removeEventListener("change", handleChange);
-  }, []);
+  const reduceMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
 
   useEffect(() => {
     if (reduceMotion) return;

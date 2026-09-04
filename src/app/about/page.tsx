@@ -3,7 +3,8 @@ import Image from "next/image";
 import { Metadata } from "next";
 import PageLayout from "@/app/components/layout/PageLayout";
 import Timeline from "@/app/components/ui/Timeline";
-import { education, certifications } from "@/lib/timeline";
+import { education } from "@/lib/timeline";
+import CertificatesSection from "@/app/components/certificates/CertificatesSection";
 import { siteConfig, techDescriptions } from "@/lib/siteConfig";
 import { personJsonLd, breadcrumbJsonLd, profilePageJsonLd } from "@/lib/seo";
 import JsonLd from "@/app/components/SEO/JsonLd";
@@ -141,9 +142,10 @@ const AboutPage = () => {
       <section className="section-pad border-t border-line">
         <div className="wrap">
           <Timeline heading={education.heading} items={education.items} />
-          <Timeline heading={certifications.heading} items={certifications.items} />
         </div>
       </section>
+
+      <CertificatesSection />
     </PageLayout>
   );
 };

@@ -1,21 +1,13 @@
 "use client";
 
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useRef, useCallback } from "react";
+import { useMediaQuery } from "@/lib/useMediaQuery";
 
 const CircuitTrace = () => {
   const svgRef = useRef<SVGSVGElement>(null);
   const layerRef = useRef<HTMLDivElement>(null);
   const progressPathRef = useRef<SVGPathElement | null>(null);
-  const [reduceMotion, setReduceMotion] = useState(false);
-
-  // Detect prefers-reduced-motion
-  useEffect(() => {
-    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReduceMotion(motionQuery.matches);
-    const handleChange = (e: MediaQueryListEvent) => setReduceMotion(e.matches);
-    motionQuery.addEventListener("change", handleChange);
-    return () => motionQuery.removeEventListener("change", handleChange);
-  }, []);
+  const reduceMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
 
   // Build the SVG paths and circles from DOM positions
   const buildCircuit = useCallback(() => {

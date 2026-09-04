@@ -2,7 +2,8 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Timeline from "@/app/components/ui/Timeline";
-import { education, certifications } from "@/lib/timeline";
+import { education } from "@/lib/timeline";
+import CertificationsSummary from "@/app/components/certificates/CertificationsSummary";
 
 const About = () => {
   return (
@@ -85,10 +86,7 @@ const About = () => {
 
         <div className="mt-[70px]">
           <Timeline heading={education.heading} items={education.items} />
-          <Timeline
-            heading={certifications.heading}
-            items={certifications.items}
-          />
+          <CertificationsSummary />
         </div>
       </div>
     </section>

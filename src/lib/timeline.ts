@@ -24,19 +24,3 @@ export const education: TimelineSection = {
     },
   ],
 };
-
-export const certifications: TimelineSection = {
-  heading: "Certifications",
-  items: [
-    {
-      year: "2023",
-      title: "Java Fundamentals",
-      subtitle: "Oracle Academy · Award of Course Completion",
-    },
-    {
-      year: "2023",
-      title: "Systems Administration",
-      subtitle: "STI College · Award of Course Completion",
-    },
-  ],
-};
