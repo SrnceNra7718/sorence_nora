@@ -237,3 +237,64 @@ The homepage must **not** load any PDFs. Only text summaries and links are rende
 - Learning-path membership
 
 If information cannot be confidently verified from the PDF or existing project data, **omit it**.
+
+## Projects
+
+Portfolio projects are stored as a single source of truth in `src/lib/projects.ts`.
+
+Project entries include: number, slug, title, role, context, overview, description, technologies, frontendTech, backendTech, databaseTech, images, imageAlt, liveUrl, githubUrl, dateCreated, caseStudy, ogImage.
+
+The `caseStudy` object holds: problem, purpose, targetUsers, features (array of `{title, description}`), challenges, implementation, architecture (optional), lessonsLearned (optional), futureImprovements (optional), results (optional).
+
+The case study is rendered by the dynamic route `src/app/projects/[slug]/page.tsx`. Pages are pre-rendered at build time via `generateStaticParams`. The projects listing at `/projects` iterates the `projects` array, so adding a new entry automatically produces a card on the listing page.
+
+The homepage `Work` section (`src/app/sections/Work.tsx`) currently highlights `projects[0]` as the featured project and links to the full projects index.
+
+### Current Projects
+
+#### 01 — Student Clearance Monitor
+
+- **Slug**: `student-clearance-monitor`
+- **GitHub**: not published (`githubUrl: null`)
+- **Live URL**: not published (`liveUrl: null`)
+- **Context**: OJT project at STI College, San Jose del Monte
+- **Stack**: HTML5, CSS3, Tailwind CSS, JavaScript, TypeScript, Next.js, Supabase, PostgreSQL
+- **Screenshots**: `/public/forProject_Section/scs.png`, `AdminPage.png`, `CashierPage.png`, `ProgHeadPage.png`, `RegistrarPage.png`
+
+#### 02 — Yenzhen Tailoring
+
+- **Slug**: `yenzhen-tailoring`
+- **GitHub**: https://github.com/SrnceNra7718/yenzhen-tailoring
+- **Live URL**: https://yenzhen-tailoring.vercel.app (verified — README `About` section on the repo lists the same URL)
+- **Context**: Client project — Yenzhen Tailoring (premium custom sublimation sportswear)
+- **Stack (verified from `package.json` and source)**: Next.js 14 (App Router), React 18, TypeScript, Tailwind CSS, Framer Motion, Lucide React, clsx, tailwind-merge. Supabase + PostgreSQL schema is included in the repo (`sql/schema.sql`) for future CRUD functionality, and is referenced in the case study as **prepared** rather than fully wired.
+- **Screenshots**: `/public/forProject_Section/yenzhen-tailoring/` (homepage, products, gallery, about, contact page renders + mobile homepage + sample product and gallery images)
+- **Source-of-truth notes**:
+  - Content lives in typed static data files (`data/products.ts`, `data/gallery.ts`, etc.) — there is no live Supabase query layer in the current code, even though the README and SQL schema describe one.
+  - The repository's `package.json` does **not** include `@supabase/supabase-js` as a dependency; the README's "Tech Stack" mentions Supabase, but in this case study Supabase is described as prepared/scaffolded for future work.
+  - The README references `lib/supabase.ts`, which does not exist in the repo (only `lib/utils.ts` exists). Do not invent Supabase helpers — refer to the repo for ground truth on future edits.
+  - Admin routes (`app/admin/**`) and an `/admin` sign-up page are scaffolded but the live deployment does not currently expose them.
+- **Manual fields**: `dateCreated` was not present in the repo metadata; set to `2024-01-01` as a placeholder.
+- **Live deployment verification**: README "About" section on the GitHub repo explicitly links to `https://yenzhen-tailoring.vercel.app`. Screenshots were captured from that live deployment.
+
+### Adding a New Project
+
+1. Add a new entry to the `projects` array in `src/lib/projects.ts`. Use the existing Student Clearance Monitor or Yenzhen Tailoring entry as the structural template. Reuse the existing `Project` interface — do not invent new fields.
+2. Place project screenshots under `/public/forProject_Section/{slug}/`.
+3. Populate `imageAlt` for every entry in `images`. Provide meaningful, frame-specific captions — never "Screenshot N".
+4. If the project has a verified live URL, add it to `liveUrl`. If not, leave `liveUrl: null` — do not invent one.
+5. If the project has a public GitHub repo, add it to `githubUrl`. If not, leave `githubUrl: null`.
+6. Run `npx tsc --noEmit`, `npx eslint .`, and `npx next build` to verify the new route is generated under `/projects/[slug]` and that the projects listing page still renders.
+7. Add a short record under `### Current Projects` in `AGENTS.md` summarising the source repo, slug, live URL status, stack, and any manual fields.
+
+### Project Accuracy
+
+**Never invent or infer unsupported project information.** Use the source repository (and, when available, the live deployment) as the source of truth for:
+- Project title and description
+- Frontend / backend / database technologies (only those actually present in `package.json` or source code)
+- Features (only those visible in routes, components, or README)
+- Architecture (only describe what the code actually does)
+- Live URL (only if explicitly mentioned in the README or repo metadata)
+- GitHub URL (only the actual repo, not a fork or unrelated project)
+
+If a field cannot be confidently verified, either omit it or describe it accurately as prepared/scaffolded (e.g. "schema prepared, not yet wired").

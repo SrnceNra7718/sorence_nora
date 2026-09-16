@@ -23,6 +23,236 @@ export interface BlogContent {
 }
 
 export const blogContent: Record<string, BlogContent> = {
+  "yenzhen-tailoring-case-study": {
+    slug: "yenzhen-tailoring-case-study",
+    title:
+      "Building the Yenzhen Tailoring Website: A Next.js, Tailwind & Static Data Case Study",
+    description:
+      "How I built a marketing website for a custom sublimation sportswear business — a product catalog of over forty items, a finished-works gallery, and a lead-generation flow, all powered by typed static data and a prepared Supabase schema.",
+    datePublished: "2024-07-10",
+    dateModified: "2024-07-10",
+    author: "Sorence Nora",
+    tag: "Project Case Study",
+    tags: ["Next.js", "Tailwind CSS", "TypeScript", "Framer Motion", "Case Study"],
+    readingTime: "7 min read",
+    ogImage: "/forProject_Section/yenzhen-tailoring/homepage_pagev3.png",
+    content: [
+      {
+        type: "paragraph",
+        text: "Yenzhen Tailoring is a client project for a custom sublimation sportswear business specializing in basketball jerseys, team uniforms, and complete team packages. The goal was to create a marketing website that could present the brand, showcase more than forty products, display finished work, and give potential customers a clear way to start an inquiry.",
+      },
+      {
+        type: "paragraph",
+        text: "This case study walks through the project goals, frontend architecture, content model, responsive design decisions, and the prepared data layer that can support the next phase of the website.",
+      },
+      {
+        type: "heading",
+        text: "The problem: a sportswear business without a central web presence",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "Before the website, the business relied on social channels to answer questions and collect interest. That made it difficult for a new customer to review the full product range, understand the custom ordering process, inspect previous work, and find a direct path to request a quote. The site needed to turn that scattered experience into one focused journey.",
+      },
+      {
+        type: "heading",
+        text: "Project goals and audience",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "The primary audience is made up of basketball team managers, coaches, schools, leagues, event organizers, and individual players looking for custom jerseys or sportswear. The website therefore needed to communicate the brand quickly, make the catalog easy to browse, build confidence through finished-work examples, and keep the contact flow visible.",
+      },
+      {
+        type: "list",
+        items: [
+          "Introduce the Yenzhen Tailoring brand and its focus on custom sublimation sportswear.",
+          "Present a large product catalog with clear categories and useful product details.",
+          "Showcase completed uniforms and custom work in a responsive gallery.",
+          "Explain the ordering process and give visitors a direct way to contact the business or request a quote.",
+          "Keep the experience fast and consistent across mobile and desktop devices.",
+        ],
+      },
+      {
+        type: "heading",
+        text: "Tech stack and why these choices",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "The project is a content-heavy marketing site rather than an application that needs live database reads on every page. I used a static-first frontend stack that keeps content close to the pages while leaving a clear path toward a database-backed admin experience.",
+      },
+      {
+        type: "list",
+        items: [
+          "Next.js 14 with the App Router — for file-based routing, optimized images, and a production-ready React frontend.",
+          "React 18 — for reusable page and component composition.",
+          "TypeScript — to keep product, gallery, and navigation data shapes consistent as the catalog grows.",
+          "Tailwind CSS — for mobile-first layouts and a shared visual system across marketing pages and product grids.",
+          "Framer Motion — for restrained scroll-reveal and hover motion that supports the brand without distracting from the catalog.",
+          "Lucide React, clsx, and tailwind-merge — for accessible interface icons and predictable conditional class handling.",
+          "Supabase and PostgreSQL — represented by a prepared SQL schema for future products, gallery items, quotes, contact messages, and admin workflows.",
+        ],
+      },
+      {
+        type: "heading",
+        text: "Frontend architecture",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "The site is organized around the customer journey: a homepage introduces the brand and directs visitors into the catalog, gallery, about page, and contact flow. Each page has a focused responsibility, while shared navigation and visual primitives keep the experience consistent.",
+      },
+      {
+        type: "code",
+        language: "text",
+        code: `src/
+  app/
+    page.tsx
+    products/page.tsx
+    gallery/page.tsx
+    about/page.tsx
+    contact/page.tsx
+  data/
+    products.ts
+    gallery.ts
+    faqs.ts
+  sql/
+    schema.sql`,
+      },
+      {
+        type: "heading",
+        text: "Content architecture: typed static data",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "Products, gallery entries, FAQs, testimonials, services, and navigation content live in typed TypeScript data files. This keeps the marketing content easy to review and update without introducing a CMS or a live database dependency for the first release. The pages consume those data files directly, so the catalog remains predictable and the build can optimize the rendered content.",
+      },
+      {
+        type: "callout",
+        text: "The current website is a static marketing experience. The Supabase schema is prepared for future CRUD functionality; it is not presented as a live query layer in the current release.",
+      },
+      {
+        type: "heading",
+        text: "Catalog and gallery experience",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "The catalog contains more than forty sportswear items across categories such as basketball jerseys, volleyball jerseys, t-shirts, riding sleeves, warmers, and team packages. Category filtering and a responsive grid help visitors narrow the collection without losing the context of the wider range.",
+      },
+      {
+        type: "image",
+        src: "/forProject_Section/yenzhen-tailoring/products_page.png",
+        alt: "Yenzhen Tailoring product catalog page showing a responsive grid of custom sportswear items with category filters",
+        caption: "The product catalog uses category filtering to make a large collection easier to browse.",
+      },
+      {
+        type: "paragraph",
+        text: "The finished-works gallery provides social proof for customers evaluating a custom order. A responsive image grid keeps the portfolio usable on small screens, while the lightbox interaction gives visitors a closer look at the details of completed uniforms.",
+      },
+      {
+        type: "image",
+        src: "/forProject_Section/yenzhen-tailoring/gallery_page.png",
+        alt: "Yenzhen Tailoring finished works gallery displaying completed custom sportswear projects in a responsive image grid with lightbox",
+        caption: "Completed projects are presented in a gallery designed for quick browsing and closer inspection.",
+      },
+      {
+        type: "heading",
+        text: "Responsive design and motion",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "The layout was designed mobile-first. Product cards, gallery tiles, navigation, and calls to action collapse into readable single-column arrangements on small screens, then expand into multi-column grids when more space is available. Tailwind utilities keep those breakpoint changes close to the markup they affect.",
+      },
+      {
+        type: "image",
+        src: "/forProject_Section/yenzhen-tailoring/homepage_pagev3.png",
+        alt: "Yenzhen Tailoring homepage hero section with the brand name, tagline, and calls to action for browsing products and team packages",
+        caption: "The homepage introduces the brand and routes visitors toward products, packages, and inquiries.",
+      },
+      {
+        type: "paragraph",
+        text: "Framer Motion adds scroll-reveal transitions and hover feedback to cards, gallery images, and primary calls to action. The motion is used as an accent: it helps establish rhythm and polish, but the content and navigation remain usable without relying on animation.",
+      },
+      {
+        type: "image",
+        src: "/forProject_Section/yenzhen-tailoring/homepage_mobilev2.png",
+        alt: "Yenzhen Tailoring homepage rendered on a mobile viewport showing the responsive layout",
+        caption: "The mobile layout keeps the hero, navigation, and primary calls to action accessible.",
+      },
+      {
+        type: "heading",
+        text: "Key challenges",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "The first challenge was organizing a large catalog without overwhelming visitors. Typed data, category grouping, and a consistent card layout made it possible to scale the product collection while keeping each page scannable. Image optimization was also important because a sportswear catalog depends on photography but cannot afford unnecessarily heavy pages.",
+      },
+      {
+        type: "paragraph",
+        text: "The second challenge was creating a brand-led visual system that could work across marketing pages and dense product grids. The dark green and gold palette, brush-style wordmark, and shared typography had to remain readable at different sizes and across responsive breakpoints.",
+      },
+      {
+        type: "callout",
+        text: "A marketing site still has to make decisions for the visitor. The contact and quote path stays visible so browsing the catalog leads naturally toward a conversation with the business.",
+      },
+      {
+        type: "heading",
+        text: "Prepared backend and future phase",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "The repository includes a Supabase and PostgreSQL schema for product categories, gallery images, templates, quote requests, contact messages, and ratings. Admin routes are also scaffolded, giving the next development phase a defined direction without pretending that those workflows are already connected in the current release.",
+      },
+      {
+        type: "list",
+        items: [
+          "Connect the prepared schema to live CRUD operations for products, gallery items, templates, quotes, and contact messages.",
+          "Add an authenticated admin panel with Supabase Auth.",
+          "Build a persistent multi-step quote calculator.",
+          "Send email notifications for new quote and contact submissions.",
+          "Expand SEO and analytics support for product and inquiry traffic.",
+        ],
+      },
+      {
+        type: "heading",
+        text: "Lessons learned",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "This project reinforced how much structure typed static data can provide for a content-heavy marketing site. Keeping content in reviewable files made the catalog and supporting pages straightforward to maintain, while the prepared schema preserved a clean migration path for future database features.",
+      },
+      {
+        type: "paragraph",
+        text: "It also highlighted the value of treating responsive design and motion as product decisions. A consistent mobile layout, optimized imagery, and restrained animation make a large visual catalog feel approachable instead of noisy.",
+      },
+      {
+        type: "heading",
+        text: "Results",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "The result is a complete, responsive marketing website for Yenzhen Tailoring. It presents the brand, product range, finished work, ordering process, and contact flow in one place, while the repository is prepared for the next stage of admin and quote functionality.",
+      },
+      {
+        type: "heading",
+        text: "What's next",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "The next phase would turn the prepared data layer into live workflows: persistent quote requests, authenticated content management, notifications, and richer customer feedback. That would extend the site from a strong marketing presence into a complete inquiry and order-support platform.",
+      },
+    ],
+  },
+
   "student-clearance-monitor-case-study": {
     slug: "student-clearance-monitor-case-study",
     title: "Building the Student Clearance Monitor: A Next.js & Supabase Case Study",

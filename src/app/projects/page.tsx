@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Metadata } from "next";
@@ -53,15 +52,23 @@ const ProjectsPage = () => {
 
   return (
     <PageLayout>
-      <JsonLd data={[breadcrumbJsonLd(breadcrumbs), ...projectStructuredData]} />
+      <JsonLd
+        data={[breadcrumbJsonLd(breadcrumbs), ...projectStructuredData]}
+      />
       <section className="section-pad pt-[150px]">
         <div className="wrap">
           <div className="eyebrow" data-circuit-node="work">
             <span className="relative flex flex-row items-center gap-[6px]">
-              <span className="absolute -left-3 top-0 hidden md:block">&lt;</span>
-              <span className="material-symbols-outlined block text-[14px]">{"deployed_code"}</span>
+              <span className="absolute -left-3 top-0 hidden md:block">
+                &lt;
+              </span>
+              <span className="material-symbols-outlined block text-[14px]">
+                {"deployed_code"}
+              </span>
               <span className="hidden md:inline">{"Projects"}</span>
-              <span className="absolute -right-6 top-0 hidden md:block">/&gt;</span>
+              <span className="absolute -right-6 top-0 hidden md:block">
+                /&gt;
+              </span>
             </span>
           </div>
 
@@ -90,7 +97,7 @@ const ProjectsPage = () => {
                       alt={proj.imageAlt[proj.images[0]] || proj.title}
                       fill
                       sizes="(max-width: 900px) 100vw, 55vw"
-                      className="proj-img object-cover object-top active"
+                      className="proj-img active object-cover object-top"
                       priority={proj.slug === projects[0]?.slug}
                     />
                   </div>
@@ -108,19 +115,25 @@ const ProjectsPage = () => {
                         <span className="w-[110px] flex-shrink-0 pt-[2px] font-mono text-[11px] uppercase tracking-[0.06em] text-ink-2">
                           Role
                         </span>
-                        <span className="leading-[1.6] text-ink-1">{proj.role}</span>
+                        <span className="leading-[1.6] text-ink-1">
+                          {proj.role}
+                        </span>
                       </div>
                       <div className="flex gap-[16px] border-t border-line py-[12px]">
                         <span className="w-[110px] flex-shrink-0 pt-[2px] font-mono text-[11px] uppercase tracking-[0.06em] text-ink-2">
                           Context
                         </span>
-                        <span className="leading-[1.6] text-ink-1">{proj.context}</span>
+                        <span className="leading-[1.6] text-ink-1">
+                          {proj.context}
+                        </span>
                       </div>
                       <div className="flex gap-[16px] border-t border-line py-[12px] last:border-b">
                         <span className="w-[110px] flex-shrink-0 pt-[2px] font-mono text-[11px] uppercase tracking-[0.06em] text-ink-2">
                           Overview
                         </span>
-                        <span className="leading-[1.6] text-ink-1">{proj.overview}</span>
+                        <span className="leading-[1.6] text-ink-1">
+                          {proj.overview}
+                        </span>
                       </div>
                     </div>
 
