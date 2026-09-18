@@ -113,7 +113,8 @@ The `react-dark.pdf` file is the learning path completion certificate (marked wi
 - `description` (optional string) — verified text from the PDF
 - `courseType` (optional string) — e.g. "Certificate of Completion"
 - `skills` (optional string[]) — topics verified from the certificate title
-- `pdf` (string) — public URL path (URL-encoded)
+- `pdf` (string) — public URL path to the authoritative PDF (URL-encoded)
+- `image` (string) — public URL path to the matching JPG preview (URL-encoded)
 - `slug` (string) — URL-safe slug for routes
 - `instructor` (optional string) — instructor name from the PDF
 - `duration` (optional string) — course duration from the PDF
