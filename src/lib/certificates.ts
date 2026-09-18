@@ -17,6 +17,7 @@ export interface Certificate {
   courseType?: string;
   skills?: string[];
   pdf: string;
+  image: string;
   slug: string;
   instructor?: string;
   duration?: string;
@@ -37,6 +38,15 @@ const MASTER_LP_FOLDER =
   "Master React and Next.js, the Leading Technologies Powering Modern Web Development";
 
 function pdfUrl(folder: string | null, filename: string): string {
+  const parts = folder
+    ? ["/certificates", ...folder.split("/"), filename]
+    : ["/certificates", filename];
+  return parts
+    .map((p) => encodeURIComponent(p).replace(/%2F/g, "/"))
+    .join("/");
+}
+
+function imageUrl(folder: string | null, filename: string): string {
   const parts = folder
     ? ["/certificates", ...folder.split("/"), filename]
     : ["/certificates", filename];
@@ -73,6 +83,7 @@ export const certificates: Certificate[] = [
       "Awarded for satisfactory completion of all course work in Java Fundamentals.",
     skills: ["Java", "Programming Fundamentals"],
     pdf: pdfUrl(null, "certificateJavaFundamentals.pdf"),
+    image: imageUrl(null, "certificateJavaFundamentals.jpg"),
     slug: slugify("Java Fundamentals"),
   },
   {
@@ -87,6 +98,7 @@ export const certificates: Certificate[] = [
       "Awarded for satisfactory completion of all course work in Systems Administration.",
     skills: ["System Administration", "IT Operations"],
     pdf: pdfUrl(null, "certificateSystemAdministration.pdf"),
+    image: imageUrl(null, "certificateSystemAdministration.jpg"),
     slug: slugify("Systems Administration"),
   },
   {
@@ -103,6 +115,7 @@ export const certificates: Certificate[] = [
     skills: ["React", "Next.js", "Full-Stack Development"],
     duration: "40 hours, 7 minutes",
     pdf: pdfUrl(MASTER_LP_FOLDER, "react-dark.pdf"),
+    image: imageUrl(MASTER_LP_FOLDER, "react-dark.jpg"),
     slug: "react-nextjs-learning-path",
     isLearningPathCertificate: true,
     learningPath: MASTER_DEV_LEARNING_PATH,
@@ -120,6 +133,7 @@ export const certificates: Certificate[] = [
     duration: "8 hours, 27 minutes",
     skills: ["React"],
     pdf: pdfUrl(MASTER_LP_FOLDER, "complete-react-v9-dark.pdf"),
+    image: imageUrl(MASTER_LP_FOLDER, "complete-react-v9-dark.jpg"),
     slug: slugify("Complete Intro to React v9"),
     learningPath: MASTER_DEV_LEARNING_PATH,
   },
@@ -136,6 +150,7 @@ export const certificates: Certificate[] = [
     duration: "6 hours, 22 minutes",
     skills: ["React", "RSCs", "Hooks", "Performance"],
     pdf: pdfUrl(MASTER_LP_FOLDER, "intermediate-react-v6-dark.pdf"),
+    image: imageUrl(MASTER_LP_FOLDER, "intermediate-react-v6-dark.jpg"),
     slug: slugify("Intermediate React v6 RSCs Hooks Performance"),
     learningPath: MASTER_DEV_LEARNING_PATH,
   },
@@ -152,6 +167,7 @@ export const certificates: Certificate[] = [
     duration: "6 hours, 41 minutes",
     skills: ["Next.js", "React"],
     pdf: pdfUrl(MASTER_LP_FOLDER, "next-js-v4-dark.pdf"),
+    image: imageUrl(MASTER_LP_FOLDER, "next-js-v4-dark.jpg"),
     slug: slugify("Nextjs Fundamentals v4"),
     learningPath: MASTER_DEV_LEARNING_PATH,
   },
@@ -168,6 +184,7 @@ export const certificates: Certificate[] = [
     duration: "4 hours, 22 minutes",
     skills: ["React", "TypeScript"],
     pdf: pdfUrl(MASTER_LP_FOLDER, "react-typescript-v3-dark.pdf"),
+    image: imageUrl(MASTER_LP_FOLDER, "react-typescript-v3-dark.jpg"),
     slug: slugify("React and TypeScript v3"),
     learningPath: MASTER_DEV_LEARNING_PATH,
   },
@@ -184,6 +201,7 @@ export const certificates: Certificate[] = [
     duration: "8 hours, 25 minutes",
     skills: ["Enterprise UI Development", "Testing", "Code Quality"],
     pdf: pdfUrl(MASTER_LP_FOLDER, "enterprise-ui-dev-dark.pdf"),
+    image: imageUrl(MASTER_LP_FOLDER, "enterprise-ui-dev-dark.jpg"),
     slug: slugify("Enterprise UI Development Testing Code Quality"),
     learningPath: MASTER_DEV_LEARNING_PATH,
   },
@@ -201,6 +219,7 @@ export const certificates: Certificate[] = [
     duration: "5 hours, 11 minutes",
     skills: ["Microfrontends", "Testing", "Code Quality", "Enterprise UI Development"],
     pdf: pdfUrl(MASTER_LP_FOLDER, "enterprise-ui-dev-v2-dark.pdf"),
+    image: imageUrl(MASTER_LP_FOLDER, "enterprise-ui-dev-v2-dark.jpg"),
     slug: slugify(
       "Enterprise UI Development Microfrontends Testing Code Quality",
     ),
@@ -219,6 +238,7 @@ export const certificates: Certificate[] = [
     duration: "4 hours, 50 minutes",
     skills: ["State Management", "React", "Next.js"],
     pdf: pdfUrl(MASTER_LP_FOLDER, "react-nextjs-state-dark.pdf"),
+    image: imageUrl(MASTER_LP_FOLDER, "react-nextjs-state-dark.jpg"),
     slug: slugify("State Management at Scale in React Nextjs"),
     learningPath: MASTER_DEV_LEARNING_PATH,
   },
@@ -235,6 +255,7 @@ export const certificates: Certificate[] = [
     duration: "4 hours, 10 minutes",
     skills: ["React", "Performance"],
     pdf: pdfUrl(MASTER_LP_FOLDER, "react-performance-v2-dark.pdf"),
+    image: imageUrl(MASTER_LP_FOLDER, "react-performance-v2-dark.jpg"),
     slug: slugify("React Performance v2"),
     learningPath: MASTER_DEV_LEARNING_PATH,
   },

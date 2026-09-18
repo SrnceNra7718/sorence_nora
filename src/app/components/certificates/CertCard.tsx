@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Badge from "@/app/components/ui/Badge";
 import { Certificate } from "@/lib/certificates";
-import LazyPdfPreview from "./LazyPdfPreview";
+import PdfPreview from "./PdfPreview";
 
 interface CertCardProps {
   certificate: Certificate;
@@ -163,7 +163,7 @@ const CertCard: React.FC<CertCardProps> = ({
               ))}
             </div>
           )}
-          {showPreview && <LazyPdfPreview certificate={certificate} compact={false} />}
+          {showPreview && <PdfPreview certificate={certificate} compact={false} />}
         </div>
       </div>
 
