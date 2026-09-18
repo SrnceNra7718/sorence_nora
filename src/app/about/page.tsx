@@ -59,9 +59,10 @@ const AboutPage = () => {
       />
       <div className="bg-grid" aria-hidden="true" />
       <section className="section-pad" id="about-hero">
-        <div className="wrap pt-[72px] md:pt-[96px]">
-          <div className="grid grid-cols-[minmax(0,1fr)_140px] gap-x-[12px] gap-y-[24px] md:grid-cols-[minmax(0,1fr)_220px] md:items-start md:gap-x-[56px] md:gap-y-0">
-            <div className="min-w-0">
+        <div className="wrap pt-[40px] md:pt-[56px]">
+          <div className="grid grid-cols-[minmax(0,1fr)_120px] items-start gap-x-[16px] gap-y-[16px] md:grid-cols-[minmax(0,1fr)_220px] md:gap-x-[48px] md:gap-y-[20px] lg:grid-cols-[minmax(0,1fr)_280px] lg:gap-x-[64px] xl:grid-cols-[minmax(0,1fr)_340px]">
+            {/* H1 (left on all sizes) */}
+            <div className="min-w-0 md:col-start-1 md:row-start-1">
               <div className="eyebrow" data-circuit-node="about">
                 <span className="relative flex flex-row items-center gap-[6px]">
                   <span className="absolute -left-3 top-0 hidden md:block">
@@ -81,7 +82,8 @@ const AboutPage = () => {
               </h1>
             </div>
 
-            <div className="w-[140px] max-w-full justify-self-start md:w-[220px] md:justify-self-end">
+            {/* Image (right on all sizes) */}
+            <div className="w-[120px] max-w-full self-start justify-self-end md:col-start-2 md:row-span-2 md:row-start-1 md:w-[220px] lg:w-[280px] xl:w-[340px]">
               <ImageSlider
                 cartoonSrc="/SNPicCartoonize1.png"
                 photoSrc="/SNPic1.png"
@@ -92,7 +94,8 @@ const AboutPage = () => {
               />
             </div>
 
-            <div className="col-span-full max-w-[42rem] md:col-span-1 md:col-start-1 md:col-end-2 md:row-start-2">
+            {/* Paragraphs — full-width on mobile, left column on desktop */}
+            <div className="col-span-full min-w-0 max-w-[42rem] md:col-span-1 md:col-start-1 md:row-start-2">
               <p className="text-[1.05rem] leading-[1.85] text-ink-1">
                 I&apos;m a frontend web developer based in the Philippines,
                 specializing in building modern, responsive web applications. My
@@ -100,7 +103,7 @@ const AboutPage = () => {
                 turning requirements into interfaces that are fast, accessible,
                 and easy to maintain.
               </p>
-              <p className="mt-[14px] text-[1.05rem] leading-[1.85] text-ink-1">
+              <p className="mt-[12px] text-[1.05rem] leading-[1.85] text-ink-1">
                 Currently building with React, Next.js, TypeScript, and
                 Supabase. I care about the details that make an interface feel
                 considered — clear hierarchy, consistent spacing, and
@@ -110,7 +113,6 @@ const AboutPage = () => {
           </div>
         </div>
       </section>
-
       <section className="section-pad border-t border-line">
         <div className="wrap">
           <h2 className="mb-[40px] font-display text-[clamp(1.8rem,3vw,2.2rem)] font-semibold text-ink-0">
