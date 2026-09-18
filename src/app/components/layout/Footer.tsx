@@ -8,14 +8,17 @@ const footerNavLinks = [
   { label: "WORK", href: "/projects" },
   { label: "ABOUT", href: "/about" },
   { label: "BLOG", href: "/blog" },
-  { label: "CONTACT", href: "/contact" },
+  { label: "CONTACT", href: "/#contact" },
 ];
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-line pb-[56px] pt-[56px]" role="contentinfo">
+    <footer
+      className="border-t border-line pb-[56px] pt-[56px]"
+      role="contentinfo"
+    >
       <div className="wrap">
         <div className="flex flex-wrap items-end justify-between gap-[28px]">
           <div>

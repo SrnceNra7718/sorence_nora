@@ -1,4 +1,3 @@
-import Reveal from "@/app/components/effects/Reveal";
 import Link from "next/link";
 
 const Intro = () => {
@@ -8,7 +7,7 @@ const Intro = () => {
         <div className="hr" />
       </div>
       <div className="wrap pt-[80px]">
-        <div className="grid grid-cols-[0.6fr_1fr] items-start gap-[60px]">
+        <div className="grid grid-cols-1 gap-[40px] md:grid-cols-[0.6fr_1fr] md:items-start md:gap-[60px]">
           <div>
             <p className="eyebrow reveal">Intro</p>
             <h2 className="reveal reveal-d1 font-display text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.02] tracking-[-0.01em] text-ink-0">

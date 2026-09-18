@@ -9,6 +9,7 @@ import { personJsonLd, breadcrumbJsonLd, profilePageJsonLd } from "@/lib/seo";
 import JsonLd from "@/app/components/SEO/JsonLd";
 import { stackCategories } from "@/lib/stack";
 import ImageSlider from "@/app/components/effects/ImageSlider";
+import ContactForm from "../components/contact/ContactForm";
 
 export const metadata: Metadata = {
   title: "About Sorence Nora — Frontend Web Developer",

@@ -18,7 +18,7 @@ const navLinks: NavLink[] = [
   { label: "WORK", target: "work", path: "/projects", num: "02" },
   { label: "ABOUT", target: "about", path: "/about", num: "03" },
   { label: "BLOG", target: "blog", path: "/blog", num: "04" },
-  { label: "CONTACT", target: "contact", path: "/contact", num: "05" },
+  { label: "CONTACT", target: "contact", path: "/#contact", num: "05" },
 ];
 
 const iconMap: Record<string, string> = {

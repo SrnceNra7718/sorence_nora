@@ -181,12 +181,6 @@ const [body, setBody] = \`Hey Sorence ✨
               >
                 ↗ View résumé
               </a>
-              <Link
-                href="/contact"
-                className="inline-flex w-fit items-center gap-[8px] border-b border-transparent font-mono text-[13.5px] text-accent transition-colors hover:border-[rgba(232,163,61,0.4)]"
-              >
-                ↗ Use contact form →
-              </Link>
             </div>
           </div>
         </div>
