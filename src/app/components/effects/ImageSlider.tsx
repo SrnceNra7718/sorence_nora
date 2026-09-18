@@ -8,8 +8,14 @@ interface ImageSliderProps {
   cartoonSrc: string;
   photoSrc: string;
   alt: string;
+  /** Design dimensions — used only to compute the slider's aspect ratio. */
   width: number;
   height: number;
+  /**
+   * Responsive sizes hint passed to next/image.
+   * Defaults match the About-page hero breakpoints; override if reused elsewhere.
+   */
+  sizes?: string;
   className?: string;
 }
 
@@ -18,12 +24,16 @@ const MAX_VALUE = 95;
 const STEP = 0.6;
 const INTERVAL = 40;
 
+const DEFAULT_SIZES =
+  "(max-width: 768px) 120px, (max-width: 1024px) 220px, (max-width: 1280px) 280px, 340px";
+
 const ImageSlider = ({
   cartoonSrc,
   photoSrc,
   alt,
   width,
   height,
+  sizes = DEFAULT_SIZES,
   className = "",
 }: ImageSliderProps) => {
   const [sliderValue, setSliderValue] = useState(50);
@@ -52,8 +62,7 @@ const ImageSlider = ({
     updateSlider(e.clientX);
     try {
       e.currentTarget.setPointerCapture(e.pointerId);
-    } catch {
-    }
+    } catch {}
   };
 
   const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -110,11 +119,9 @@ const ImageSlider = ({
       aria-valuemax={MAX_VALUE}
       aria-valuenow={Math.round(sliderValue)}
       tabIndex={0}
-      className={`relative overflow-hidden select-none ${className}`}
+      className={`relative w-full select-none overflow-hidden ${className}`}
       style={{
         touchAction: "none",
-        width: "100%",
-        maxWidth: `${width}px`,
         aspectRatio: `${width} / ${height}`,
       }}
       onPointerDown={handlePointerDown}
@@ -134,13 +141,12 @@ const ImageSlider = ({
         id="SNPicCartoonize"
         src={cartoonSrc}
         alt={alt}
-        width={width}
-        height={height}
+        fill
+        sizes={sizes}
         draggable="false"
-        className="absolute inset-0"
+        className="object-contain"
         style={{
           userSelect: "none",
-          objectFit: "contain",
           clipPath: `polygon(0 0, ${sliderValue}% 0, ${sliderValue}% 100%, 0 100%)`,
         }}
       />
@@ -148,13 +154,12 @@ const ImageSlider = ({
         id="SNPic"
         src={photoSrc}
         alt={alt}
-        width={width}
-        height={height}
+        fill
+        sizes={sizes}
         draggable="false"
-        className="absolute inset-0"
+        className="object-contain"
         style={{
           userSelect: "none",
-          objectFit: "contain",
           clipPath: `polygon(${sliderValue}% 0, 100% 0, 100% 100%, ${sliderValue}% 100%)`,
         }}
       />
