@@ -4,89 +4,131 @@ import React, { useState, useCallback, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Badge from "@/app/components/ui/Badge";
-import { project } from "@/lib/projects";
+import { projects } from "@/lib/projects";
 
 const Work = () => {
-  const [current, setCurrent] = useState(0);
-  const total = project.images.length;
+  const [currentProject, setCurrentProject] = useState(0);
+  const [currentFrame, setCurrentFrame] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const project = projects[currentProject] ?? projects[0];
+  const totalProjects = projects.length;
+  const totalFrames = project.images.length;
+
+  const showProject = useCallback(
+    (index: number) => {
+      if (totalProjects <= 0) return;
+      const nextProject =
+        ((index % totalProjects) + totalProjects) % totalProjects;
+      setCurrentProject(nextProject);
+      setCurrentFrame(0);
+    },
+    [totalProjects],
+  );
 
   const showFrame = useCallback(
-    (i: number) => {
-      setCurrent(((i % total) + total) % total);
+    (index: number) => {
+      if (totalFrames <= 0) return;
+      const nextFrame = ((index % totalFrames) + totalFrames) % totalFrames;
+      setCurrentFrame(nextFrame);
     },
-    [total],
+    [totalFrames],
   );
 
   useEffect(() => {
-    if (total <= 1) return;
+    if (totalFrames <= 1 || isHovered) return;
     const id = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % total);
-    }, 4000);
+      setCurrentFrame((previousFrame) => (previousFrame + 1) % totalFrames);
+    }, 5000);
     return () => clearInterval(id);
-  }, [total]);
+  }, [isHovered, totalFrames]);
+
+  useEffect(() => {
+    if (totalProjects <= 1 || isHovered) return;
+    const id = setInterval(() => {
+      setCurrentProject(
+        (previousProject) => (previousProject + 1) % totalProjects,
+      );
+      setCurrentFrame(0);
+    }, 5000);
+    return () => clearInterval(id);
+  }, [isHovered, totalProjects]);
 
   return (
     <section className="section-pad" id="work">
       <div className="wrap">
-           <div className="reveal mb-[56px] flex flex-wrap items-end justify-between gap-[20px]">
-           <div>
-             <div
-               className="eyebrow"
-               data-circuit-node="work"
-               style={{ marginBottom: "14px" }}
-             >
-               <span className="relative flex flex-row items-center gap-[6px]">
-                 <span className="absolute -left-3 top-0 hidden md:block">
-                   &lt;
-                 </span>
-                 <span className="material-symbols-outlined block text-[14px]">
-                   {"deployed_code"}
-                 </span>
-                 <span className="hidden md:inline">{"Work"}</span>
-                 <span className="absolute -right-6 top-0 hidden md:block">
-                   /&gt;
-                 </span>
-               </span>
-             </div>
-             <h2 className="font-display text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.02] tracking-[-0.01em] text-ink-0">
-               Work that
-               <br />
-               shipped.
-             </h2>
-           </div>
-           <span className="font-mono text-[12px] text-ink-2">
-             <Link href="/projects" className="text-ink-2 hover:text-accent">
-               01 OF 01 — View all projects →
-             </Link>
-           </span>
-         </div>
+        <div className="reveal mb-[56px] flex flex-wrap items-end justify-between gap-[20px]">
+          <div>
+            <div
+              className="eyebrow"
+              data-circuit-node="work"
+              style={{ marginBottom: "14px" }}
+            >
+              <span className="relative flex flex-row items-center gap-[6px]">
+                <span className="absolute -left-3 top-0 hidden md:block">
+                  &lt;
+                </span>
+                <span className="material-symbols-outlined block text-[14px]">
+                  {"deployed_code"}
+                </span>
+                <span className="hidden md:inline">{"Work"}</span>
+                <span className="absolute -right-6 top-0 hidden md:block">
+                  /&gt;
+                </span>
+              </span>
+            </div>
+            <h2 className="font-display text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.02] tracking-[-0.01em] text-ink-0">
+              Work that
+              <br />
+              shipped.
+            </h2>
+          </div>
+          <div className="flex items-center gap-[14px]">
+            <span className="font-mono text-[12px] text-ink-2">
+              {String(currentProject + 1).padStart(2, "0")} OF{" "}
+              {String(totalProjects).padStart(2, "0")}
+            </span>
+            <Link
+              href="/projects"
+              className="text-[12px] text-ink-2 hover:text-accent"
+            >
+              View all projects →
+            </Link>
+          </div>
+        </div>
 
-        <div className="reveal reveal-d1 grid grid-cols-1 items-center gap-[32px] md:grid-cols-[1.1fr_0.9fr] md:gap-[56px]">
+        <div
+          className="reveal reveal-d1 grid grid-cols-1 items-center gap-[32px] md:grid-cols-[1.1fr_0.9fr] md:gap-[56px]"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
           <div className="project-visual">
             {project.images.map((src, i) => (
               <Image
                 key={src}
                 src={src}
-                alt={project.imageAlt?.[src] ?? `${project.title} — frame ${i + 1}`}
+                alt={
+                  project.imageAlt?.[src] ?? `${project.title} — frame ${i + 1}`
+                }
                 fill
                 sizes="(max-width: 900px) 100vw, 60vw"
-                className={`proj-img object-cover object-top ${i === current ? "active" : ""}`}
+                className={`proj-img object-cover object-top ${i === currentFrame ? "active" : ""}`}
                 priority={i === 0}
               />
             ))}
             <span className="project-frame-label mono">
               FRAME{" "}
               <span id="frameCount">
-                {String(current + 1).padStart(2, "0")}/
-                {String(total).padStart(2, "0")}
+                {String(currentFrame + 1).padStart(2, "0")}/
+                {String(totalFrames).padStart(2, "0")}
               </span>
             </span>
             <div className="project-nav">
               {project.images.map((_, i) => (
                 <button
                   key={i}
+                  type="button"
                   onClick={() => showFrame(i)}
-                  className={i === current ? "active" : ""}
+                  className={i === currentFrame ? "active" : ""}
                   aria-label={`View frame ${i + 1}`}
                 />
               ))}

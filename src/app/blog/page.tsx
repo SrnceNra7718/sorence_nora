@@ -45,12 +45,16 @@ const BlogPage = () => {
         <div className="wrap">
           <div className="eyebrow" data-circuit-node="blog">
             <span className="relative flex flex-row items-center gap-[6px]">
-              <span className="absolute -left-3 top-0 hidden md:block">&lt;</span>
+              <span className="absolute -left-3 top-0 hidden md:block">
+                &lt;
+              </span>
               <span className="material-symbols-outlined block text-[14px]">
                 {"article"}
               </span>
               <span className="hidden md:inline">{"Blog"}</span>
-              <span className="absolute -right-6 top-0 hidden md:block">/&gt;</span>
+              <span className="absolute -right-6 top-0 hidden md:block">
+                /&gt;
+              </span>
             </span>
           </div>
 
@@ -62,8 +66,8 @@ const BlogPage = () => {
 
           <p className="mt-[26px] max-w-[46ch] text-[clamp(1rem,1.6vw,1.15rem)] leading-[1.7] text-ink-1">
             Technical articles on frontend development, React, Next.js,
-            TypeScript, and responsive web design — drawn from projects I&apos;ve
-            built.
+            TypeScript, and responsive web design — drawn from projects
+            I&apos;ve built.
           </p>
 
           <div className="mt-[56px] space-y-[42px]">
@@ -87,7 +91,7 @@ const BlogPage = () => {
                       <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-accent">
                         {post.tag}
                       </span>
-                      <h2 className="mt-[10px] font-display text-[clamp(1.4rem,2.2vw,1.8rem)] font-semibold leading-[1.15] text-ink-0 group-hover:text-accent transition-colors">
+                      <h2 className="mt-[10px] font-display text-[clamp(1.4rem,2.2vw,1.8rem)] font-semibold leading-[1.15] text-ink-0 transition-colors group-hover:text-accent">
                         {post.title}
                       </h2>
                       <p className="mt-[12px] text-[14px] leading-[1.7] text-ink-1">

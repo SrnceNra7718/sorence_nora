@@ -13,6 +13,20 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "yenzhen-tailoring-case-study",
+    title:
+      "Building the Yenzhen Tailoring Website: A Next.js, Tailwind & Static Data Case Study",
+    description:
+      "How I built a marketing website for a custom sublimation sportswear business — a product catalog of over forty items, a finished-works gallery, and a lead-generation flow, all powered by typed static data and a prepared Supabase schema.",
+    datePublished: "2024-07-10",
+    dateModified: "2024-07-10",
+    author: "Sorence Nora",
+    tag: "Project Case Study",
+    tags: ["Next.js", "Tailwind CSS", "TypeScript", "Framer Motion", "Case Study"],
+    readingTime: "7 min read",
+    ogImage: "/forProject_Section/yenzhen-tailoring/homepage_pagev3.png",
+  },
+  {
     slug: "student-clearance-monitor-case-study",
     title:
       "Building the Student Clearance Monitor: A Next.js & Supabase Case Study",
@@ -37,7 +51,7 @@ export const blogPosts: BlogPost[] = [
     tag: "Development Practices",
     tags: ["Next.js", "Frontend Development", "Architecture"],
     readingTime: "5 min read",
-    ogImage: "/forProject_Section/scs.png",
+    ogImage: "/forVlog_Section/AppStructure.png",
   },
   {
     slug: "responsive-design-tailwind",
@@ -50,7 +64,7 @@ export const blogPosts: BlogPost[] = [
     tag: "Responsive Design",
     tags: ["Tailwind CSS", "Responsive Design", "CSS"],
     readingTime: "4 min read",
-    ogImage: "/forProject_Section/scs.png",
+    ogImage: "/forVlog_Section/RespWebDes.png",
   },
 ];
 
