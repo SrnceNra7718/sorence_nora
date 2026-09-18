@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import { Metadata } from "next";
 import PageLayout from "@/app/components/layout/PageLayout";
 import Timeline from "@/app/components/ui/Timeline";
@@ -9,6 +8,7 @@ import { siteConfig, techDescriptions } from "@/lib/siteConfig";
 import { personJsonLd, breadcrumbJsonLd, profilePageJsonLd } from "@/lib/seo";
 import JsonLd from "@/app/components/SEO/JsonLd";
 import { stackCategories } from "@/lib/stack";
+import ImageSlider from "@/app/components/effects/ImageSlider";
 
 export const metadata: Metadata = {
   title: "About Sorence Nora — Frontend Web Developer",
@@ -50,52 +50,63 @@ const AboutPage = () => {
 
   return (
     <PageLayout>
-      <JsonLd data={[personJsonLd(), breadcrumbJsonLd(breadcrumbs), profilePageJsonLd()]} />
+      <JsonLd
+        data={[
+          personJsonLd(),
+          breadcrumbJsonLd(breadcrumbs),
+          profilePageJsonLd(),
+        ]}
+      />
       <div className="bg-grid" aria-hidden="true" />
       <section className="section-pad" id="about-hero">
-        <div className="wrap pt-[150px]">
-          <div className="grid grid-cols-1 gap-[48px] md:grid-cols-[0.6fr_1fr] md:gap-[70px]">
-            <div>
+        <div className="wrap pt-[72px] md:pt-[96px]">
+          <div className="grid grid-cols-[minmax(0,1fr)_140px] gap-x-[12px] gap-y-[24px] md:grid-cols-[minmax(0,1fr)_220px] md:items-start md:gap-x-[56px] md:gap-y-0">
+            <div className="min-w-0">
               <div className="eyebrow" data-circuit-node="about">
                 <span className="relative flex flex-row items-center gap-[6px]">
-                  <span className="absolute -left-3 top-0 hidden md:block">&lt;</span>
-                  <span className="material-symbols-outlined block text-[14px]">{"person"}</span>
+                  <span className="absolute -left-3 top-0 hidden md:block">
+                    &lt;
+                  </span>
+                  <span className="material-symbols-outlined block text-[14px]">
+                    {"person"}
+                  </span>
                   <span className="hidden md:inline">{"About"}</span>
-                  <span className="absolute -right-6 top-0 hidden md:block">/&gt;</span>
+                  <span className="absolute -right-6 top-0 hidden md:block">
+                    /&gt;
+                  </span>
                 </span>
               </div>
-              <h1 className="font-display text-[clamp(2.4rem,5.5vw,4.4rem)] font-semibold leading-[1.02] tracking-[-0.01em] text-ink-0">
+              <h1 className="font-display text-[clamp(2rem,9vw,4.4rem)] font-semibold leading-[1.02] tracking-[-0.01em] text-ink-0 md:text-[clamp(2.4rem,5.5vw,4.4rem)]">
                 Sorence Nora.
               </h1>
             </div>
-            <div className="mt-[10px] md:mt-0">
-              <Image
-                src="/SNPic.png"
+
+            <div className="w-[140px] max-w-full justify-self-start md:w-[220px] md:justify-self-end">
+              <ImageSlider
+                cartoonSrc="/SNPicCartoonize1.png"
+                photoSrc="/SNPic1.png"
                 alt="Sorence Nora — Frontend Web Developer"
-                width={400}
-                height={400}
-                className="rounded-[6px] border border-line object-cover"
-                priority
-                loading="eager"
-                sizes="(max-width: 768px) 100vw, 400px"
+                width={200}
+                height={300}
+                className="rounded-[6px] border border-line"
               />
             </div>
-          </div>
 
-          <div className="mt-[56px] max-w-[42rem]">
-            <p className="text-[1.05rem] leading-[1.85] text-ink-1">
-              I&apos;m a frontend web developer based in the Philippines, specializing
-              in building modern, responsive web applications. My work sits at
-              the intersection of design and engineering — turning requirements
-              into interfaces that are fast, accessible, and easy to maintain.
-            </p>
-            <br />
-            <p className="mt-[18px] text-[1.05rem] leading-[1.85] text-ink-1">
-              Currently building with React, Next.js, TypeScript, and Supabase. I
-              care about the details that make an interface feel considered —
-              clear hierarchy, consistent spacing, and interactions that respond
-              the way people expect.
-            </p>
+            <div className="col-span-full max-w-[42rem] md:col-span-1 md:col-start-1 md:col-end-2 md:row-start-2">
+              <p className="text-[1.05rem] leading-[1.85] text-ink-1">
+                I&apos;m a frontend web developer based in the Philippines,
+                specializing in building modern, responsive web applications. My
+                work sits at the intersection of design and engineering —
+                turning requirements into interfaces that are fast, accessible,
+                and easy to maintain.
+              </p>
+              <p className="mt-[14px] text-[1.05rem] leading-[1.85] text-ink-1">
+                Currently building with React, Next.js, TypeScript, and
+                Supabase. I care about the details that make an interface feel
+                considered — clear hierarchy, consistent spacing, and
+                interactions that respond the way people expect.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -126,7 +137,7 @@ const AboutPage = () => {
                     >
                       {item}
                       {techDescriptions[item] && (
-                        <span className="ml-[6px] font-mono text-[10px] text-ink-2 align-text-bottom">
+                        <span className="ml-[6px] align-text-bottom font-mono text-[10px] text-ink-2">
                           ⓘ
                         </span>
                       )}
