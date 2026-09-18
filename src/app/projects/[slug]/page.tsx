@@ -96,12 +96,16 @@ const ProjectPage = async ({ params }: ProjectPageProps) => {
         <div className="wrap">
           <div className="eyebrow" data-circuit-node="work">
             <span className="relative flex flex-row items-center gap-[6px]">
-              <span className="absolute -left-3 top-0 hidden md:block">&lt;</span>
+              <span className="absolute -left-3 top-0 hidden md:block">
+                &lt;
+              </span>
               <span className="material-symbols-outlined block text-[14px]">
                 {"deployed_code"}
               </span>
               <span className="hidden md:inline">{"Project"}</span>
-              <span className="absolute -right-6 top-0 hidden md:block">/&gt;</span>
+              <span className="absolute -right-6 top-0 hidden md:block">
+                /&gt;
+              </span>
             </span>
           </div>
 
@@ -109,7 +113,9 @@ const ProjectPage = async ({ params }: ProjectPageProps) => {
             {proj.title}
           </h1>
 
-          <p className="mt-[12px] font-mono text-[13px] text-accent">{proj.number}</p>
+          <p className="mt-[12px] font-mono text-[13px] text-accent">
+            {proj.number}
+          </p>
 
           <p className="mt-[26px] max-w-[46ch] text-[clamp(1rem,1.6vw,1.15rem)] leading-[1.7] text-ink-1">
             {proj.overview}
@@ -209,11 +215,12 @@ const ProjectPage = async ({ params }: ProjectPageProps) => {
                   alt={proj.imageAlt[img] || `${proj.title} — frame ${i + 1}`}
                   fill
                   sizes="(max-width: 640px) 100vw, 45vw"
-                  className="proj-img object-cover object-top active"
+                  className="proj-img active object-cover object-top"
                   priority={i === 0}
                 />
                 <span className="project-frame-label mono">
-                  FRAME {String(i + 1).padStart(2, "0")}/{String(proj.images.length).padStart(2, "0")}
+                  FRAME {String(i + 1).padStart(2, "0")}/
+                  {String(proj.images.length).padStart(2, "0")}
                 </span>
               </div>
             ))}
@@ -249,7 +256,7 @@ const ProjectPage = async ({ params }: ProjectPageProps) => {
 
           {proj.caseStudy.architecture && (
             <>
-              <h3 className="mt-[32px] mb-[12px] font-display text-[1.3rem] font-semibold text-ink-0">
+              <h3 className="mb-[12px] mt-[32px] font-display text-[1.3rem] font-semibold text-ink-0">
                 Architecture
               </h3>
               <p className="max-w-[48rem] text-[15px] leading-[1.7] text-ink-1">
@@ -258,7 +265,7 @@ const ProjectPage = async ({ params }: ProjectPageProps) => {
             </>
           )}
 
-          <h3 className="mt-[32px] mb-[12px] font-display text-[1.3rem] font-semibold text-ink-0">
+          <h3 className="mb-[12px] mt-[32px] font-display text-[1.3rem] font-semibold text-ink-0">
             Features
           </h3>
           <ul className="space-y-[18px]">
@@ -274,14 +281,14 @@ const ProjectPage = async ({ params }: ProjectPageProps) => {
             ))}
           </ul>
 
-          <h3 className="mt-[32px] mb-[12px] font-display text-[1.3rem] font-semibold text-ink-0">
+          <h3 className="mb-[12px] mt-[32px] font-display text-[1.3rem] font-semibold text-ink-0">
             Implementation
           </h3>
           <p className="max-w-[48rem] text-[15px] leading-[1.7] text-ink-1">
             {proj.caseStudy.implementation}
           </p>
 
-          <h3 className="mt-[32px] mb-[12px] font-display text-[1.3rem] font-semibold text-ink-0">
+          <h3 className="mb-[12px] mt-[32px] font-display text-[1.3rem] font-semibold text-ink-0">
             Challenges
           </h3>
           <p className="max-w-[48rem] text-[15px] leading-[1.7] text-ink-1">
@@ -290,7 +297,7 @@ const ProjectPage = async ({ params }: ProjectPageProps) => {
 
           {proj.caseStudy.lessonsLearned && (
             <>
-              <h3 className="mt-[32px] mb-[12px] font-display text-[1.3rem] font-semibold text-ink-0">
+              <h3 className="mb-[12px] mt-[32px] font-display text-[1.3rem] font-semibold text-ink-0">
                 Lessons learned
               </h3>
               <p className="max-w-[48rem] text-[15px] leading-[1.7] text-ink-1">
@@ -301,7 +308,7 @@ const ProjectPage = async ({ params }: ProjectPageProps) => {
 
           {proj.caseStudy.results && (
             <>
-              <h3 className="mt-[32px] mb-[12px] font-display text-[1.3rem] font-semibold text-ink-0">
+              <h3 className="mb-[12px] mt-[32px] font-display text-[1.3rem] font-semibold text-ink-0">
                 Results
               </h3>
               <p className="max-w-[48rem] text-[15px] leading-[1.7] text-ink-1">
@@ -312,7 +319,7 @@ const ProjectPage = async ({ params }: ProjectPageProps) => {
 
           {proj.caseStudy.futureImprovements && (
             <>
-              <h3 className="mt-[32px] mb-[12px] font-display text-[1.3rem] font-semibold text-ink-0">
+              <h3 className="mb-[12px] mt-[32px] font-display text-[1.3rem] font-semibold text-ink-0">
                 Future improvements
               </h3>
               <p className="max-w-[48rem] text-[15px] leading-[1.7] text-ink-1">
@@ -331,16 +338,18 @@ const ProjectPage = async ({ params }: ProjectPageProps) => {
                 Interested in similar work?
               </h2>
               <p className="mt-[8px] max-w-[42ch] text-[14px] leading-[1.7] text-ink-1">
-                I&apos;m open to frontend development and full-stack web application
-                projects. Reach out to discuss how I can help.
+                I&apos;m open to frontend development and full-stack web
+                application projects. Reach out to discuss how I can help.
               </p>
             </div>
             <Link
-              href="/contact"
+              href="/#contact"
               className="inline-flex items-center gap-[8px] rounded-[2px] border border-accent bg-accent px-[24px] py-[14px] font-mono text-[13px] font-medium text-accent-ink transition-colors hover:bg-[#f0b25d]"
             >
               Get in touch
-              <span className="inline-block transition-transform duration-300">→</span>
+              <span className="inline-block transition-transform duration-300">
+                →
+              </span>
             </Link>
           </div>
         </div>

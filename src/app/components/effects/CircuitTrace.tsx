@@ -19,8 +19,15 @@ const CircuitTrace = () => {
     if (!wrapEl) return;
     const wrapLeft = wrapEl.getBoundingClientRect().left;
 
-    const traceX = Math.max(14, Math.round(wrapLeft - 72));
-    const branchX = Math.max(34, Math.round(wrapLeft - 30));
+    const isMobile = window.innerWidth <= 768;
+    // On mobile the wrap sits flush-left, so pin the trace to the screen
+    // edge; on desktop keep it offset relative to the wrap content.
+    const traceX = isMobile
+      ? 8
+      : Math.max(14, Math.round(wrapLeft - 72));
+    const branchX = isMobile
+      ? 20
+      : Math.max(34, Math.round(wrapLeft - 30));
 
     // Clear previous SVG content and reset ref
     svg.innerHTML = "";
