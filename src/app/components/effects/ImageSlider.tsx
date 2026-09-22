@@ -138,7 +138,7 @@ const ImageSlider = ({
         }}
       />
       <Image
-        id="SNPicCartoonize"
+        id="sorence-nora-cartoon-avatar"
         src={cartoonSrc}
         alt={alt}
         fill
@@ -151,7 +151,7 @@ const ImageSlider = ({
         }}
       />
       <Image
-        id="SNPic"
+        id="sorence-nora-profile-photo"
         src={photoSrc}
         alt={alt}
         fill
