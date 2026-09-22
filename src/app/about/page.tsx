@@ -85,8 +85,8 @@ const AboutPage = () => {
             {/* Image (right on all sizes) */}
             <div className="w-[120px] max-w-full self-start justify-self-end md:col-start-2 md:row-span-2 md:row-start-1 md:w-[220px] lg:w-[280px] xl:w-[340px]">
               <ImageSlider
-                cartoonSrc="/SNPicCartoonize1.png"
-                photoSrc="/SNPic1.png"
+                cartoonSrc="/sorence-nora-cartoon-avatar.png"
+                photoSrc="/sorence-nora-profile-photo.png"
                 alt="Sorence Nora — Frontend Web Developer"
                 width={200}
                 height={300}

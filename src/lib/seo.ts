@@ -28,7 +28,7 @@ export function createMetadata(params: {
   const description = params.description ?? siteConfig.description;
   const canonicalUrl = params.canonical ?? siteConfig.siteUrl;
   const ogImage = params.images?.[0] ?? {
-    url: `${siteConfig.siteUrl}/SNPic.png`,
+    url: `${siteConfig.siteUrl}/sorence-nora-profile-photo.png`,
     width: 400,
     height: 400,
     alt: `${siteConfig.name} — ${siteConfig.author.jobTitle}`,
@@ -169,7 +169,7 @@ export function articleJsonLd(article: {
     },
     datePublished: article.datePublished,
     dateModified: article.dateModified ?? article.datePublished,
-    image: article.image ?? `${siteConfig.siteUrl}/SNPic.png`,
+    image: article.image ?? `${siteConfig.siteUrl}/sorence-nora-profile-photo.png`,
     articleSection: "Blog",
     keywords: article.tags ? article.tags.join(", ") : undefined,
   };
@@ -226,8 +226,8 @@ export function profilePageJsonLd() {
     "@context": "https://schema.org",
     "@type": "ProfilePage",
     url: siteConfig.siteUrl,
-    dateModified: new Date().toISOString().split("T")[0],
-    author: personJsonLd(),
+    dateModified: new Date().toISOString(),
+    mainEntity: personJsonLd(),
   };
 }
 

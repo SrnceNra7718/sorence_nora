@@ -14,7 +14,7 @@ export const siteConfig = {
     bio: "Frontend web developer from the Philippines specializing in modern, responsive web applications built with React, Next.js, TypeScript, and Tailwind CSS.",
     jobTitle: "Frontend Web Developer",
     location: "Philippines",
-    image: "https://sorence-nora.vercel.app/SNPic.png",
+    image: "https://sorence-nora.vercel.app/sorence-nora-profile-photo.png",
     imageWidth: 400,
     imageHeight: 400,
   },

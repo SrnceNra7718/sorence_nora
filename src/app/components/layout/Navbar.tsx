@@ -148,7 +148,7 @@ const Navbar = () => {
             className={`flex items-center justify-center transition-all duration-300 ${
               scrolled ? "h-[28px] w-[28px]" : "h-[56px] w-[56px]"
             }`}
-            src="/SNLogo.png"
+            src="/sorence-nora-portfolio-logo.png"
             alt="Sorence Nora"
             width={90}
             height={90}

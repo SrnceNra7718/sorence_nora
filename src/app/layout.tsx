@@ -82,10 +82,16 @@ export const metadata: Metadata = {
     locale: "en_PH",
     images: [
       {
-        url: "https://sorence-nora.vercel.app/forProject_Section/scs.png",
-        width: 1200,
-        height: 630,
+        url: "https://sorence-nora.vercel.app/sorence-nora-profile-photo.png",
+        width: 400,
+        height: 400,
         alt: "Sorence Nora — Frontend Web Developer from the Philippines",
+      },
+      {
+        url: "https://sorence-nora.vercel.app/sorence-nora-portfolio-logo.png",
+        width: 400,
+        height: 400,
+        alt: "Sorence Nora — Portfolio Logo",
       },
     ],
   },
@@ -94,7 +100,7 @@ export const metadata: Metadata = {
     title: "Sorence Nora — Frontend Web Developer & Software Developer",
     description:
       "Frontend web developer from the Philippines building modern, responsive web applications with React, Next.js, and TypeScript.",
-    images: ["https://sorence-nora.vercel.app/forProject_Section/scs.png"],
+    images: ["https://sorence-nora.vercel.app/sorence-nora-profile-photo.png"],
   },
   icons: {
     icon: "/favicon-v2.png",
