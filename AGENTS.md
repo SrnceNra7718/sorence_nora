@@ -278,6 +278,56 @@ The homepage `Work` section (`src/app/sections/Work.tsx`) currently highlights `
 - **Manual fields**: `dateCreated` was not present in the repo metadata; set to `2024-01-01` as a placeholder.
 - **Live deployment verification**: README "About" section on the GitHub repo explicitly links to `https://yenzhen-tailoring.vercel.app`. Screenshots were captured from that live deployment.
 
+#### 03 — Brows By Her
+
+- **Slug**: `brows-by-her`
+- **GitHub**: https://github.com/SrnceNra7718/brows-by-her
+- **Live URL**: https://brows-by-her.vercel.app (verified live deployment)
+- **Context**: Client project — Brows By Her (luxury eyebrow artistry studio, Melbourne)
+- **Stack (verified from `package.json` and source)**: Next.js 14 (App Router), React 18, TypeScript, Tailwind CSS, Framer Motion, Lucide React, React Hook Form, Zod, next-themes, Cal.com scheduling integration. Route Handlers for API endpoints (`/api/contact`, `/api/subscribe`).
+- **Screenshots**: `/public/forProject_Section/brows-by-her/` (homepage hero, services catalog, gallery, pricing tiers, about studio, booking page)
+- **Manual fields**: `dateCreated` set to `2026-08-07` from commit history.
+
+#### 04 — Stylish Flow Hair & Beauty
+
+- **Slug**: `stylish-flow-hair-beauty`
+- **GitHub**: https://github.com/SrnceNra7718/stylish-flow-hair-beauty
+- **Live URL**: https://stylish-flow-hair-beauty.vercel.app (verified live deployment)
+- **Context**: Client project — Stylish Flow Hair & Beauty Salon (Melbourne)
+- **Stack (verified from source)**: Semantic HTML5, CSS3 Custom Properties, Vanilla JavaScript (ES6+), Lucide Icons, Google Fonts (Manrope and Inter).
+- **Screenshots**: `/public/forProject_Section/stylish-flow-hair-beauty/` (homepage hero with gold ribbon brand mark, about studio, service and treatment menu, filterable masonry gallery, customer testimonials, contact section)
+- **Manual fields**: `dateCreated` set to `2026-08-07` from commit history.
+
+#### 05 — Subbie Street Garage (Prototype)
+
+- **Slug**: `subbie-street-garage-proto`
+- **GitHub**: https://github.com/SrnceNra7718/subbie-street-garage-proto
+- **Live URL**: https://subbie-street-garage-proto.vercel.app (verified live deployment)
+- **Context**: Prototype design — Subaru specialist workshop (Dandenong VIC)
+- **Stack (verified from source)**: Semantic HTML5, CSS3 Custom Properties, CSS Keyframe Animations, Custom SVG Vector Graphics (animated boxer engine), Google Fonts (Bebas Neue and Inter).
+- **Screenshots**: `/public/forProject_Section/subbie-street-garage-proto/` (homepage hero with animated boxer engine SVG, specialist services, workshop philosophy, driver testimonials, contact module)
+- **Manual fields**: `dateCreated` set to `2026-08-05` from commit history.
+
+#### 06 — Subbie Street Garage
+
+- **Slug**: `subbie-street-garage`
+- **GitHub**: https://github.com/SrnceNra7718/subbie-street-garage
+- **Live URL**: https://subbie-street-garage.vercel.app (verified live deployment)
+- **Context**: Production application — Subaru specialist workshop (Dandenong VIC)
+- **Stack (verified from `package.json` and source)**: Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4, Lucide React, React Hook Form, Zod, Schema.org AutoRepair JSON-LD structured data.
+- **Screenshots**: `/public/forProject_Section/subbie-street-garage/` (homepage hero with dynamic navigation, dedicated services directory, Subaru specialist platform deep-dive, workshop build gallery, interactive quote builder, appointment booking scheduler)
+- **Manual fields**: `dateCreated` set to `2026-08-05` from commit history.
+
+#### 07 — Seek Migration
+
+- **Slug**: `seek-migration`
+- **GitHub**: https://github.com/SrnceNra7718/seek_migration
+- **Live URL**: https://seek-migration.vercel.app (verified live deployment)
+- **Context**: Client project — Seek Migration (international visa consultancy)
+- **Stack (verified from source)**: Semantic HTML5, CSS3 (Grid, Flexbox, Keyframes), Vanilla JavaScript (ES6+), SVG Vector Graphics, Google Fonts (DM Sans and Instrument Sans).
+- **Screenshots**: `/public/forProject_Section/seek-migration/` (homepage hero with navigation and consultation CTA, visa pathways breakdown, destination comparison, migrant success stories, consultation booking section)
+- **Manual fields**: `dateCreated` set to `2026-08-22` from commit history.
+
 ### Adding a New Project
 
 1. Add a new entry to the `projects` array in `src/lib/projects.ts`. Use the existing Student Clearance Monitor or Yenzhen Tailoring entry as the structural template. Reuse the existing `Project` interface — do not invent new fields.
