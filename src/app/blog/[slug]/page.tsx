@@ -180,7 +180,7 @@ const BlogPostPage = async ({ params }: BlogPostPageProps) => {
         ]}
       />
 
-      <article className="section-pad pt-[150px]">
+      <article className="section-pad pt-[60px] md:pt-[150px]">
         <div className="wrap">
           <div className="eyebrow" data-circuit-node="blog">
             <span className="relative flex flex-row items-center gap-[6px]">

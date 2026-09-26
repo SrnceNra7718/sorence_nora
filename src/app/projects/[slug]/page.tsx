@@ -92,7 +92,7 @@ const ProjectPage = async ({ params }: ProjectPageProps) => {
         ]}
       />
 
-      <section className="section-pad pt-[150px]">
+      <section className="section-pad pt-[60px] md:pt-[150px]">
         <div className="wrap">
           <div className="eyebrow" data-circuit-node="work">
             <span className="relative flex flex-row items-center gap-[6px]">
