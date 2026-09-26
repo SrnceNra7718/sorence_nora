@@ -13,6 +13,107 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "seek-migration-case-study",
+    title:
+      "Building Seek Migration: An Immigration Consultancy Website with Animated Route Graphics",
+    description:
+      "How I built an authoritative web presence for an international visa consultancy — demystifying Australia and New Zealand migration pathways with clean typography, SVG route maps, and a structured consultation booking flow.",
+    datePublished: "2026-08-25",
+    dateModified: "2026-08-25",
+    author: "Sorence Nora",
+    tag: "Project Case Study",
+    tags: [
+      "HTML5",
+      "CSS3",
+      "JavaScript",
+      "SVG Graphics",
+      "Responsive Design",
+      "Case Study",
+    ],
+    readingTime: "6 min read",
+    ogImage: "/forProject_Section/seek-migration/homepage_hero.png",
+  },
+  {
+    slug: "subbie-street-garage-case-study",
+    title:
+      "Building Subbie Street Garage: A Next.js 16 Production Automotive Web Application",
+    description:
+      "How I transformed a prototype into a full-scale production web application for a Subaru specialist workshop — Next.js 16, React 19, Tailwind CSS v4, and type-safe multi-step quote & booking forms.",
+    datePublished: "2026-08-09",
+    dateModified: "2026-08-09",
+    author: "Sorence Nora",
+    tag: "Project Case Study",
+    tags: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Case Study",
+      "React Hook Form",
+      "Zod",
+    ],
+    readingTime: "8 min read",
+    ogImage: "/forProject_Section/subbie-street-garage/homepage_hero.png",
+  },
+  {
+    slug: "subbie-street-garage-prototype-case-study",
+    title:
+      "Prototyping Subbie Street Garage: Animated SVG Boxer Engine & Motorsport Branding",
+    description:
+      "How I validated the brand identity for a Subaru specialist workshop using pure HTML5, CSS3, and a custom animated SVG boxer engine — the prototype that became the blueprint for the full production build.",
+    datePublished: "2026-08-06",
+    dateModified: "2026-08-06",
+    author: "Sorence Nora",
+    tag: "Project Case Study",
+    tags: ["HTML5", "CSS3", "SVG Animation", "JavaScript", "Case Study"],
+    readingTime: "5 min read",
+    ogImage: "/forProject_Section/subbie-street-garage-proto/homepage_hero.png",
+  },
+  {
+    slug: "stylish-flow-hair-beauty-case-study",
+    title:
+      "Building Stylish Flow Hair & Beauty: A Lightweight Vanilla CSS Luxury Salon Website",
+    description:
+      "How I crafted an ultra-fast, luxury salon website using pure semantic HTML5, modern CSS3 custom properties, and vanilla JavaScript — featuring a signature gold scroll-progress line and filterable masonry gallery.",
+    datePublished: "2026-08-11",
+    dateModified: "2026-08-11",
+    author: "Sorence Nora",
+    tag: "Project Case Study",
+    tags: [
+      "HTML5",
+      "CSS3",
+      "JavaScript",
+      "Vanilla JavaScript",
+      "Responsive Design",
+      "Case Study",
+    ],
+    readingTime: "6 min read",
+    ogImage: "/forProject_Section/stylish-flow-hair-beauty/homepage_hero.png",
+  },
+  {
+    slug: "brows-by-her-case-study",
+    title:
+      "Building Brows By Her: A Next.js Luxury Beauty Booking Website Case Study",
+    description:
+      "How I built a luxury brow artistry studio website with Next.js 14, TypeScript, Tailwind CSS, and Cal.com scheduling — combining refined aesthetics with type-safe form validation and seamless appointment booking.",
+    datePublished: "2026-08-10",
+    dateModified: "2026-08-10",
+    author: "Sorence Nora",
+    tag: "Project Case Study",
+    tags: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Framer Motion",
+      "React Hook Form",
+      "Zod",
+      "Cal.com",
+      "Case Study",
+    ],
+    readingTime: "7 min read",
+    ogImage: "/forProject_Section/brows-by-her/homepage_hero.png",
+  },
+  {
     slug: "yenzhen-tailoring-case-study",
     title:
       "Building the Yenzhen Tailoring Website: A Next.js, Tailwind & Static Data Case Study",
@@ -79,5 +180,15 @@ export const blogTags = [
   "Case Study",
   "Architecture",
   "CSS",
+  "CSS3",
   "JavaScript",
+  "HTML5",
+  "Framer Motion",
+  "React Hook Form",
+  "Zod",
+  "Cal.com",
+  "Lucide React",
+  "SVG Animation",
+  "SVG Graphics",
+  "Vanilla JavaScript",
 ];
