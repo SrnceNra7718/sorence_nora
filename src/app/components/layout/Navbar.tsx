@@ -133,7 +133,7 @@ const Navbar = () => {
         ref={navRef}
         className={`fixed left-1/2 top-[18px] z-[100] hidden w-[calc(100%-40px)] max-w-[1100px] -translate-x-1/2 items-center justify-between rounded-[999px] border border-transparent px-[18px] py-[12px] transition-all duration-300 md:flex md:px-[14px] md:py-[8px] ${
           scrolled
-            ? "border-line bg-[rgba(13,15,18,0.72)] px-[16px] py-[9px] md:px-[12px] md:py-[6px] shadow-[0_8px_30px_rgba(0,0,0,0.35)] saturate-[140%] backdrop-blur-[14px]"
+            ? "border-line bg-[rgba(13,15,18,0.72)] px-[16px] py-[9px] shadow-[0_8px_30px_rgba(0,0,0,0.35)] saturate-[140%] backdrop-blur-[14px] md:px-[12px] md:py-[6px]"
             : ""
         }`}
       >
@@ -159,7 +159,7 @@ const Navbar = () => {
 
         <ul
           ref={linksContainerRef}
-          className="nav-links relative hidden list-none items-center gap-[28px] md:flex md:gap-[22px] lg:gap-[28px]"
+          className="nav-links relative hidden list-none items-center gap-[28px] md:flex md:gap-[10px] lg:gap-[28px]"
         >
           <span
             ref={highlightRef}
@@ -174,19 +174,19 @@ const Navbar = () => {
                 <Link
                   href={href}
                   data-target={target}
-                  className={`relative flex items-baseline gap-[6px] py-[4px] font-mono text-[12px] tracking-[0.03em] text-ink-1 md:text-[11px] ${
+                  className={`relative flex items-baseline gap-[4px] py-[4px] font-mono text-[12px] tracking-[0.03em] text-ink-1 md:gap-[3px] md:text-[11px] ${
                     isActive ? "active text-accent" : ""
                   }`}
                   onMouseEnter={() => setHoveredLink(target)}
                   onMouseLeave={() => setHoveredLink(null)}
                 >
-                  <span className="relative flex flex-row items-center gap-[6px]">
+                  <span className="relative flex flex-row items-center gap-[3px] md:scale-[0.85] md:gap-[2px] lg:scale-100">
                     {hoveredLink === target && (
                       <span className="absolute -left-3 top-0 hidden md:block">
                         &lt;
                       </span>
                     )}
-                    <span className="material-symbols-outlined block text-[14px]">
+                    <span className="material-symbols-outlined block scale-[0.8]">
                       {iconMap[label]}
                     </span>
                     <span className="hidden md:inline">{label}</span>
@@ -208,9 +208,7 @@ const Navbar = () => {
         </span>
       </nav>
 
-      <nav
-        className="fixed bottom-[18px] left-1/2 z-[90] flex w-[calc(100%-40px)] max-w-[1100px] -translate-x-1/2 items-center justify-center gap-[8px] rounded-[999px] border border-[rgba(232,163,61,0.22)] bg-[rgba(13,15,18,0.72)] px-[12px] py-[10px] backdrop-blur-[14px] transition-all duration-300 md:hidden"
-      >
+      <nav className="fixed bottom-[18px] left-1/2 z-[90] flex w-[calc(100%-40px)] max-w-[1100px] -translate-x-1/2 items-center justify-center gap-[8px] rounded-[999px] border border-[rgba(232,163,61,0.22)] bg-[rgba(13,15,18,0.72)] px-[12px] py-[10px] backdrop-blur-[14px] transition-all duration-300 md:hidden">
         {navLinks.map(({ label, target, path }) => {
           const href = getHref({ label, target, path, num: "00" });
           const isActive = isActiveLink({
