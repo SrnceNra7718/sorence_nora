@@ -28,7 +28,7 @@ export default function NotFoundPage() {
           ]),
         ]}
       />
-      <section className="flex min-h-[70svh] items-center justify-center pt-[100px]">
+      <section className="flex min-h-[70svh] items-center justify-center pt-[40px] md:pt-[100px]">
         <div className="wrap text-center">
           <span className="font-display text-[clamp(4rem,12vw,6rem)] font-bold text-accent">
             404

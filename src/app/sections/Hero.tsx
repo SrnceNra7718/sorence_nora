@@ -28,7 +28,7 @@ const Hero = () => {
 
   return (
     <section
-      className="hero flex min-h-[100svh] items-start pb-[80px] pt-[150px]"
+      className="hero flex min-h-[100svh] items-start pb-[80px] pt-[60px] md:pt-[150px]"
       id="hero"
     >
       <div className="wrap">

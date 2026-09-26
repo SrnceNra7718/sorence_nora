@@ -34,7 +34,6 @@ const Navbar = () => {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
   const [activeTarget, setActiveTarget] = useState("hero");
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const navRef = useRef<HTMLElement>(null);
@@ -98,14 +97,6 @@ const Navbar = () => {
   }, [activeTarget, moveHighlight]);
 
   useEffect(() => {
-    if (mobileOpen) {
-      document.body.classList.add("menu-open");
-    } else {
-      document.body.classList.remove("menu-open");
-    }
-  }, [mobileOpen]);
-
-  useEffect(() => {
     if (!isHome) {
       const path = pathname as string;
       const matched = navLinks.find(
@@ -119,10 +110,6 @@ const Navbar = () => {
     }
   }, [pathname, isHome, moveHighlight]);
 
-  const closeDrawer = () => {
-    setMobileOpen(false);
-  };
-
   const getHref = (link: NavLink): string => {
     if (isHome) {
       return `#${link.target}`;
@@ -130,13 +117,23 @@ const Navbar = () => {
     return link.path;
   };
 
+  const isActiveLink = (link: NavLink): boolean => {
+    if (isHome) {
+      return activeTarget === link.target;
+    }
+    return (
+      link.path === pathname ||
+      (link.path === "/projects" && pathname?.startsWith("/projects/"))
+    );
+  };
+
   return (
     <>
       <nav
         ref={navRef}
-        className={`fixed left-1/2 top-[18px] z-[100] flex w-[calc(100%-40px)] max-w-[1100px] -translate-x-1/2 items-center justify-between rounded-[999px] border border-transparent px-[18px] py-[12px] transition-all duration-300 ${
+        className={`fixed left-1/2 top-[18px] z-[100] hidden w-[calc(100%-40px)] max-w-[1100px] -translate-x-1/2 items-center justify-between rounded-[999px] border border-transparent px-[18px] py-[12px] transition-all duration-300 md:flex md:px-[14px] md:py-[8px] ${
           scrolled
-            ? "border-line bg-[rgba(13,15,18,0.72)] px-[16px] py-[9px] shadow-[0_8px_30px_rgba(0,0,0,0.35)] saturate-[140%] backdrop-blur-[14px]"
+            ? "border-line bg-[rgba(13,15,18,0.72)] px-[16px] py-[9px] md:px-[12px] md:py-[6px] shadow-[0_8px_30px_rgba(0,0,0,0.35)] saturate-[140%] backdrop-blur-[14px]"
             : ""
         }`}
       >
@@ -146,21 +143,23 @@ const Navbar = () => {
         >
           <Image
             className={`flex items-center justify-center transition-all duration-300 ${
-              scrolled ? "h-[28px] w-[28px]" : "h-[56px] w-[56px]"
+              scrolled
+                ? "h-[28px] w-[28px] md:h-[24px] md:w-[24px]"
+                : "h-[56px] w-[56px] md:h-[36px] md:w-[36px]"
             }`}
             src="/sorence-nora-portfolio-logo.png"
             alt="Sorence Nora"
             width={90}
             height={90}
           />
-          <span className="hidden font-mono text-[12px] font-normal tracking-[0.05em] text-ink-1 sm:inline">
+          <span className="hidden font-mono text-[12px] font-normal tracking-[0.05em] text-ink-1 sm:inline md:text-[10px]">
             SORENCE&nbsp;NORA
           </span>
         </Link>
 
         <ul
           ref={linksContainerRef}
-          className="nav-links relative hidden list-none items-center gap-[28px] lg:flex"
+          className="nav-links relative hidden list-none items-center gap-[28px] md:flex md:gap-[22px] lg:gap-[28px]"
         >
           <span
             ref={highlightRef}
@@ -169,16 +168,13 @@ const Navbar = () => {
           />
           {navLinks.map(({ label, target, path }) => {
             const href = getHref({ label, target, path, num: "00" });
-            const isActive = isHome
-              ? activeTarget === target
-              : pathname === path ||
-                (path === "/projects" && pathname?.startsWith("/projects"));
+            const isActive = isActiveLink({ label, target, path, num: "00" });
             return (
               <li key={target}>
                 <Link
                   href={href}
                   data-target={target}
-                  className={`relative flex items-baseline gap-[6px] py-[4px] font-mono text-[12px] tracking-[0.03em] text-ink-1 ${
+                  className={`relative flex items-baseline gap-[6px] py-[4px] font-mono text-[12px] tracking-[0.03em] text-ink-1 md:text-[11px] ${
                     isActive ? "active text-accent" : ""
                   }`}
                   onMouseEnter={() => setHoveredLink(target)}
@@ -206,70 +202,52 @@ const Navbar = () => {
           })}
         </ul>
 
-        <div className="flex items-center gap-[14px]">
-          <span className="hidden items-center gap-[7px] rounded-[999px] border border-line-strong px-[12px] py-[7px] font-mono text-[11px] tracking-[0.04em] text-ink-1 lg:flex">
-            <span className="h-[6px] w-[6px] rounded-full bg-[#7CC29B] shadow-[0_0_0_3px_rgba(124,194,155,0.15)]" />
-            AVAILABLE FOR WORK
-          </span>
-          <button
-            className={`flex h-[38px] w-[38px] items-center justify-center rounded-[8px] border border-line-strong lg:hidden ${mobileOpen ? "open" : ""}`}
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            aria-expanded={mobileOpen}
-          >
-            <span
-              className={`relative block h-[1px] w-[16px] bg-ink-0 transition-all duration-300 ${mobileOpen ? "bg-transparent" : ""}`}
-            >
-              <span
-                className={`absolute left-0 h-[1px] w-[16px] bg-ink-0 transition-all duration-300 ${
-                  mobileOpen ? "top-0 rotate-45" : "top-[-5px]"
-                }`}
-              />
-              <span
-                className={`absolute left-0 h-[1px] w-[16px] bg-ink-0 transition-all duration-300 ${
-                  mobileOpen ? "top-0 -rotate-45" : "top-[5px]"
-                }`}
-              />
-            </span>
-          </button>
-        </div>
+        <span className="hidden items-center gap-[7px] rounded-[999px] border border-line-strong px-[12px] py-[7px] font-mono text-[11px] tracking-[0.04em] text-ink-1 md:flex md:text-[10px] lg:text-[11px]">
+          <span className="h-[6px] w-[6px] rounded-full bg-[#7CC29B] shadow-[0_0_0_3px_rgba(124,194,155,0.15)]" />
+          AVAILABLE FOR WORK
+        </span>
       </nav>
 
-      <div
-        className={`fixed inset-0 z-[90] flex flex-col justify-center bg-bg-0 p-[32px] transition-all duration-[350ms] lg:hidden ${
-          mobileOpen
-            ? "visible translate-y-0 opacity-100"
-            : "invisible -translate-y-[8px] opacity-0"
-        }`}
+      <nav
+        className="fixed bottom-[18px] left-1/2 z-[90] flex w-[calc(100%-40px)] max-w-[1100px] -translate-x-1/2 items-center justify-center gap-[8px] rounded-[999px] border border-[rgba(232,163,61,0.22)] bg-[rgba(13,15,18,0.72)] px-[12px] py-[10px] backdrop-blur-[14px] transition-all duration-300 md:hidden"
       >
-        {navLinks.map(({ label, target, path, num }) => {
-          const href = getHref({ label, target, path, num });
+        {navLinks.map(({ label, target, path }) => {
+          const href = getHref({ label, target, path, num: "00" });
+          const isActive = isActiveLink({
+            label,
+            target,
+            path,
+            num: "00",
+          });
           return (
             <Link
               key={target}
               href={href}
               data-target={target}
-              onClick={closeDrawer}
-              className="flex items-baseline gap-[16px] border-b border-line py-[14px] font-display text-[clamp(2rem,10vw,3rem)] font-semibold text-ink-0"
+              className={`flex h-[46px] w-[46px] items-center justify-center rounded-[10px] ${
+                isActive
+                  ? "border border-[rgba(232,163,61,0.3)] text-accent"
+                  : "text-ink-1"
+              }`}
+              title={label}
             >
-              <span className="material-symbols-outlined text-[24px]">
-                {iconMap[label]}
-              </span>
-              <span className="font-mono text-[14px] text-accent">{num}</span>
-              {label}
+              {label === "HOME" ? (
+                <Image
+                  src="/sorence-nora-portfolio-logo.png"
+                  alt="Home"
+                  width={90}
+                  height={90}
+                  className="h-[28px] w-[28px]"
+                />
+              ) : (
+                <span className="material-symbols-outlined text-[22px]">
+                  {iconMap[label]}
+                </span>
+              )}
             </Link>
           );
         })}
-        <Link
-          href="https://drive.google.com/file/d/14s3Y6nlgkDAuJWRYq021temUH9k1tD1b/view?usp=sharing"
-          target="_blank"
-          rel="noopener"
-          onClick={closeDrawer}
-          className="mt-[28px] inline-flex items-center gap-[8px] font-mono text-[14px] text-accent"
-        >
-          Resume ↗
-        </Link>
-      </div>
+      </nav>
     </>
   );
 };

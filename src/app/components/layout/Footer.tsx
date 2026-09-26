@@ -53,7 +53,9 @@ const Footer = () => {
 
         <div className="mt-[34px] flex flex-wrap justify-between gap-[10px] border-t border-line pt-[22px] font-mono text-[11px] text-ink-2">
           <span>© {currentYear} Sorence Nora. All rights reserved.</span>
-          <span>Official website — built with HTML, CSS &amp; JavaScript</span>
+          <span>
+            Official website — built with Next.js, React &amp; Tailwind CSS
+          </span>
         </div>
       </div>
     </footer>

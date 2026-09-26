@@ -68,10 +68,6 @@
     overflow-x: hidden;
   }
 
-  body.menu-open {
-    overflow: hidden;
-  }
-
   ::selection {
     background: var(--accent);
     color: var(--accent-ink);
@@ -756,47 +752,6 @@
       animation: none;
       opacity: 0.25;
     }
-  }
-
-  .nav-toggle.open span {
-    background: transparent;
-  }
-
-  .nav-toggle.open span::before {
-    top: 0;
-    transform: rotate(45deg);
-  }
-
-  .nav-toggle.open span::after {
-    top: 0;
-    transform: rotate(-45deg);
-  }
-
-  .mobile-drawer {
-    position: fixed;
-    inset: 0;
-    z-index: 90;
-    background: var(--bg-0);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 32px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-8px);
-    transition:
-      opacity 0.35s var(--ease),
-      transform 0.35s var(--ease),
-      visibility 0s linear 0.35s;
-  }
-
-  .mobile-drawer.open {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-    transition:
-      opacity 0.35s var(--ease),
-      transform 0.35s var(--ease);
   }
 
   .nav.scrolled {
