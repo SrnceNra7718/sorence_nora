@@ -544,6 +544,7 @@
 .sn-home .steps {
   --p: 0;
   position: relative;
+  isolation: isolate;
   counter-reset: step;
   display: grid;
   gap: 14px;
@@ -559,6 +560,7 @@
   width: 3px;
   border-radius: 3px;
   background: rgba(243, 241, 236, 0.14);
+  z-index: 0;
 }
 .sn-home .steps::after {
   background: var(--blue);
@@ -591,6 +593,7 @@
   background: var(--bg-1);
   color: var(--muted);
   border: 3px solid rgba(243, 241, 236, 0.14);
+  z-index: 2;
   transition:
     background-color 0.3s,
     color 0.3s,
