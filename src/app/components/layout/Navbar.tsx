@@ -66,25 +66,37 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    if (isHome) {
-      const sections = navLinks
-        .map((l) => document.getElementById(l.target))
-        .filter((s): s is HTMLElement => s !== null);
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              setActiveTarget(entry.target.id);
-              moveHighlight(entry.target.id);
-            }
-          });
-        },
-        { rootMargin: "-45% 0px -50% 0px", threshold: 0 },
-      );
-      sections.forEach((s) => observer.observe(s));
-      return () => observer.disconnect();
-    }
-  }, [moveHighlight, isHome]);
+    if (!isHome) return;
+
+    const sections = navLinks
+      .map((link) => document.getElementById(link.target))
+      .filter((section): section is HTMLElement => section !== null);
+
+    const updateActiveSection = () => {
+      const activationLine = window.innerHeight * 0.45;
+      let activeSection = sections[0];
+
+      for (const section of sections) {
+        if (section.getBoundingClientRect().top > activationLine) break;
+        activeSection = section;
+      }
+
+      if (activeSection) {
+        setActiveTarget((current) =>
+          current === activeSection.id ? current : activeSection.id,
+        );
+      }
+    };
+
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    window.addEventListener("resize", updateActiveSection);
+    updateActiveSection();
+
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
+    };
+  }, [isHome]);
 
   useEffect(() => {
     moveHighlight(activeTarget);

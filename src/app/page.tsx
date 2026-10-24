@@ -3,7 +3,7 @@ import ScrollReveal from "@/app/components/effects/ScrollReveal";
 import CircuitTrace from "@/app/components/effects/CircuitTrace";
 import Navbar from "@/app/components/layout/Navbar";
 import Footer from "@/app/components/layout/Footer";
-import Hero from "@/app/sections/Hero";
+import HomeClient from "@/app/components/home/HomeClient";
 import Intro from "@/app/sections/Intro";
 import Stack from "@/app/sections/Stack";
 import Work from "@/app/sections/Work";
@@ -20,6 +20,12 @@ import {
 } from "@/lib/seo";
 
 export const dynamic = "force-static";
+
+export const metadata = {
+  title: "Sorence Nora — Full-stack web developer in the Philippines",
+  description:
+    "Full-stack web developer in the Philippines building complete websites and conversion-focused landing pages for businesses, from requirements to handover.",
+};
 
 export default function Home() {
   return (
@@ -80,7 +86,7 @@ export default function Home() {
         <ScrollReveal />
         <CircuitTrace />
         <Navbar />
-        <Hero />
+        <HomeClient />
         <Intro />
         <Stack />
         <Work />
