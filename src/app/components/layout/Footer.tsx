@@ -34,7 +34,7 @@ const Footer = () => {
               </p>
             </div>
             <p className="mt-[6px] font-mono text-[12px] text-ink-1">
-              FRONTEND WEB DEVELOPER — PHILIPPINES
+              FULL-STACK WEB DEVELOPER — PHILIPPINES
             </p>
           </div>
 

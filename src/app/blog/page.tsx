@@ -9,11 +9,11 @@ import { breadcrumbJsonLd } from "@/lib/seo";
 import { blogPosts } from "@/lib/blog";
 
 export const metadata: Metadata = {
-  title: "Blog — Frontend Development Notes by Sorence Nora",
+  title: "Blog — Full-Stack Development Notes by Sorence Nora",
   description:
-    "Technical articles on frontend development, React, Next.js, TypeScript, Tailwind CSS, and responsive web design by Sorence Nora, a frontend web developer from the Philippines.",
+    "Technical articles on full-stack development, React, Next.js, TypeScript, Tailwind CSS, and responsive web design by Sorence Nora, a full-stack web developer from the Philippines.",
   keywords: [
-    "frontend development blog",
+    "full-stack development blog",
     "React articles",
     "Next.js tutorials",
     "TypeScript tips",
@@ -23,9 +23,9 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: `${siteConfig.siteUrl}/blog` },
   openGraph: {
-    title: "Blog — Frontend Development Notes by Sorence Nora",
+    title: "Blog — Full-Stack Development Notes by Sorence Nora",
     description:
-      "Technical articles on frontend development, React, Next.js, TypeScript, and Tailwind CSS.",
+      "Technical articles on full-stack development, React, Next.js, TypeScript, and Tailwind CSS.",
     url: `${siteConfig.siteUrl}/blog`,
     type: "website",
     locale: "en_PH",
@@ -65,7 +65,7 @@ const BlogPage = () => {
           </h1>
 
           <p className="mt-[26px] max-w-[46ch] text-[clamp(1rem,1.6vw,1.15rem)] leading-[1.7] text-ink-1">
-            Technical articles on frontend development, React, Next.js,
+            Technical articles on full-stack development, React, Next.js,
             TypeScript, and responsive web design — drawn from projects
             I&apos;ve built.
           </p>

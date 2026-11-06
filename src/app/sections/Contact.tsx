@@ -169,7 +169,7 @@ const [body, setBody] = \`Hey Sorence ✨
             <div className="flex flex-col gap-[10px]">
               <a
                 href="mailto:nora.sorence@gmail.com"
-                className="inline-flex w-fit items-center gap-[8px] border-b border-transparent font-mono text-[13.5px] text-ink-1 transition-colors hover:border-[rgba(232,163,61,0.4)] hover:text-accent"
+                className="inline-flex w-fit items-center gap-[8px] border-b border-transparent font-mono text-[13.5px] text-ink-1 transition-colors hover:border-[rgba(59, 130, 246,0.4)] hover:text-accent"
               >
                 ↗ nora.sorence@gmail.com
               </a>
@@ -177,7 +177,7 @@ const [body, setBody] = \`Hey Sorence ✨
                 href="/Resume_Nora_Sorence.pdf"
                 target="_blank"
                 rel="noopener"
-                className="inline-flex w-fit items-center gap-[8px] border-b border-transparent font-mono text-[13.5px] text-ink-1 transition-colors hover:border-[rgba(232,163,61,0.4)] hover:text-accent"
+                className="inline-flex w-fit items-center gap-[8px] border-b border-transparent font-mono text-[13.5px] text-ink-1 transition-colors hover:border-[rgba(59, 130, 246,0.4)] hover:text-accent"
               >
                 ↗ View résumé
               </a>
@@ -190,10 +190,10 @@ const [body, setBody] = \`Hey Sorence ✨
             onMouseMove={handlePortalMove}
             className="code-portal reveal reveal-d1 relative order-2 lg:order-1"
           >
-            <div className="relative z-10 flex items-center justify-between border-b border-[rgba(232,163,61,0.15)] px-[14px] py-[9px] font-mono text-[11px] uppercase tracking-[0.08em] text-ink-2">
+            <div className="relative z-10 flex items-center justify-between border-b border-[rgba(59, 130, 246,0.15)] px-[14px] py-[9px] font-mono text-[11px] uppercase tracking-[0.08em] text-ink-2">
               <span className="flex items-center gap-[6px]">
                 <span className="h-[8px] w-[8px] rounded-full bg-[#c4634a]" />
-                <span className="h-[8px] w-[8px] rounded-full bg-[#e8a33d]" />
+                <span className="h-[8px] w-[8px] rounded-full bg-[#3b82f6]" />
                 <span className="h-[8px] w-[8px] rounded-full bg-[#7CC29B]" />
               </span>
               <span className="flex items-center gap-[8px]">
@@ -202,7 +202,7 @@ const [body, setBody] = \`Hey Sorence ✨
                 <span className="twinkle twinkle-d2">✧</span>
               </span>
             </div>
-            <div className="relative z-10 grid grid-cols-[1fr_auto] items-center gap-[10px] border-b border-[rgba(232,163,61,0.08)] px-[14px] py-[6px] font-mono text-[10.5px] uppercase tracking-[0.1em] text-ink-2">
+            <div className="relative z-10 grid grid-cols-[1fr_auto] items-center gap-[10px] border-b border-[rgba(59, 130, 246,0.08)] px-[14px] py-[6px] font-mono text-[10.5px] uppercase tracking-[0.1em] text-ink-2">
               <span className="truncate">
                 <span className="text-accent">~/transmissions</span>
                 <span className="text-ink-2"> / </span>
@@ -243,7 +243,7 @@ const [body, setBody] = \`Hey Sorence ✨
                 </pre>
               )}
             </Highlight>
-            <div className="relative z-10 flex items-center justify-between border-t border-[rgba(232,163,61,0.08)] px-[14px] py-[8px] font-mono text-[10.5px] uppercase tracking-[0.1em] text-ink-2">
+            <div className="relative z-10 flex items-center justify-between border-t border-[rgba(59, 130, 246,0.08)] px-[14px] py-[8px] font-mono text-[10.5px] uppercase tracking-[0.1em] text-ink-2">
               <span className="flex items-center gap-[8px]">
                 <span className="inline-block h-[6px] w-[6px] animate-pulse rounded-full bg-[#7CC29B]" />
                 <span>signal locked</span>
@@ -361,7 +361,7 @@ const [body, setBody] = \`Hey Sorence ✨
               <button
                 type="submit"
                 disabled={state.submitting}
-                className="relative inline-flex items-center gap-[10px] overflow-hidden rounded-[2px] bg-accent px-[24px] py-[15px] font-mono text-[13px] font-medium tracking-[0.02em] text-accent-ink transition-colors duration-300 hover:bg-[#f0b25d] disabled:cursor-not-allowed disabled:opacity-50"
+                className="relative inline-flex items-center gap-[10px] overflow-hidden rounded-[2px] bg-accent px-[24px] py-[15px] font-mono text-[13px] font-medium tracking-[0.02em] text-accent-ink transition-colors duration-300 hover:bg-[#60a5fa] disabled:cursor-not-allowed disabled:opacity-50"
               >
                 SEND MESSAGE{" "}
                 <span className="inline-block transition-transform duration-300">

@@ -11,11 +11,11 @@ import { projects } from "@/lib/projects";
 export const metadata: Metadata = {
   title: "Projects — Web Development Work by Sorence Nora",
   description:
-    "Portfolio of web applications built by Sorence Nora, a frontend web developer from the Philippines. Showcasing projects built with React, Next.js, TypeScript, and Tailwind CSS.",
+    "Portfolio of web applications built by Sorence Nora, a full-stack web developer from the Philippines. Showcasing projects built with React, Next.js, TypeScript, and Tailwind CSS.",
   keywords: [
     "Sorence Nora projects",
     "web development portfolio",
-    "frontend developer portfolio",
+    "full-stack developer portfolio",
     "software developer portfolio",
     "React projects",
     "Next.js projects",

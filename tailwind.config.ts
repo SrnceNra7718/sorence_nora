@@ -10,24 +10,24 @@ const config: Config = {
     extend: {
       colors: {
         bg: {
-          0: "#08090B",
-          1: "#0D0F12",
-          2: "#141619",
+          0: "var(--bg-0)",
+          1: "var(--bg-1)",
+          2: "var(--bg-2)",
         },
         ink: {
-          0: "#F3F1EC",
-          1: "#A6A39B",
-          2: "#706D66",
+          0: "var(--ink-0)",
+          1: "var(--ink-1)",
+          2: "var(--ink-2)",
         },
-        line: "rgba(243,241,236,0.10)",
-        "line-strong": "rgba(243,241,236,0.18)",
+        line: "var(--line)",
+        "line-strong": "var(--line-strong)",
         accent: {
-          DEFAULT: "#E8A33D",
-          dim: "#B97F2C",
-          ink: "#1A1200",
+          DEFAULT: "var(--accent)",
+          dim: "var(--accent-dim)",
+          ink: "var(--accent-ink)",
         },
-        secondary: "#6E86A6",
-        danger: "#C4634A",
+        secondary: "var(--secondary)",
+        danger: "var(--danger)",
       },
       fontFamily: {
         display: "var(--font-display)",

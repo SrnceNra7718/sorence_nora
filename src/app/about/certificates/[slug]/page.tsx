@@ -7,12 +7,12 @@ import JsonLd from "@/app/components/SEO/JsonLd";
 import Badge from "@/app/components/ui/Badge";
 import PdfPreview from "@/app/components/certificates/PdfPreview";
 import { siteConfig } from "@/lib/siteConfig";
+import { personJsonLd, breadcrumbJsonLd, certificateJsonLd } from "@/lib/seo";
 import {
-  personJsonLd,
-  breadcrumbJsonLd,
-  certificateJsonLd,
-} from "@/lib/seo";
-import { Certificate, getCertificateBySlug, certificates } from "@/lib/certificates";
+  Certificate,
+  getCertificateBySlug,
+  certificates,
+} from "@/lib/certificates";
 
 interface CertificatePageProps {
   params: Promise<{ slug: string }>;
@@ -98,9 +98,7 @@ const CertificatePage = async ({ params }: CertificatePageProps) => {
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
     {
-      label: cert.learningPath
-        ? "Certifications"
-        : "Certifications",
+      label: cert.learningPath ? "Certifications" : "Certifications",
       href: "/about#certifications",
     },
     { label: cert.title, href: `/about/certificates/${cert.slug}` },
@@ -136,7 +134,7 @@ const CertificatePage = async ({ params }: CertificatePageProps) => {
           </div>
 
           <nav aria-label="Breadcrumb" className="mt-[20px]">
-            <ol className="flex items-center gap-[8px] text-[11.5px] font-mono uppercase tracking-[0.08em] text-ink-2">
+            <ol className="flex items-center gap-[8px] font-mono text-[11.5px] uppercase tracking-[0.08em] text-ink-2">
               <li>
                 <Link href="/" className="hover:text-accent">
                   Home
@@ -163,14 +161,10 @@ const CertificatePage = async ({ params }: CertificatePageProps) => {
           {cert.learningPath && (
             <p className="mt-[12px] font-mono text-[12px] text-ink-2">
               Part of{" "}
-              <Link
-                href="/about"
-                className="text-accent hover:underline"
-              >
+              <Link href="/about" className="text-accent hover:underline">
                 {cert.learningPath.provider}
               </Link>{" "}
-              ·{" "}
-              <span className="text-ink-1">{cert.learningPath.title}</span>
+              · <span className="text-ink-1">{cert.learningPath.title}</span>
             </p>
           )}
 
@@ -230,7 +224,7 @@ const CertificatePage = async ({ params }: CertificatePageProps) => {
                     <dt className="font-mono text-[11px] uppercase tracking-[0.08em] text-ink-2">
                       Credential ID
                     </dt>
-                    <dd className="mt-[4px] text-[14px] font-mono text-ink-1">
+                    <dd className="mt-[4px] font-mono text-[14px] text-ink-1">
                       {cert.credentialId}
                     </dd>
                   </div>
@@ -251,8 +245,7 @@ const CertificatePage = async ({ params }: CertificatePageProps) => {
                       Learning path
                     </dt>
                     <dd className="mt-[4px] text-[14px] text-ink-1">
-                      {cert.learningPath?.provider} —{" "}
-                      {cert.learningPath?.title}
+                      {cert.learningPath?.provider} — {cert.learningPath?.title}
                     </dd>
                   </div>
                 )}
@@ -281,7 +274,7 @@ const CertificatePage = async ({ params }: CertificatePageProps) => {
                   href={pdfUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-[8px] rounded-[2px] border border-accent bg-accent px-[24px] py-[12px] font-mono text-[12.5px] font-medium text-accent-ink transition-colors hover:bg-[#f0b25d]"
+                  className="inline-flex items-center justify-center gap-[8px] rounded-[2px] border border-accent bg-accent px-[24px] py-[12px] font-mono text-[12.5px] font-medium text-accent-ink transition-colors hover:bg-[#60a5fa]"
                 >
                   <span className="material-symbols-outlined text-[16px]">
                     open_in_full
@@ -307,14 +300,14 @@ const CertificatePage = async ({ params }: CertificatePageProps) => {
                     className="group flex items-center justify-between gap-[16px] rounded-[6px] border border-line bg-bg-1 p-[18px] transition-colors hover:border-accent"
                   >
                     <div>
-                      <p className="font-display text-[1.05rem] font-medium text-ink-0 group-hover:text-accent transition-colors">
+                      <p className="font-display text-[1.05rem] font-medium text-ink-0 transition-colors group-hover:text-accent">
                         {rel.title}
                       </p>
                       <p className="mt-[2px] text-[13px] text-ink-1">
                         {rel.issuer} · {rel.year}
                       </p>
                     </div>
-                    <span className="material-symbols-outlined text-[20px] text-ink-2 group-hover:text-accent transition-colors">
+                    <span className="material-symbols-outlined text-[20px] text-ink-2 transition-colors group-hover:text-accent">
                       chevron_right
                     </span>
                   </Link>

@@ -16,7 +16,7 @@ const Intro = () => {
           </div>
           <div>
             <p className="reveal reveal-d1 font-display text-[clamp(1.5rem,3vw,2.2rem)] font-medium leading-[1.35] text-ink-0">
-              Frontend development focused on building modern, responsive, and
+              Full-stack development focused on building modern, responsive, and
               purposeful web applications — interfaces that are fast,
               accessible, and easy to maintain.
             </p>
