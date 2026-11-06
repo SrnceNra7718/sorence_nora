@@ -12,6 +12,7 @@ export default function HomeSections() {
             <div className="cta-row">
               <a className="btn btn-primary" href="#contact">Start a project</a>
               <a className="btn btn-ghost" href="#work">See my work</a>
+              <a className="btn btn-ghost" href="/Resume_Nora_Sorence.pdf" target="_blank" rel="noopener">View résumé</a>
             </div>
             <ul className="proof">
               <li>React, Next.js, TypeScript</li>

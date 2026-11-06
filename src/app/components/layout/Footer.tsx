@@ -48,6 +48,14 @@ const Footer = () => {
                 {label}
               </Link>
             ))}
+            <a
+              href="/Resume_Nora_Sorence.pdf"
+              target="_blank"
+              rel="noopener"
+              className="font-mono text-[12.5px] text-ink-1 transition-colors hover:text-accent"
+            >
+              RESUME
+            </a>
           </div>
         </div>
 
