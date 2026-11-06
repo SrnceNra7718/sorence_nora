@@ -85,7 +85,7 @@ const Hero = () => {
               </Magnetic>
             </div>
             <a
-              href="https://drive.google.com/file/d/14s3Y6nlgkDAuJWRYq021temUH9k1tD1b/view?usp=sharing"
+              href="/Resume_Nora_Sorence.pdf"
               target="_blank"
               rel="noopener"
               className="mt-4 inline-flex items-center gap-[6px] border-b border-transparent pb-[2px] font-mono text-[12.5px] text-ink-1 transition-colors duration-300 hover:border-line-strong hover:text-ink-0"

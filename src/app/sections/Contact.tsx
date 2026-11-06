@@ -174,7 +174,7 @@ const [body, setBody] = \`Hey Sorence ✨
                 ↗ nora.sorence@gmail.com
               </a>
               <a
-                href="https://drive.google.com/file/d/14s3Y6nlgkDAuJWRYq021temUH9k1tD1b/view?usp=sharing"
+                href="/Resume_Nora_Sorence.pdf"
                 target="_blank"
                 rel="noopener"
                 className="inline-flex w-fit items-center gap-[8px] border-b border-transparent font-mono text-[13.5px] text-ink-1 transition-colors hover:border-[rgba(232,163,61,0.4)] hover:text-accent"
