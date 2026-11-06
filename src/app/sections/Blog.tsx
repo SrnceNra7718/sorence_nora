@@ -53,10 +53,10 @@ const Blog = () => {
                     <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-accent">
                       {post.tag}
                     </span>
-                    <h3 className="mt-[10px] font-display text-[clamp(1.3rem,2.2vw,1.6rem)] font-semibold leading-[1.15] text-ink-0 group-hover:text-accent transition-colors">
+                    <h3 className="mt-[10px] font-display text-[clamp(1.3rem,2.2vw,1.6rem)] font-semibold leading-[1.15] text-ink-0 transition-colors group-hover:text-accent">
                       {post.title}
                     </h3>
-                    <p className="mt-[12px] text-[14px] leading-[1.7] text-ink-1 line-clamp-2">
+                    <p className="mt-[12px] line-clamp-2 text-[14px] leading-[1.7] text-ink-1">
                       {post.description}
                     </p>
                   </div>
@@ -75,10 +75,12 @@ const Blog = () => {
         <div className="reveal mt-[40px]">
           <Link
             href="/blog"
-            className="inline-flex items-center gap-[8px] rounded-[2px] border border-accent bg-accent px-[24px] py-[14px] font-mono text-[13px] font-medium text-accent-ink transition-colors hover:bg-[#f0b25d]"
+            className="inline-flex items-center gap-[8px] rounded-[2px] border border-accent bg-accent px-[24px] py-[14px] font-mono text-[13px] font-medium text-accent-ink transition-colors hover:bg-[#60a5fa]"
           >
             See more articles
-            <span className="inline-block transition-transform duration-300">→</span>
+            <span className="inline-block transition-transform duration-300">
+              →
+            </span>
           </Link>
         </div>
       </div>

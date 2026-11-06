@@ -168,7 +168,7 @@ const SkillsPage = () => {
             </p>
             <Link
               href="/projects"
-              className="inline-flex items-center gap-[8px] rounded-[2px] border border-accent bg-accent px-[24px] py-[14px] font-mono text-[13px] font-medium text-accent-ink transition-colors hover:bg-[#f0b25d]"
+              className="inline-flex items-center gap-[8px] rounded-[2px] border border-accent bg-accent px-[24px] py-[14px] font-mono text-[13px] font-medium text-accent-ink transition-colors hover:bg-[#60a5fa]"
             >
               View projects
               <span className="inline-block transition-transform duration-300">→</span>

@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import ThemeToggle from "../ui/ThemeToggle";
 
 interface NavLink {
   label: string;
@@ -145,7 +146,7 @@ const Navbar = () => {
         ref={navRef}
         className={`fixed left-1/2 top-[18px] z-[100] hidden w-[calc(100%-40px)] max-w-[1100px] -translate-x-1/2 items-center justify-between rounded-[999px] border border-transparent px-[18px] py-[12px] transition-all duration-300 md:flex md:px-[14px] md:py-[8px] ${
           scrolled
-            ? "border-line bg-[rgba(13,15,18,0.72)] px-[16px] py-[9px] shadow-[0_8px_30px_rgba(0,0,0,0.35)] saturate-[140%] backdrop-blur-[14px] md:px-[12px] md:py-[6px]"
+            ? "border-line bg-[color-mix(in_srgb,var(--bg-1),transparent_28%)] px-[16px] py-[9px] shadow-[0_8px_30px_rgba(0,0,0,0.12)] saturate-[140%] backdrop-blur-[14px] md:px-[12px] md:py-[6px]"
             : ""
         }`}
       >
@@ -175,7 +176,7 @@ const Navbar = () => {
         >
           <span
             ref={highlightRef}
-            className="nav-highlight pointer-events-none absolute bottom-[-8px] left-0 top-[-8px] -z-10 w-0 rounded-[999px] border border-[rgba(232,163,61,0.22)] bg-[rgba(232,163,61,0.08)]"
+            className="nav-highlight pointer-events-none absolute bottom-[-8px] left-0 top-[-8px] -z-10 w-0 rounded-[999px] border border-[rgba(59,130,246,0.22)] bg-[rgba(59,130,246,0.08)]"
             aria-hidden="true"
           />
           {navLinks.map(({ label, target, path }) => {
@@ -218,9 +219,10 @@ const Navbar = () => {
           <span className="h-[6px] w-[6px] rounded-full bg-[#7CC29B] shadow-[0_0_0_3px_rgba(124,194,155,0.15)]" />
           AVAILABLE FOR WORK
         </span>
+        <ThemeToggle />
       </nav>
 
-      <nav className="fixed bottom-[18px] left-1/2 z-[90] flex w-[calc(100%-40px)] max-w-[1100px] -translate-x-1/2 items-center justify-center gap-[8px] rounded-[999px] border border-[rgba(232,163,61,0.22)] bg-[rgba(13,15,18,0.72)] px-[12px] py-[10px] backdrop-blur-[14px] transition-all duration-300 md:hidden">
+      <nav className="fixed bottom-[18px] left-1/2 z-[90] flex w-[calc(100%-40px)] max-w-[1100px] -translate-x-1/2 items-center justify-center gap-[8px] rounded-[999px] border border-[rgba(59,130,246,0.22)] bg-[color-mix(in_srgb,var(--bg-1),transparent_28%)] px-[12px] py-[10px] backdrop-blur-[14px] transition-all duration-300 md:hidden">
         {navLinks.map(({ label, target, path }) => {
           const href = getHref({ label, target, path, num: "00" });
           const isActive = isActiveLink({
@@ -236,7 +238,7 @@ const Navbar = () => {
               data-target={target}
               className={`flex h-[46px] w-[46px] items-center justify-center rounded-[10px] ${
                 isActive
-                  ? "border border-[rgba(232,163,61,0.3)] text-accent"
+                  ? "border border-[rgba(59,130,246,0.3)] text-accent"
                   : "text-ink-1"
               }`}
               title={label}

@@ -38,9 +38,9 @@ const CertCard: React.FC<CertCardProps> = ({
     return (
       <Link
         href={`/about/certificates/${slug}`}
-        className="group grid grid-cols-[100px_1fr] gap-[16px] py-[22px] transition-colors duration-200 hover:bg-bg-1/40 md:gap-[24px]"
+        className="hover:bg-bg-1/40 group grid grid-cols-[100px_1fr] gap-[16px] py-[22px] transition-colors duration-200 md:gap-[24px]"
       >
-        <span className="font-mono text-[13px] text-accent pt-[2px]">
+        <span className="pt-[2px] font-mono text-[13px] text-accent">
           {year}
         </span>
         <div>
@@ -49,7 +49,7 @@ const CertCard: React.FC<CertCardProps> = ({
               {issuer}
             </span>
           )}
-          <p className="font-display text-[1.05rem] font-medium text-ink-0 group-hover:text-accent transition-colors">
+          <p className="font-display text-[1.05rem] font-medium text-ink-0 transition-colors group-hover:text-accent">
             {title}
           </p>
           <p className="mt-[2px] text-[13.5px] text-ink-1">
@@ -67,7 +67,7 @@ const CertCard: React.FC<CertCardProps> = ({
       className="rounded-[6px] border border-line bg-bg-1 p-[28px]"
       aria-labelledby={`cert-title-${slug}`}
     >
-      <header className="mb-[24px] flex flex-wrap items-start justify-between gap-[16px] pb-[16px] border-b border-line">
+      <header className="mb-[24px] flex flex-wrap items-start justify-between gap-[16px] border-b border-line pb-[16px]">
         <div>
           {certificate.learningPath && (
             <p className="mb-[6px] font-mono text-[11px] uppercase tracking-[0.08em] text-ink-2">
@@ -135,7 +135,7 @@ const CertCard: React.FC<CertCardProps> = ({
               <dt className="font-mono text-[11px] uppercase tracking-[0.08em] text-ink-2">
                 Credential ID
               </dt>
-              <dd className="mt-[4px] text-[14px] font-mono text-ink-1">
+              <dd className="mt-[4px] font-mono text-[14px] text-ink-1">
                 {credentialId}
               </dd>
             </div>
@@ -163,14 +163,16 @@ const CertCard: React.FC<CertCardProps> = ({
               ))}
             </div>
           )}
-          {showPreview && <PdfPreview certificate={certificate} compact={false} />}
+          {showPreview && (
+            <PdfPreview certificate={certificate} compact={false} />
+          )}
         </div>
       </div>
 
       <div className="mt-[22px] flex flex-wrap gap-[12px] border-t border-line pt-[16px]">
         <Link
           href={`/about/certificates/${slug}`}
-          className="inline-flex items-center justify-center gap-[8px] rounded-[2px] border border-accent bg-accent px-[24px] py-[12px] font-mono text-[12.5px] font-medium text-accent-ink transition-colors hover:bg-[#f0b25d]"
+          className="inline-flex items-center justify-center gap-[8px] rounded-[2px] border border-accent bg-accent px-[24px] py-[12px] font-mono text-[12.5px] font-medium text-accent-ink transition-colors hover:bg-[#60a5fa]"
         >
           <span className="material-symbols-outlined text-[16px]">
             visibility

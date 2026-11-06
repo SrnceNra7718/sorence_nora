@@ -37,11 +37,12 @@ export default function NotFoundPage() {
             Page not found
           </h1>
           <p className="mt-[18px] max-w-[42ch] text-[15px] leading-[1.7] text-ink-1">
-            The page you&apos;re looking for doesn&apos;t exist or has been moved.
+            The page you&apos;re looking for doesn&apos;t exist or has been
+            moved.
           </p>
           <Link
             href="/"
-            className="mt-[32px] inline-flex items-center gap-[8px] rounded-[2px] border border-accent bg-accent px-[24px] py-[14px] font-mono text-[13px] font-medium text-accent-ink transition-colors hover:bg-[#f0b25d]"
+            className="mt-[32px] inline-flex items-center gap-[8px] rounded-[2px] border border-accent bg-accent px-[24px] py-[14px] font-mono text-[13px] font-medium text-accent-ink transition-colors hover:bg-[#60a5fa]"
           >
             Back to homepage
             <span>→</span>

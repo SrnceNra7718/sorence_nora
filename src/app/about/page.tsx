@@ -11,12 +11,12 @@ import { stackCategories } from "@/lib/stack";
 import ImageSlider from "@/app/components/effects/ImageSlider";
 
 export const metadata: Metadata = {
-  title: "About Sorence Nora — Frontend Web Developer",
+  title: "About Sorence Nora — Full-Stack Web Developer",
   description:
-    "About Sorence Nora, a frontend web developer from the Philippines. Learn about my education, certifications, approach to web development, and my focus on building modern, responsive web applications.",
+    "About Sorence Nora, a full-stack web developer from the Philippines. Learn about my education, certifications, approach to web development, and my focus on building modern, responsive web applications.",
   keywords: [
     "Sorence Nora",
-    "frontend developer Philippines",
+    "full-stack developer Philippines",
     "about Sorence Nora",
     "web developer portfolio",
     "React developer",
@@ -25,9 +25,9 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: `${siteConfig.siteUrl}/about` },
   openGraph: {
-    title: "About Sorence Nora — Frontend Web Developer",
+    title: "About Sorence Nora — Full-Stack Web Developer",
     description:
-      "Frontend web developer from the Philippines building modern, responsive web applications with React, Next.js, and TypeScript.",
+      "Full-stack web developer from the Philippines building modern, responsive web applications with React, Next.js, and TypeScript.",
     url: `${siteConfig.siteUrl}/about`,
     type: "profile",
     locale: "en_PH",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
         url: siteConfig.author.image,
         width: 400,
         height: 400,
-        alt: "Sorence Nora — Frontend Web Developer",
+        alt: "Sorence Nora — Full-Stack Web Developer",
       },
     ],
   },
@@ -87,7 +87,7 @@ const AboutPage = () => {
               <ImageSlider
                 cartoonSrc="/sorence-nora-cartoon-avatar.png"
                 photoSrc="/sorence-nora-profile-photo.png"
-                alt="Sorence Nora — Frontend Web Developer"
+                alt="Sorence Nora — Full-Stack Web Developer"
                 width={200}
                 height={300}
                 className="rounded-[6px] border border-line"
@@ -97,7 +97,7 @@ const AboutPage = () => {
             {/* Paragraphs — full-width on mobile, left column on desktop */}
             <div className="col-span-full min-w-0 max-w-[42rem] md:col-span-1 md:col-start-1 md:row-start-2">
               <p className="text-[1.05rem] leading-[1.85] text-ink-1">
-                I&apos;m a frontend web developer based in the Philippines,
+                I&apos;m a full-stack web developer based in the Philippines,
                 specializing in building modern, responsive web applications. My
                 work sits at the intersection of design and engineering —
                 turning requirements into interfaces that are fast, accessible,

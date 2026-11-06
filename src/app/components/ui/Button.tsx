@@ -10,7 +10,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const base =
       "inline-flex items-center gap-2 font-mono text-[13px] tracking-[0.02em] px-6 py-[15px] rounded-[2px] relative overflow-hidden transition-colors duration-300";
     const variants = {
-      primary: "bg-accent text-accent-ink font-medium hover:bg-[#f0b25d]",
+      primary: "bg-accent text-accent-ink font-medium hover:bg-[#60a5fa]",
       ghost:
         "border border-line-strong text-ink-0 hover:border-accent hover:text-accent",
     };
@@ -24,7 +24,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {children}
       </button>
     );
-  }
+  },
 );
 
 Button.displayName = "Button";

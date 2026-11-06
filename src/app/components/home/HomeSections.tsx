@@ -7,7 +7,7 @@ export default function HomeSections() {
         <div className="wrap hero-grid">
           <div className="hero-copy">
             <p className="status" data-circuit-node="hero"><span className="pulse" aria-hidden="true"></span>Taking on new client projects</p>
-            <h1>Websites that turn visitors into customers.</h1>
+            <h1><span className="text-accent">Websites</span> that turn <span className="text-accent">visitors</span> into <span className="text-accent">customers</span>.</h1>
             <p className="lede">I&apos;m Sorence Nora, a full-stack web developer in the Philippines. I build complete websites and conversion-focused landing pages for businesses, and I work with you from the first brief to handover.</p>
             <div className="cta-row">
               <a className="btn btn-primary" href="#contact">Start a project</a>
