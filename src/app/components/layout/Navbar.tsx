@@ -222,7 +222,10 @@ const Navbar = () => {
         <ThemeToggle />
       </nav>
 
-      <nav className="fixed bottom-[18px] left-1/2 z-[90] flex w-[calc(100%-40px)] max-w-[1100px] -translate-x-1/2 items-center justify-center gap-[8px] rounded-[999px] border border-[rgba(59,130,246,0.22)] bg-[color-mix(in_srgb,var(--bg-1),transparent_28%)] px-[12px] py-[10px] backdrop-blur-[14px] transition-all duration-300 md:hidden">
+      <nav
+        aria-label="Mobile navigation"
+        className="fixed bottom-[18px] left-1/2 z-[90] flex w-[calc(100%-24px)] max-w-[1100px] -translate-x-1/2 items-center justify-center gap-[2px] rounded-[999px] border border-[rgba(59,130,246,0.22)] bg-[color-mix(in_srgb,var(--bg-1),transparent_28%)] px-[12px] py-[10px] backdrop-blur-[14px] transition-all duration-300 md:hidden"
+      >
         {navLinks.map(({ label, target, path }) => {
           const href = getHref({ label, target, path, num: "00" });
           const isActive = isActiveLink({
@@ -236,7 +239,7 @@ const Navbar = () => {
               key={target}
               href={href}
               data-target={target}
-              className={`flex h-[46px] w-[46px] items-center justify-center rounded-[10px] ${
+              className={`mobile-nav-link flex h-[38px] min-w-0 flex-1 items-center justify-center rounded-[30px] ${
                 isActive
                   ? "border border-[rgba(59,130,246,0.3)] text-accent"
                   : "text-ink-1"
@@ -247,9 +250,9 @@ const Navbar = () => {
                 <Image
                   src="/sorence-nora-portfolio-logo.png"
                   alt="Home"
-                  width={90}
-                  height={90}
-                  className="h-[28px] w-[28px]"
+                  width={80}
+                  height={80}
+                  className="h-[24px] w-[24px]"
                 />
               ) : (
                 <span className="material-symbols-outlined text-[22px]">
@@ -259,6 +262,7 @@ const Navbar = () => {
             </Link>
           );
         })}
+        <ThemeToggle />
       </nav>
     </>
   );

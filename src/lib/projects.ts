@@ -32,6 +32,7 @@ export interface Project {
   imageAlt: Record<string, string>;
   liveUrl: string | null;
   githubUrl: string | null;
+  sourceUrl?: string;
   dateCreated: string;
   caseStudy: ProjectCaseStudy;
   ogImage: string;
@@ -88,6 +89,7 @@ const studentClearanceMonitor: Project = {
   },
   liveUrl: null,
   githubUrl: null,
+  sourceUrl: undefined,
   dateCreated: "2024-01-01",
   caseStudy: {
     problem:
@@ -199,6 +201,7 @@ const yenzhenTailoring: Project = {
   },
   liveUrl: "https://yenzhen-tailoring.vercel.app",
   githubUrl: "https://github.com/SrnceNra7718/yenzhen-tailoring",
+  sourceUrl: "https://github.com/SrnceNra7718/yenzhen-tailoring",
   dateCreated: "2024-01-01",
   caseStudy: {
     problem:
@@ -320,6 +323,7 @@ const browsByHer: Project = {
   },
   liveUrl: "https://brows-by-her.vercel.app",
   githubUrl: "https://github.com/SrnceNra7718/brows-by-her",
+  sourceUrl: "https://github.com/SrnceNra7718/brows-by-her",
   dateCreated: "2026-08-07",
   caseStudy: {
     problem:
@@ -425,6 +429,7 @@ const stylishFlowHairBeauty: Project = {
   },
   liveUrl: "https://stylish-flow-hair-beauty.vercel.app",
   githubUrl: "https://github.com/SrnceNra7718/stylish-flow-hair-beauty",
+  sourceUrl: "https://github.com/SrnceNra7718/stylish-flow-hair-beauty",
   dateCreated: "2026-08-07",
   caseStudy: {
     problem:
@@ -520,6 +525,7 @@ const subbieStreetGarageProto: Project = {
   },
   liveUrl: "https://subbie-street-garage-proto.vercel.app",
   githubUrl: "https://github.com/SrnceNra7718/subbie-street-garage-proto",
+  sourceUrl: "https://github.com/SrnceNra7718/subbie-street-garage-proto",
   dateCreated: "2026-08-05",
   caseStudy: {
     problem:
@@ -624,8 +630,9 @@ const subbieStreetGarage: Project = {
     "/forProject_Section/subbie-street-garage/booking_page.png":
       "Subbie Street Garage appointment booking form with vehicle information and preferred scheduling",
   },
-  liveUrl: "https://subbie-street-garage.vercel.app",
-  githubUrl: "https://github.com/SrnceNra7718/subbie-street-garage",
+  liveUrl: null,
+  githubUrl: null,
+  sourceUrl: undefined,
   dateCreated: "2026-08-05",
   caseStudy: {
     problem:
@@ -728,6 +735,7 @@ const seekMigration: Project = {
   },
   liveUrl: "https://seek-migration.vercel.app",
   githubUrl: "https://github.com/SrnceNra7718/seek_migration",
+  sourceUrl: "https://github.com/SrnceNra7718/seek_migration",
   dateCreated: "2026-08-22",
   caseStudy: {
     problem:

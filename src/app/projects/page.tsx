@@ -4,6 +4,7 @@ import { Metadata } from "next";
 import PageLayout from "@/app/components/layout/PageLayout";
 import Badge from "@/app/components/ui/Badge";
 import JsonLd from "@/app/components/SEO/JsonLd";
+import ProjectLinks from "@/app/components/projects/ProjectLinks";
 import { siteConfig } from "@/lib/siteConfig";
 import { breadcrumbJsonLd, projectJsonLd } from "@/lib/seo";
 import { projects } from "@/lib/projects";
@@ -143,12 +144,20 @@ const ProjectsPage = () => {
                       ))}
                     </div>
 
-                    <Link
-                      href={`/projects/${proj.slug}`}
-                      className="mt-[24px] inline-flex items-center gap-[8px] font-mono text-[12.5px] text-accent"
-                    >
-                      View case study →
-                    </Link>
+                  <div className="mt-[18px]">
+                    <ProjectLinks
+                      title={proj.title}
+                      sourceUrl={proj.sourceUrl || proj.githubUrl}
+                      liveUrl={proj.liveUrl}
+                    />
+                  </div>
+
+                  <Link
+                    href={`/projects/${proj.slug}`}
+                    className="mt-[14px] inline-flex items-center gap-[8px] font-mono text-[12.5px] text-accent"
+                  >
+                    View case study →
+                  </Link>
                   </div>
                 </div>
               </article>

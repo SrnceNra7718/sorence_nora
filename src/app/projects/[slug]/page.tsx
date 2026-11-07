@@ -6,6 +6,7 @@ import { Metadata } from "next";
 import PageLayout from "@/app/components/layout/PageLayout";
 import Badge from "@/app/components/ui/Badge";
 import JsonLd from "@/app/components/SEO/JsonLd";
+import ProjectLinks from "@/app/components/projects/ProjectLinks";
 import { siteConfig } from "@/lib/siteConfig";
 import { breadcrumbJsonLd, projectJsonLd } from "@/lib/seo";
 import { projects, Project } from "@/lib/projects";
@@ -126,6 +127,13 @@ const ProjectPage = async ({ params }: ProjectPageProps) => {
               <Badge key={tech}>{tech}</Badge>
             ))}
           </div>
+
+          <ProjectLinks
+            title={proj.title}
+            sourceUrl={proj.sourceUrl || proj.githubUrl}
+            liveUrl={proj.liveUrl}
+            className="mt-[26px]"
+          />
         </div>
       </section>
 
@@ -342,15 +350,22 @@ const ProjectPage = async ({ params }: ProjectPageProps) => {
                 application projects. Reach out to discuss how I can help.
               </p>
             </div>
-            <Link
-              href="/#contact"
-              className="inline-flex items-center gap-[8px] rounded-[2px] border border-accent bg-accent px-[24px] py-[14px] font-mono text-[13px] font-medium text-accent-ink transition-colors hover:bg-[#60a5fa]"
-            >
-              Get in touch
-              <span className="inline-block transition-transform duration-300">
-                →
-              </span>
-            </Link>
+            <div className="flex flex-wrap items-center gap-[12px]">
+              <ProjectLinks
+                title={proj.title}
+                sourceUrl={proj.sourceUrl || proj.githubUrl}
+                liveUrl={proj.liveUrl}
+              />
+              <Link
+                href="/#contact"
+                className="inline-flex items-center gap-[8px] rounded-[2px] border border-accent bg-accent px-[24px] py-[14px] font-mono text-[13px] font-medium text-accent-ink transition-colors hover:bg-[#60a5fa]"
+              >
+                Get in touch
+                <span className="inline-block transition-transform duration-300">
+                  →
+                </span>
+              </Link>
+            </div>
           </div>
         </div>
       </section>

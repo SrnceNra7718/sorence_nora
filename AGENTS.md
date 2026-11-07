@@ -243,7 +243,7 @@ If information cannot be confidently verified from the PDF or existing project d
 
 Portfolio projects are stored as a single source of truth in `src/lib/projects.ts`.
 
-Project entries include: number, slug, title, role, context, overview, description, technologies, frontendTech, backendTech, databaseTech, images, imageAlt, liveUrl, githubUrl, dateCreated, caseStudy, ogImage.
+Project entries include: number, slug, title, role, context, overview, description, technologies, frontendTech, backendTech, databaseTech, images, imageAlt, liveUrl, githubUrl, sourceUrl (optional, mirrors verified GitHub repo URL), dateCreated, caseStudy, ogImage.
 
 The `caseStudy` object holds: problem, purpose, targetUsers, features (array of `{title, description}`), challenges, implementation, architecture (optional), lessonsLearned (optional), futureImprovements (optional), results (optional).
 
@@ -256,8 +256,8 @@ The homepage `Work` section (`src/app/sections/Work.tsx`) currently highlights `
 #### 01 — Student Clearance Monitor
 
 - **Slug**: `student-clearance-monitor`
-- **GitHub**: not published (`githubUrl: null`)
-- **Live URL**: not published (`liveUrl: null`)
+- **GitHub**: MISSING — no matching public repo found for `SrnceNra7718` (OJT/school project; source may be private)
+- **Live URL**: MISSING — no verified public deployment
 - **Context**: OJT project at STI College, San Jose del Monte
 - **Stack**: HTML5, CSS3, Tailwind CSS, JavaScript, TypeScript, Next.js, Supabase, PostgreSQL
 - **Screenshots**: `/public/forProject_Section/scs.png`, `AdminPage.png`, `CashierPage.png`, `ProgHeadPage.png`, `RegistrarPage.png`
@@ -311,12 +311,12 @@ The homepage `Work` section (`src/app/sections/Work.tsx`) currently highlights `
 #### 06 — Subbie Street Garage
 
 - **Slug**: `subbie-street-garage`
-- **GitHub**: https://github.com/SrnceNra7718/subbie-street-garage
-- **Live URL**: https://subbie-street-garage.vercel.app (verified live deployment)
+- **GitHub**: MISSING (no matching public repo found via GitHub API for `subbie-street-garage`; `subbie-street-garage-proto` exists)
+- **Live URL**: MISSING (no verified live URL for the production build; only the prototype deployment was found)
 - **Context**: Production application — Subaru specialist workshop (Dandenong VIC)
 - **Stack (verified from `package.json` and source)**: Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4, Lucide React, React Hook Form, Zod, Schema.org AutoRepair JSON-LD structured data.
 - **Screenshots**: `/public/forProject_Section/subbie-street-garage/` (homepage hero with dynamic navigation, dedicated services directory, Subaru specialist platform deep-dive, workshop build gallery, interactive quote builder, appointment booking scheduler)
-- **Manual fields**: `dateCreated` set to `2026-08-05` from commit history.
+- **Manual fields**: `dateCreated` set to `2026-08-05` from commit history. Source/live links not added because no verified repo or production deployment URL was found.
 
 #### 07 — Seek Migration
 
