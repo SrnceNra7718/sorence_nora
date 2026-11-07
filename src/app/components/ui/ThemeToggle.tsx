@@ -34,7 +34,7 @@ export default function ThemeToggle() {
     <button
       onClick={toggle}
       aria-label="Toggle color theme"
-      className="flex h-[34px] w-[34px] items-center justify-center rounded-full border border-line-strong text-ink-1 transition hover:text-accent"
+      className="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full border border-line-strong text-ink-1 transition hover:text-accent"
     >
       <span className="material-symbols-outlined text-[18px]">
         {theme === "dark" ? "light_mode" : "dark_mode"}

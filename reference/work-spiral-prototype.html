@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Work — Spiral Parallax Prototype</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+<!-- Tailwind (CDN is fine for a prototype; your Next.js site already has it) -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: { bg: '#08090b', ink: '#e8eaed', mute: '#8b9099', accent: '#3ee0b0' },
+        fontFamily: {
+          display: ['Space Grotesk', 'sans-serif'],
+          mono: ['JetBrains Mono', 'ui-monospace', 'monospace']
+        }
+      }
+    }
+  };
+</script>
+
+<style>
+  /* ------------------------------------------------------------------
+     Swap the accent here (and in tailwind.config above) to match your site
+  ------------------------------------------------------------------ */
+  :root {
+    --bg: #08090b;
+    --accent: #3ee0b0;
+    --accent-rgb: 62, 224, 176;
+    --trace-dim: rgba(62, 224, 176, .17);
+  }
+  html { background: var(--bg); }
+  body { margin: 0; background: var(--bg); color: #e8eaed; -webkit-font-smoothing: antialiased; }
+
+  /* ---------- Work section: tall scroll track + sticky stage ---------- */
+  #work { position: relative; height: 640vh; } /* JS recalculates from card count */
+
+  .stage {
+    position: sticky; top: 0;
+    height: 100vh; height: 100svh;
+    overflow: hidden;
+    perspective: 1200px;            /* gives the helix its depth */
+    background:
+      radial-gradient(55% 45% at 50% 56%, rgba(var(--accent-rgb), .07), transparent 70%),
+      var(--bg);
+  }
+
+  /* ---------- Circuit-trace pole (lives only inside this section) ---------- */
+  .pole {
+    position: absolute; top: 0; bottom: 0; left: 50%;
+    width: 120px; margin-left: -60px;
+    z-index: 100; pointer-events: none;
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent);
+            mask-image: linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent);
+  }
+  .pole::before {
+    content: ""; position: absolute; top: 0; bottom: 0; left: 50%; width: 46px; margin-left: -23px;
+    background: linear-gradient(to right, transparent, rgba(var(--accent-rgb), .06), transparent);
+  }
+  .pole svg { position: relative; display: block; width: 120px; height: 100%; overflow: visible; }
+  .use-dim { stroke: var(--trace-dim); color: var(--trace-dim); }
+  .use-lit { stroke: var(--accent);    color: var(--accent); }
+  .pole .lit { filter: drop-shadow(0 0 5px rgba(var(--accent-rgb), .85)); }
+
+  /* energy pulses running up the spine */
+  .pulse {
+    position: absolute; top: 100%; left: 50%;
+    width: 2px; height: 90px; margin-left: -1px; border-radius: 2px;
+    background: linear-gradient(to top, transparent, var(--accent));
+    box-shadow: 0 0 12px var(--accent);
+    animation: rise 3.8s linear infinite;
+  }
+  .pulse:nth-of-type(2) { animation-duration: 5.2s; animation-delay: -1.7s; height: 60px; opacity: .8; }
+  .pulse:nth-of-type(3) { animation-duration: 4.4s; animation-delay: -3.1s; height: 120px; opacity: .65; }
+  @keyframes rise { to { transform: translateY(calc(-100vh - 160px)); } }
+
+  /* ping when the active project changes */
+  .ping {
+    position: absolute; left: 50%; top: calc(50% + var(--yoff, 0px));
+    width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%;
+    border: 1px solid var(--accent); opacity: 0; z-index: 100; pointer-events: none;
+  }
+  .ping.go { animation: ping .8s ease-out; }
+  @keyframes ping { 0% { opacity: .9; transform: scale(1); } 100% { opacity: 0; transform: scale(11); } }
+
+  /* ---------- Helix guide line the cards ride on ---------- */
+  .helix { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+  #helixB { z-index: 5; }
+  #helixF { z-index: 101; }                         /* just above the pole, below front cards */
+  .helix path { fill: none; stroke: var(--accent); stroke-linecap: round; }
+  #helixB path { stroke-width: 1; opacity: .16; stroke-dasharray: 2 7; }
+  #helixF path { stroke-width: 1.4; opacity: .5; stroke-dasharray: 2 7; filter: drop-shadow(0 0 4px rgba(var(--accent-rgb), .6)); }
+
+  /* ---------- Cards ---------- */
+  .card {
+    position: absolute; left: 50%; top: 50%;
+    width: clamp(260px, 78vw, 500px);
+    border-radius: 14px; overflow: hidden;
+    background: rgba(13, 15, 19, .92);
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, .07),
+      0 0 0 1px rgba(var(--accent-rgb), calc(var(--a, 0) * .55)),
+      0 0 calc(var(--a, 0) * 46px) rgba(var(--accent-rgb), calc(var(--a, 0) * .2)),
+      0 34px 80px -34px rgba(0, 0, 0, .9);
+    will-change: transform, opacity, filter;
+    backface-visibility: hidden;
+    cursor: pointer;
+  }
+  @media (min-width: 768px) { .card { width: clamp(320px, 36vw, 520px); } }
+
+  .card-media {
+    position: relative; aspect-ratio: 16 / 9; overflow: hidden;
+    background:
+      linear-gradient(135deg, hsl(var(--h) 38% 17%), hsl(calc(var(--h) + 40) 46% 8%));
+  }
+  .card-media img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top;
+    transform: translate3d(0, calc(var(--u, 0) * -16px), 0) scale(1.2);   /* inner parallax */
+    transition: opacity .4s;
+  }
+  .card-media::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(13, 15, 19, .85), transparent 55%);
+  }
+  .card-idx {
+    position: absolute; z-index: 2; left: 14px; bottom: 10px;
+    font: 500 11px/1 'JetBrains Mono', monospace; letter-spacing: .2em; color: var(--accent);
+  }
+  .card-link { transition: gap .25s, color .25s; }
+  .card-link:hover { gap: .75rem; color: #fff; }
+
+  /* ---------- Overlays ---------- */
+  .fade-top, .fade-bot { position: absolute; left: 0; right: 0; z-index: 250; pointer-events: none; }
+  .fade-top { top: 0;    height: 190px; background: linear-gradient(var(--bg) 38%, transparent); }
+  .fade-bot { bottom: 0; height: 150px; background: linear-gradient(to top, var(--bg) 30%, transparent); }
+  .head { position: absolute; z-index: 300; top: 0; left: 0; right: 0; pointer-events: none; }
+  .head a { pointer-events: auto; }
+
+  .dot { height: 3px; width: 14px; border-radius: 2px; background: rgba(255, 255, 255, .18); transition: width .3s, background .3s; }
+  .dot:hover { background: rgba(255, 255, 255, .4); }
+  .dot.on { width: 30px; background: var(--accent); box-shadow: 0 0 10px rgba(var(--accent-rgb), .7); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pulse, .ping { display: none; }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- demo spacer: stands in for your STACK section -->
+<section class="h-[60vh] grid place-items-center border-b border-white/5">
+  <p class="font-mono text-xs tracking-[.25em] text-mute">↑ STACK SECTION (demo spacer) — scroll down</p>
+</section>
+
+<!-- ============================ #WORK ============================ -->
+<section id="work" aria-label="Selected work">
+  <div class="stage" id="stage">
+
+    <!-- helix guide: back half sits behind the pole -->
+    <svg id="helixB" class="helix" aria-hidden="true"><path id="pathB"/></svg>
+
+    <!-- circuit-trace pole -->
+    <div class="pole" aria-hidden="true">
+      <svg id="poleSvg" viewBox="0 0 120 900" preserveAspectRatio="xMidYMin meet">
+        <defs>
+          <!-- one seamless 120×360 tile of PCB traces -->
+          <g id="tile" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M60 0V360" stroke-width="2.6"/>
+            <path d="M36 0V70L24 82V150L36 162V232L48 244V300L36 312V360" stroke-width="1.6"/>
+            <path d="M84 0V92L96 104V176L84 188V250L72 262V322L84 334V360" stroke-width="1.6"/>
+            <path d="M12 0V110L20 118V190L12 198V360" stroke-width="1.2"/>
+            <path d="M108 0V250L100 258V300L108 308V360" stroke-width="1.2"/>
+            <!-- branches -->
+            <path d="M60 120H24M60 140H96M60 270H48M60 290H72M24 96H12M84 200H108" stroke-width="1.2"/>
+            <!-- pads -->
+            <circle cx="24" cy="120" r="2.6" fill="currentColor" stroke="none"/>
+            <circle cx="96" cy="140" r="2.6" fill="currentColor" stroke="none"/>
+            <circle cx="48" cy="270" r="2.2" fill="currentColor" stroke="none"/>
+            <circle cx="72" cy="290" r="2.2" fill="currentColor" stroke="none"/>
+            <circle cx="12" cy="96"  r="2.2" fill="currentColor" stroke="none"/>
+            <circle cx="108" cy="200" r="2.2" fill="currentColor" stroke="none"/>
+            <!-- vias on the spine -->
+            <circle cx="60" cy="60"  r="5" stroke-width="1.4" fill="#08090b"/>
+            <circle cx="60" cy="60"  r="1.6" fill="currentColor" stroke="none"/>
+            <circle cx="60" cy="200" r="5" stroke-width="1.4" fill="#08090b"/>
+            <circle cx="60" cy="200" r="1.6" fill="currentColor" stroke="none"/>
+            <circle cx="60" cy="330" r="5" stroke-width="1.4" fill="#08090b"/>
+            <circle cx="60" cy="330" r="1.6" fill="currentColor" stroke="none"/>
+            <!-- chip -->
+            <rect x="48" y="18" width="24" height="16" rx="2" stroke-width="1.2" fill="#08090b"/>
+            <path d="M44 23H48M44 29H48M72 23H76M72 29H76" stroke-width="1.1"/>
+          </g>
+
+          <pattern id="patDim" width="120" height="360" patternUnits="userSpaceOnUse">
+            <use href="#tile" class="use-dim"/>
+          </pattern>
+          <pattern id="patLit" width="120" height="360" patternUnits="userSpaceOnUse">
+            <use href="#tile" class="use-lit"/>
+          </pattern>
+
+          <!-- lit zone: the pole glows around the active card -->
+          <linearGradient id="litGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop id="g1" offset="0.16" stop-color="#fff" stop-opacity="0"/>
+            <stop id="g2" offset="0.36" stop-color="#fff" stop-opacity=".35"/>
+            <stop id="g3" offset="0.5"  stop-color="#fff" stop-opacity="1"/>
+            <stop id="g4" offset="0.64" stop-color="#fff" stop-opacity=".35"/>
+            <stop id="g5" offset="0.84" stop-color="#fff" stop-opacity="0"/>
+          </linearGradient>
+          <mask id="litMask" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="4000">
+            <rect id="maskRect" x="0" y="0" width="120" height="900" fill="url(#litGrad)"/>
+          </mask>
+        </defs>
+
+        <rect x="0" y="0" width="120" height="100%" fill="url(#patDim)"/>
+        <rect class="lit" x="0" y="0" width="120" height="100%" fill="url(#patLit)" mask="url(#litMask)"/>
+      </svg>
+      <span class="pulse"></span><span class="pulse"></span><span class="pulse"></span>
+    </div>
+    <div class="ping" id="ping"></div>
+
+    <!-- helix guide: front half crosses over the pole -->
+    <svg id="helixF" class="helix" aria-hidden="true"><path id="pathF"/></svg>
+
+    <!-- project cards get injected here -->
+    <div id="cards"></div>
+
+    <div class="fade-top"></div>
+    <div class="fade-bot"></div>
+
+    <!-- header -->
+    <header class="head px-6 md:px-12 pt-20 md:pt-24">
+      <div class="flex items-end justify-between gap-4">
+        <div>
+          <p class="font-mono text-[11px] tracking-[.24em] text-accent">&lt;WORK/&gt;</p>
+          <h2 class="font-display font-semibold tracking-tight text-3xl sm:text-4xl md:text-5xl mt-2">Work that shipped.</h2>
+        </div>
+        <div class="text-right shrink-0">
+          <p id="counter" class="font-mono text-xs tracking-[.2em] text-mute">01 OF 07</p>
+          <a href="https://sorence-nora.vercel.app/projects"
+             class="mt-2 inline-block font-mono text-xs tracking-[.14em] text-ink/80 hover:text-accent transition-colors">VIEW ALL PROJECTS →</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- bottom: hint + dot nav -->
+    <div class="absolute z-[300] bottom-5 md:bottom-7 left-0 right-0 flex flex-col items-center gap-3">
+      <div id="dots" class="flex items-center gap-1.5"></div>
+      <p class="font-mono text-[10px] tracking-[.3em] text-mute">SCROLL ↓</p>
+    </div>
+  </div>
+</section>
+
+<!-- demo spacer: stands in for your ABOUT section -->
+<section class="h-[70vh] grid place-items-center border-t border-white/5">
+  <p class="font-mono text-xs tracking-[.25em] text-mute">ABOUT SECTION (demo spacer) ↓</p>
+</section>
+
+<script>
+(() => {
+  /* ------------------------------------------------------------------
+     DATA — in the real site, swap ASSET for '' and use /public paths.
+     If a screenshot fails to load the card falls back to a gradient.
+  ------------------------------------------------------------------ */
+  const ASSET = 'https://sorence-nora.vercel.app';
+  const projects = [
+    { slug: 'student-clearance-monitor', title: 'Student Clearance Monitor', role: 'Frontend Developer',
+      ctx: 'OJT project — STI College', tags: ['Next.js', 'TypeScript', 'Supabase', 'PostgreSQL'],
+      img: '/forProject_Section/scs.png', hue: 205 },
+    { slug: 'yenzhen-tailoring', title: 'Yenzhen Tailoring', role: 'Frontend Developer',
+      ctx: 'Client — custom sportswear', tags: ['Next.js', 'React', 'Tailwind CSS', 'Framer Motion'],
+      img: '/forProject_Section/yenzhen-tailoring/homepage_pagev3.png', hue: 150 },
+    { slug: 'brows-by-her', title: 'Brows By Her', role: 'Frontend Developer & UI Designer',
+      ctx: 'Client — eyebrow studio, Melbourne', tags: ['Next.js', 'Cal.com', 'Zod', 'Framer Motion'],
+      img: '/forProject_Section/brows-by-her/homepage_hero.png', hue: 28 },
+    { slug: 'stylish-flow-hair-beauty', title: 'Stylish Flow Hair & Beauty', role: 'Frontend Developer & UI Designer',
+      ctx: 'Client — salon, Melbourne', tags: ['HTML5', 'CSS3', 'JavaScript', 'Vercel'],
+      img: '/forProject_Section/stylish-flow-hair-beauty/homepage_hero.png', hue: 45 },
+    { slug: 'subbie-street-garage-proto', title: 'Subbie Street Garage (Prototype)', role: 'Frontend Developer & UI Designer',
+      ctx: 'Prototype — Subaru specialist', tags: ['HTML5', 'CSS3', 'SVG Animation', 'Vercel'],
+      img: '/forProject_Section/subbie-street-garage-proto/homepage_hero.png', hue: 220 },
+    { slug: 'subbie-street-garage', title: 'Subbie Street Garage', role: 'Frontend Developer & UI Designer',
+      ctx: 'Production — Subaru specialist', tags: ['Next.js 16', 'React 19', 'Tailwind v4', 'Zod'],
+      img: '/forProject_Section/subbie-street-garage/homepage_hero.png', hue: 235 },
+    { slug: 'seek-migration', title: 'Seek Migration', role: 'Frontend Developer & UI Designer',
+      ctx: 'Client — visa consultancy', tags: ['HTML5', 'CSS3', 'JavaScript', 'SVG'],
+      img: '/forProject_Section/seek-migration/homepage_hero.png', hue: 190 }
+  ];
+
+  const N = projects.length;
+  const STEP = 52;        // degrees between neighbouring cards around the pole
+  const PERSP = 1200;     // must match .stage { perspective }
+  const PI = Math.PI;
+
+  const $ = (s) => document.querySelector(s);
+  const section = $('#work'), stage = $('#stage'), cardsEl = $('#cards');
+  const counter = $('#counter'), dotsEl = $('#dots'), ping = $('#ping');
+  const helixBSvg = $('#helixB'), helixFSvg = $('#helixF'), pathB = $('#pathB'), pathF = $('#pathF');
+  const poleSvg = $('#poleSvg'), maskRect = $('#maskRect');
+  const patDim = $('#patDim'), patLit = $('#patLit');
+  const stops = ['#g1', '#g2', '#g3', '#g4', '#g5'].map($);
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  const pad = (n) => String(n).padStart(2, '0');
+
+  /* ---------- build cards + dots ---------- */
+  const cards = projects.map((p, i) => {
+    const el = document.createElement('article');
+    el.className = 'card';
+    el.style.setProperty('--h', p.hue);
+    el.innerHTML = `
+      <div class="card-media">
+        <img src="${ASSET}${p.img}" alt="${p.title} homepage screenshot" loading="lazy" decoding="async">
+        <span class="card-idx">${pad(i + 1)}</span>
+      </div>
+      <div class="px-[18px] py-4">
+        <h3 class="font-display font-semibold text-lg md:text-xl tracking-tight leading-tight">${p.title}</h3>
+        <p class="font-mono text-[11px] tracking-wide text-mute mt-1.5">${p.role} · ${p.ctx}</p>
+        <ul class="flex flex-wrap gap-1.5 mt-3">
+          ${p.tags.map(t => `<li class="font-mono text-[10px] tracking-wide px-2 py-1 rounded border border-white/10 text-ink/75">${t}</li>`).join('')}
+        </ul>
+        <a class="card-link mt-4 inline-flex items-center gap-2 font-mono text-xs tracking-[.14em] text-accent"
+           href="${ASSET}/projects/${p.slug}">VIEW CASE STUDY <span aria-hidden="true">→</span></a>
+      </div>`;
+    el.querySelector('img').addEventListener('error', (e) => e.target.remove());
+    el.addEventListener('click', (e) => {
+      if (Math.abs(i - cur) > 0.45) { e.preventDefault(); scrollToIndex(i); }
+    });
+    cardsEl.appendChild(el);
+    return el;
+  });
+  const links = cards.map(c => c.querySelector('a'));
+
+  const dots = projects.map((p, i) => {
+    const b = document.createElement('button');
+    b.className = 'dot'; b.type = 'button';
+    b.setAttribute('aria-label', `Go to project ${i + 1}: ${p.title}`);
+    b.addEventListener('click', () => scrollToIndex(i));
+    dotsEl.appendChild(b);
+    return b;
+  });
+
+  /* ---------- geometry ---------- */
+  let W = 0, H = 0, R = 0, dy = 0, yOff = 0;
+
+  function project(u) {                       // shared by cards + helix guide
+    const rad = u * STEP * PI / 180;
+    const s = Math.sin(rad), c = Math.cos(rad);
+    const z = (c - 1) * R * 0.85;
+    return { x: R * s, y: u * dy + yOff, z, c, s, f: PERSP / (PERSP - z) };
+  }
+
+  function buildHelix() {
+    let fp = '', bp = '', last = '', prev = null;
+    for (let u = -4.2; u <= 4.2001; u += 0.035) {
+      const q = project(u);
+      const p = { x: q.x * q.f, y: q.y * q.f, c: q.c };
+      if (prev) {
+        const type = (prev.c + p.c) / 2 >= 0 ? 'f' : 'b';
+        const seg = (type !== last ? `M${prev.x.toFixed(1)} ${prev.y.toFixed(1)}` : '') +
+                    `L${p.x.toFixed(1)} ${p.y.toFixed(1)}`;
+        if (type === 'f') fp += seg; else bp += seg;
+        last = type;
+      }
+      prev = p;
+    }
+    pathF.setAttribute('d', fp);
+    pathB.setAttribute('d', bp);
+  }
+
+  function measure() {
+    W = stage.clientWidth; H = stage.clientHeight;
+    R = clamp(W * 0.33, 140, 520);
+    dy = clamp(H * 0.17, 80, 150);
+    yOff = H * 0.05;
+    stage.style.setProperty('--yoff', yOff + 'px');
+
+    const vhs = 100 + (N - 1) * 90;
+    section.style.height = vhs + 'vh';
+    section.style.height = `${vhs}svh`;      // ignored where svh is unsupported
+
+    const vb = `${-W / 2} ${-H / 2} ${W} ${H}`;
+    helixBSvg.setAttribute('viewBox', vb);
+    helixFSvg.setAttribute('viewBox', vb);
+    buildHelix();
+
+    poleSvg.setAttribute('viewBox', `0 0 120 ${H}`);
+    maskRect.setAttribute('height', H);
+    const c = (H / 2 + yOff) / H;
+    [-.34, -.14, 0, .14, .34].forEach((d, k) => stops[k].setAttribute('offset', clamp(c + d, 0, 1)));
+  }
+
+  /* ---------- scroll → progress ---------- */
+  function getTarget() {
+    const r = section.getBoundingClientRect();
+    const total = Math.max(1, section.offsetHeight - stage.offsetHeight);
+    return clamp(-r.top / total, 0, 1) * (N - 1);
+  }
+  function scrollToIndex(i) {
+    const total = section.offsetHeight - stage.offsetHeight;
+    const top = window.scrollY + section.getBoundingClientRect().top + (i / (N - 1)) * total;
+    window.scrollTo({ top, behavior: reduce ? 'auto' : 'smooth' });
+  }
+
+  /* ---------- render one frame ---------- */
+  let cur = 0, tgt = 0, raf = 0, activeIdx = -1;
+
+  function render(t) {
+    // pole traces slide upward as you scroll, so the pole feels like it's turning
+    const tr = `translate(0 ${(-t * dy * 1.6).toFixed(1)})`;
+    patDim.setAttribute('patternTransform', tr);
+    patLit.setAttribute('patternTransform', tr);
+
+    for (let i = 0; i < N; i++) {
+      const el = cards[i];
+      const u = i - t;
+      const q = project(u);
+      const face = (q.c + 1) / 2;                                   // 1 = front, 0 = back
+      const fade = clamp(1 - (Math.abs(u) - 2.4) / 1.3, 0, 1);      // dissolve far cards
+      const ang = Math.atan2(q.s, q.c) * 180 / PI;                  // -180..180
+      const rot = clamp(ang * 0.8, -60, 60);
+      const a = clamp(1 - Math.abs(u) / 0.75, 0, 1);                // "active" amount
+
+      el.style.transform =
+        `translate(-50%,-50%) translate3d(${q.x.toFixed(1)}px,${q.y.toFixed(1)}px,${q.z.toFixed(1)}px) rotateY(${rot.toFixed(1)}deg)`;
+      el.style.opacity = (fade * (0.28 + 0.72 * Math.pow(face, 0.8))).toFixed(3);
+      el.style.filter = face > 0.92 ? 'none' : `blur(${((1 - face) * 3).toFixed(2)}px)`;
+      el.style.zIndex = 100 + Math.round(q.c * 90);                 // pole sits at 100
+      el.style.pointerEvents = Math.abs(u) < 2.6 ? 'auto' : 'none';
+      el.style.setProperty('--u', u.toFixed(3));
+      el.style.setProperty('--a', a.toFixed(3));
+    }
+
+    const idx = clamp(Math.round(t), 0, N - 1);
+    if (idx !== activeIdx) {
+      const first = activeIdx === -1;
+      activeIdx = idx;
+      counter.textContent = `${pad(idx + 1)} OF ${pad(N)}`;
+      dots.forEach((d, k) => d.classList.toggle('on', k === idx));
+      links.forEach((l, k) => (l.tabIndex = k === idx ? 0 : -1));
+      if (!first && !reduce) {
+        ping.classList.remove('go'); void ping.offsetWidth; ping.classList.add('go');
+      }
+    }
+  }
+
+  function tick() {
+    raf = 0;
+    tgt = getTarget();
+    cur = reduce ? tgt : cur + (tgt - cur) * 0.1;      // eased follow
+    if (Math.abs(tgt - cur) < 0.0008) cur = tgt;
+    render(cur);
+    if (cur !== tgt) raf = requestAnimationFrame(tick);
+  }
+  const kick = () => { if (!raf) raf = requestAnimationFrame(tick); };
+
+  measure();
+  cur = getTarget();
+  render(cur);
+  addEventListener('scroll', kick, { passive: true });
+  addEventListener('resize', () => { measure(); kick(); });
+  addEventListener('load', () => { measure(); kick(); });
+})();
+</script>
+</body>
+</html>
