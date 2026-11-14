@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { projects } from "@/lib/projects";
@@ -197,7 +197,7 @@ export default function Work() {
     };
   };
 
-  const buildHelix = useCallback(() => {
+  const buildHelixRef = useRef(() => {
     const pathB = pathBRef.current;
     const pathF = pathFRef.current;
     if (!pathB || !pathF) return;
@@ -221,9 +221,9 @@ export default function Work() {
     }
     pathF.setAttribute("d", fp);
     pathB.setAttribute("d", bp);
-  }, []);
+  });
 
-  const measure = useCallback(() => {
+  const measureRef = useRef(() => {
     const stage = stageRef.current;
     const section = sectionRef.current;
     if (!stage || !section) return;
@@ -246,7 +246,7 @@ export default function Work() {
     const vb = `${-W / 2} ${-H / 2} ${W} ${H}`;
     helixBRef.current?.setAttribute("viewBox", vb);
     helixFRef.current?.setAttribute("viewBox", vb);
-    buildHelix();
+    buildHelixRef.current();
 
     poleSvgRef.current?.setAttribute("viewBox", `0 0 120 ${H}`);
     maskRectRef.current?.setAttribute("height", String(H));
@@ -256,18 +256,18 @@ export default function Work() {
       const stop = stopRefs.current[k];
       if (stop) stop.setAttribute("offset", String(clamp(c + d, 0, 1)));
     });
-  }, [buildHelix]);
+  });
 
-  const getTarget = useCallback(() => {
+  const getTargetRef = useRef(() => {
     const section = sectionRef.current;
     const stage = stageRef.current;
     if (!section || !stage) return 0;
     const r = section.getBoundingClientRect();
     const total = Math.max(1, section.offsetHeight - stage.offsetHeight);
     return clamp(-r.top / total, 0, 1) * (N - 1);
-  }, []);
+  });
 
-  const scrollToIndex = useCallback((i: number) => {
+  const scrollToIndexRef = useRef((i: number) => {
     const section = sectionRef.current;
     const stage = stageRef.current;
     if (!section || !stage) return;
@@ -277,9 +277,9 @@ export default function Work() {
       section.getBoundingClientRect().top +
       (i / (N - 1)) * total;
     window.scrollTo({ top, behavior: reduceRef.current ? "auto" : "smooth" });
-  }, []);
+  });
 
-  const render = useCallback((t: number) => {
+  const renderRef = useRef((t: number) => {
     const stage = stageRef.current;
     if (!stage) return;
 
@@ -308,7 +308,6 @@ export default function Work() {
 
     const updateActive = (idx: number, first: boolean) => {
       activeIdxRef.current = idx;
-      setActiveProjectIndex(idx);
       counterRef.current &&
         (counterRef.current.textContent = `${pad(idx + 1)} OF ${pad(N)}`);
       counterShortRef.current &&
@@ -346,32 +345,42 @@ export default function Work() {
       const first = activeIdxRef.current === -1;
       updateActive(idx, first);
     }
-  }, []);
+  });
 
-  const tick = useCallback(
-    function tick() {
-      rafRef.current = 0;
-      tgtRef.current = getTarget();
-      curRef.current = reduceRef.current
-        ? tgtRef.current
-        : curRef.current + (tgtRef.current - curRef.current) * 0.1;
-      if (Math.abs(tgtRef.current - curRef.current) < 0.0008)
-        curRef.current = tgtRef.current;
-      render(curRef.current);
-      if (curRef.current !== tgtRef.current)
-        rafRef.current = requestAnimationFrame(tick);
-    },
-    [getTarget, render],
-  );
+  const tickRef = useRef(() => {
+    rafRef.current = 0;
+    tgtRef.current = getTargetRef.current();
+    curRef.current = reduceRef.current
+      ? tgtRef.current
+      : curRef.current + (tgtRef.current - curRef.current) * 0.1;
+    if (Math.abs(tgtRef.current - curRef.current) < 0.0008)
+      curRef.current = tgtRef.current;
+    renderRef.current(curRef.current);
+    if (curRef.current !== tgtRef.current)
+      rafRef.current = requestAnimationFrame(tickRef.current);
+  });
 
-  const kick = useCallback(() => {
-    if (!rafRef.current) rafRef.current = requestAnimationFrame(tick);
-  }, [tick]);
+  const kickRef = useRef(() => {
+    if (!rafRef.current) rafRef.current = requestAnimationFrame(tickRef.current);
+  });
 
   useEffect(() => {
-    measure();
-    curRef.current = getTarget();
-    render(curRef.current);
+    measureRef.current();
+    curRef.current = getTargetRef.current();
+    renderRef.current(curRef.current);
+
+    // Throttled state sync for active project (drives image cycling only).
+    // Kept out of the render loop to avoid React re-renders every frame.
+    let syncTicking = false;
+    const scheduleSync = () => {
+      if (!syncTicking) {
+        syncTicking = true;
+        requestAnimationFrame(() => {
+          setActiveProjectIndex(activeIdxRef.current);
+          syncTicking = false;
+        });
+      }
+    };
 
     const mq = matchMedia("(prefers-reduced-motion: reduce)");
     const onReduceChange = () => {
@@ -379,21 +388,24 @@ export default function Work() {
     };
     mq.addEventListener("change", onReduceChange);
 
-    const onScroll = kick;
+    const onScroll = () => {
+      kickRef.current();
+      scheduleSync();
+    };
     const onResize = () => {
-      measure();
-      kick();
+      measureRef.current();
+      kickRef.current();
     };
     const onLoad = () => {
-      measure();
-      kick();
+      measureRef.current();
+      kickRef.current();
     };
 
     addEventListener("scroll", onScroll, { passive: true });
     addEventListener("resize", onResize);
     addEventListener("load", onLoad, { once: true });
 
-    kick();
+    kickRef.current();
 
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
@@ -403,7 +415,7 @@ export default function Work() {
       removeEventListener("load", onLoad);
       mq.removeEventListener("change", onReduceChange);
     };
-  }, [measure, getTarget, kick, render]);
+  }, []);
 
   return (
     <section
@@ -711,7 +723,7 @@ export default function Work() {
                 type="button"
                 className="dot"
                 aria-label={`Go to project ${i + 1}: ${p.title}`}
-                onClick={() => scrollToIndex(i)}
+                onClick={() => scrollToIndexRef.current(i)}
               />
             ))}
           </div>

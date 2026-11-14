@@ -1122,6 +1122,18 @@
     #work .head {
       z-index: 350;
     }
+    #work .stage {
+      touch-action: none;
+    }
+    #work .card {
+      transform: translateZ(0);
+      backface-visibility: hidden;
+    }
+    #work .pole svg,
+    #work #helixB,
+    #work #helixF {
+      transform: translateZ(0);
+    }
   }
   .ruler-v {
     position: fixed;
