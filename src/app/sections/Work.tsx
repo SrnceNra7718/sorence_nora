@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { projects } from "@/lib/projects";
 
@@ -12,11 +13,14 @@ const pad = (n: number) => String(n).padStart(2, "0");
 
 function ProjectImageCycle({
   project,
-}: {
+  isActive,
+}: Readonly<{
   project: (typeof projects)[number];
-}) {
+  isActive: boolean;
+}>) {
   const fadeTimerRef = useRef(0);
   const currentImageRef = useRef<HTMLImageElement>(null);
+  const intervalRef = useRef(0);
   const [imageState, setImageState] = useState({
     currentIndex: 0,
     previousIndex: null as number | null,
@@ -41,23 +45,25 @@ function ProjectImageCycle({
   };
 
   useEffect(() => {
-    if (imageCount < 2) return;
+    if (!isActive || imageCount < 2) return;
 
-    const interval = window.setInterval(() => {
+    intervalRef.current = window.setInterval(() => {
       setImageState((current) => ({
         currentIndex: (current.currentIndex + 1) % imageCount,
         previousIndex: current.currentIndex,
         isFading: false,
       }));
-    }, 2000);
+    }, 5000);
 
     return () => {
-      window.clearInterval(interval);
-      if (fadeTimerRef.current) window.clearTimeout(fadeTimerRef.current);
+      window.clearInterval(intervalRef.current);
+      intervalRef.current = 0;
     };
-  }, [imageCount]);
+  }, [isActive, imageCount]);
 
   useEffect(() => {
+    if (!isActive) return;
+
     const image = currentImageRef.current;
     if (!image || imageState.previousIndex === null || imageState.isFading)
       return;
@@ -75,6 +81,7 @@ function ProjectImageCycle({
       image.removeEventListener("error", onLoad);
     };
   }, [
+    isActive,
     currentImage,
     imageState.currentIndex,
     imageState.isFading,
@@ -101,17 +108,19 @@ function ProjectImageCycle({
   return (
     <>
       {previousImage && (
-        <img
+        <Image
           key={`previous-${imageState.previousIndex}`}
           src={previousImage}
           alt=""
           aria-hidden="true"
           loading="eager"
           decoding="async"
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
           className={`card-img ${imageState.isFading ? "card-img--fade-out" : ""}`}
         />
       )}
-      <img
+      <Image
         key={`current-${imageState.currentIndex}`}
         ref={currentImageRef}
         src={currentImage}
@@ -121,6 +130,8 @@ function ProjectImageCycle({
         }
         loading="eager"
         decoding="async"
+        fill
+        sizes="(max-width: 768px) 100vw, 50vw"
         className={`card-img ${previousImage && !imageState.isFading ? "card-img--fade-in" : ""}`}
         onError={(event) => {
           event.currentTarget.style.display = "none";
@@ -135,6 +146,8 @@ export default function Work() {
   const stageRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
 
+  const [activeProjectIndex, setActiveProjectIndex] = useState(0);
+
   const helixBRef = useRef<SVGSVGElement>(null);
   const helixFRef = useRef<SVGSVGElement>(null);
   const pathBRef = useRef<SVGPathElement | null>(null);
@@ -143,14 +156,17 @@ export default function Work() {
   const maskRectRef = useRef<SVGRectElement | null>(null);
   const patDimRef = useRef<SVGPatternElement | null>(null);
   const patLitRef = useRef<SVGPatternElement | null>(null);
-  const stopRefs = useRef<(SVGStopElement | null)[]>(Array(5).fill(null));
+  const stopRefs = useRef<(SVGStopElement | null)[]>(new Array(5).fill(null));
   const pingRef = useRef<HTMLDivElement>(null);
   const counterRef = useRef<HTMLParagraphElement>(null);
+  const counterShortRef = useRef<HTMLParagraphElement>(null);
   const dotsRef = useRef<HTMLDivElement>(null);
 
-  const cardsEls = useRef<(HTMLElement | null)[]>(Array(N).fill(null));
-  const linksRef = useRef<(HTMLAnchorElement | null)[]>(Array(N).fill(null));
-  const dotsEls = useRef<(HTMLButtonElement | null)[]>(Array(N).fill(null));
+  const cardsEls = useRef<(HTMLElement | null)[]>(new Array(N).fill(null));
+  const linksRef = useRef<(HTMLAnchorElement | null)[]>(
+    new Array(N).fill(null),
+  );
+  const dotsEls = useRef<(HTMLButtonElement | null)[]>(new Array(N).fill(null));
 
   const dimRef = useRef({ W: 0, H: 0, R: 0, dy: 0, yOff: 0 });
   const reduceRef = useRef(
@@ -181,7 +197,7 @@ export default function Work() {
     };
   };
 
-  const buildHelix = () => {
+  const buildHelix = useCallback(() => {
     const pathB = pathBRef.current;
     const pathF = pathFRef.current;
     if (!pathB || !pathF) return;
@@ -205,9 +221,9 @@ export default function Work() {
     }
     pathF.setAttribute("d", fp);
     pathB.setAttribute("d", bp);
-  };
+  }, []);
 
-  const measure = () => {
+  const measure = useCallback(() => {
     const stage = stageRef.current;
     const section = sectionRef.current;
     if (!stage || !section) return;
@@ -240,18 +256,18 @@ export default function Work() {
       const stop = stopRefs.current[k];
       if (stop) stop.setAttribute("offset", String(clamp(c + d, 0, 1)));
     });
-  };
+  }, [buildHelix]);
 
-  const getTarget = () => {
+  const getTarget = useCallback(() => {
     const section = sectionRef.current;
     const stage = stageRef.current;
     if (!section || !stage) return 0;
     const r = section.getBoundingClientRect();
     const total = Math.max(1, section.offsetHeight - stage.offsetHeight);
     return clamp(-r.top / total, 0, 1) * (N - 1);
-  };
+  }, []);
 
-  const scrollToIndex = (i: number) => {
+  const scrollToIndex = useCallback((i: number) => {
     const section = sectionRef.current;
     const stage = stageRef.current;
     if (!section || !stage) return;
@@ -261,22 +277,17 @@ export default function Work() {
       section.getBoundingClientRect().top +
       (i / (N - 1)) * total;
     window.scrollTo({ top, behavior: reduceRef.current ? "auto" : "smooth" });
-  };
+  }, []);
 
-  const render = (t: number) => {
+  const render = useCallback((t: number) => {
     const stage = stageRef.current;
     if (!stage) return;
-    const { dy } = dimRef.current;
 
-    const tr = `translate(0 ${(-t * dy * 1.6).toFixed(1)})`;
-    patDimRef.current?.setAttribute("patternTransform", tr);
-    patLitRef.current?.setAttribute("patternTransform", tr);
-
-    for (let i = 0; i < N; i++) {
-      const el = cardsEls.current[i];
-      if (!el) continue;
-      const u = i - t;
-      const q = project(u);
+    const updateCard = (
+      el: HTMLElement,
+      u: number,
+      q: { x: number; y: number; z: number; c: number; s: number },
+    ) => {
       const face = (q.c + 1) / 2;
       const fade = clamp(1 - (Math.abs(u) - 2.4) / 1.3, 0, 1);
       const ang = (Math.atan2(q.s, q.c) * 180) / PI;
@@ -293,45 +304,69 @@ export default function Work() {
       el.style.setProperty("--u", u.toFixed(3));
       el.style.setProperty("--image-y", `${(-u * 16).toFixed(1)}px`);
       el.style.setProperty("--a", a.toFixed(3));
+    };
+
+    const updateActive = (idx: number, first: boolean) => {
+      activeIdxRef.current = idx;
+      setActiveProjectIndex(idx);
+      counterRef.current &&
+        (counterRef.current.textContent = `${pad(idx + 1)} OF ${pad(N)}`);
+      counterShortRef.current &&
+        (counterShortRef.current.textContent = `${idx + 1}/${N}`);
+      dotsEls.current.forEach((d, k) => d?.classList.toggle("on", k === idx));
+      linksRef.current.forEach((l, k) => {
+        if (l) l.tabIndex = k === idx ? 0 : -1;
+      });
+
+      if (!first && !reduceRef.current) {
+        const ping = pingRef.current;
+        if (ping) {
+          ping.classList.remove("go");
+          ping.getBoundingClientRect();
+          ping.classList.add("go");
+        }
+      }
+    };
+
+    const { dy } = dimRef.current;
+    const tr = `translate(0 ${(-t * dy * 1.6).toFixed(1)})`;
+    patDimRef.current?.setAttribute("patternTransform", tr);
+    patLitRef.current?.setAttribute("patternTransform", tr);
+
+    for (let i = 0; i < N; i++) {
+      const el = cardsEls.current[i];
+      if (!el) continue;
+      const u = i - t;
+      const q = project(u);
+      updateCard(el, u, q);
     }
 
     const idx = clamp(Math.round(t), 0, N - 1);
     if (idx !== activeIdxRef.current) {
       const first = activeIdxRef.current === -1;
-      activeIdxRef.current = idx;
-      counterRef.current &&
-        (counterRef.current.textContent = `${pad(idx + 1)} OF ${pad(N)}`);
-      dotsEls.current.forEach((d, k) => d?.classList.toggle("on", k === idx));
-      linksRef.current.forEach((l, k) => {
-        if (l) l.tabIndex = k === idx ? 0 : -1;
-      });
-      if (!first && !reduceRef.current) {
-        const ping = pingRef.current;
-        if (ping) {
-          ping.classList.remove("go");
-          void ping.offsetWidth;
-          ping.classList.add("go");
-        }
-      }
+      updateActive(idx, first);
     }
-  };
+  }, []);
 
-  const tick = () => {
-    rafRef.current = 0;
-    tgtRef.current = getTarget();
-    curRef.current = reduceRef.current
-      ? tgtRef.current
-      : curRef.current + (tgtRef.current - curRef.current) * 0.1;
-    if (Math.abs(tgtRef.current - curRef.current) < 0.0008)
-      curRef.current = tgtRef.current;
-    render(curRef.current);
-    if (curRef.current !== tgtRef.current)
-      rafRef.current = requestAnimationFrame(tick);
-  };
+  const tick = useCallback(
+    function tick() {
+      rafRef.current = 0;
+      tgtRef.current = getTarget();
+      curRef.current = reduceRef.current
+        ? tgtRef.current
+        : curRef.current + (tgtRef.current - curRef.current) * 0.1;
+      if (Math.abs(tgtRef.current - curRef.current) < 0.0008)
+        curRef.current = tgtRef.current;
+      render(curRef.current);
+      if (curRef.current !== tgtRef.current)
+        rafRef.current = requestAnimationFrame(tick);
+    },
+    [getTarget, render],
+  );
 
-  const kick = () => {
+  const kick = useCallback(() => {
     if (!rafRef.current) rafRef.current = requestAnimationFrame(tick);
-  };
+  }, [tick]);
 
   useEffect(() => {
     measure();
@@ -368,7 +403,7 @@ export default function Work() {
       removeEventListener("load", onLoad);
       mq.removeEventListener("change", onReduceChange);
     };
-  }, []);
+  }, [measure, getTarget, kick, render]);
 
   return (
     <section
@@ -582,7 +617,10 @@ export default function Work() {
                 aria-label={`View ${p.title} case study`}
               >
                 <div className="card-media">
-                  <ProjectImageCycle project={p} />
+                  <ProjectImageCycle
+                    project={p}
+                    isActive={i === activeProjectIndex}
+                  />
                   <span className="card-idx">{pad(i + 1)}</span>
                 </div>
                 <div className="px-[18px] py-4">
@@ -624,20 +662,40 @@ export default function Work() {
                 Work that shipped.
               </h2>
             </div>
-            <div className="shrink-0 text-right">
+            <div className="flex shrink-0 items-center justify-end gap-3 text-right sm:block">
               <p
                 ref={counterRef}
-                id="counter"
-                className="font-mono text-xs tracking-[.2em] text-ink-2"
+                className="counter-full hidden font-mono text-xs tracking-[.2em] text-ink-2 sm:block"
               >
                 {pad(1)} OF {pad(N)}
               </p>
-              <Link
-                href="/projects"
-                className="text-ink-2/80 mt-2 inline-block font-mono text-xs tracking-[.14em] transition-colors hover:text-accent"
-              >
-                VIEW ALL PROJECTS →
-              </Link>
+              <div className="flex items-center gap-2 sm:block">
+                <p
+                  ref={counterShortRef}
+                  className="counter-short block font-mono text-xs tracking-[.2em] text-ink-2 sm:hidden"
+                >
+                  {pad(1)}/{pad(N)}
+                </p>
+                <Link
+                  href="/projects"
+                  className="text-ink-2/80 mt-0 inline-flex items-center justify-center font-mono text-xs tracking-[.14em] transition-colors hover:text-accent sm:mt-2"
+                >
+                  <span className="link-full hidden sm:block">
+                    VIEW ALL PROJECTS →
+                  </span>
+                  <span
+                    className="link-short inline-flex items-center justify-center sm:hidden"
+                    aria-hidden="true"
+                  >
+                    <span
+                      className="material-symbols-outlined inline-flex font-mono text-xs leading-none tracking-[.2em] text-ink-2"
+                      aria-hidden="true"
+                    >
+                      chevron_right
+                    </span>
+                  </span>
+                </Link>
+              </div>
             </div>
           </div>
         </header>
@@ -646,7 +704,7 @@ export default function Work() {
           <div ref={dotsRef} id="dots" className="flex items-center gap-1.5">
             {projects.map((p, i) => (
               <button
-                key={i}
+                key={p.slug}
                 ref={(el) => {
                   dotsEls.current[i] = el;
                 }}
