@@ -113,7 +113,7 @@ function ProjectImageCycle({
           src={previousImage}
           alt=""
           aria-hidden="true"
-          loading="eager"
+          loading={isActive ? "eager" : "lazy"}
           decoding="async"
           fill
           sizes="(max-width: 768px) 100vw, 50vw"
@@ -128,7 +128,7 @@ function ProjectImageCycle({
           project.imageAlt?.[currentImage] ??
           `${project.title} project screenshot`
         }
-        loading="eager"
+        loading={isActive ? "eager" : "lazy"}
         decoding="async"
         fill
         sizes="(max-width: 768px) 100vw, 50vw"
@@ -172,6 +172,11 @@ export default function Work() {
   const reduceRef = useRef(
     typeof matchMedia === "function"
       ? matchMedia("(prefers-reduced-motion: reduce)").matches
+      : false,
+  );
+  const mobileRef = useRef(
+    typeof matchMedia === "function"
+      ? matchMedia("(max-width: 640px)").matches
       : false,
   );
   const curRef = useRef(0);
@@ -298,7 +303,11 @@ export default function Work() {
       el.style.opacity = (fade * (0.28 + 0.72 * Math.pow(face, 0.8))).toFixed(
         3,
       );
-      el.style.filter = face > 0.92 ? "none" : `blur(${(1 - face) * 3}px)`;
+      el.style.filter = mobileRef.current
+        ? "none"
+        : face > 0.92
+          ? "none"
+          : `blur(${(1 - face) * 3}px)`;
       el.style.zIndex = String(100 + Math.round(q.c * 90));
       el.style.pointerEvents = Math.abs(u) < 2.6 ? "auto" : "none";
       el.style.setProperty("--u", u.toFixed(3));
@@ -350,7 +359,7 @@ export default function Work() {
   const tickRef = useRef(() => {
     rafRef.current = 0;
     tgtRef.current = getTargetRef.current();
-    curRef.current = reduceRef.current
+    curRef.current = reduceRef.current || mobileRef.current
       ? tgtRef.current
       : curRef.current + (tgtRef.current - curRef.current) * 0.1;
     if (Math.abs(tgtRef.current - curRef.current) < 0.0008)
@@ -383,10 +392,17 @@ export default function Work() {
     };
 
     const mq = matchMedia("(prefers-reduced-motion: reduce)");
+    const mobileMq = matchMedia("(max-width: 640px)");
+    mobileRef.current = mobileMq.matches;
     const onReduceChange = () => {
       reduceRef.current = mq.matches;
     };
+    const onMobileChange = () => {
+      mobileRef.current = mobileMq.matches;
+      kickRef.current();
+    };
     mq.addEventListener("change", onReduceChange);
+    mobileMq.addEventListener("change", onMobileChange);
 
     const onScroll = () => {
       kickRef.current();
@@ -414,6 +430,7 @@ export default function Work() {
       removeEventListener("resize", onResize);
       removeEventListener("load", onLoad);
       mq.removeEventListener("change", onReduceChange);
+      mobileMq.removeEventListener("change", onMobileChange);
     };
   }, []);
 
