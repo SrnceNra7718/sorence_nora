@@ -999,27 +999,21 @@
   html[data-theme="light"] #work .work-tech-chip {
     border-color: #1a1814;
   }
-  #work .card-media::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to top,
-      rgba(13, 15, 19, 0.85),
-      transparent 55%
-    );
-  }
   #work .card-idx {
     position: absolute;
     z-index: 2;
     left: 14px;
     bottom: 10px;
-    font: 500 11px/1 var(--font-mono), monospace;
+    font:
+      500 11px/1 var(--font-mono),
+      monospace;
     letter-spacing: 0.2em;
     color: var(--accent);
   }
   #work .card-link {
-    transition: gap 0.25s, color 0.25s;
+    transition:
+      gap 0.25s,
+      color 0.25s;
   }
   #work .card-link:hover {
     gap: 0.75rem;
@@ -1059,7 +1053,9 @@
     width: 14px;
     border-radius: 2px;
     background: rgba(255, 255, 255, 0.18);
-    transition: width 0.3s, background 0.3s;
+    transition:
+      width 0.3s,
+      background 0.3s;
   }
   #work .dot:hover {
     background: rgba(255, 255, 255, 0.4);
@@ -1073,6 +1069,58 @@
     #work .pulse,
     #work .ping {
       display: none;
+    }
+  }
+
+  /* ---------- Work section: small screen responsiveness ---------- */
+  @media (max-width: 640px) {
+    #work .stage {
+      height: 90svh;
+    }
+    #work .fade-top {
+      height: 110px;
+    }
+    #work .fade-bot {
+      height: 90px;
+    }
+    #work .head {
+      padding-top: 48px !important;
+      top: 0;
+    }
+    #work .head > div {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    #work .head .shrink-0 {
+      width: 100%;
+      text-align: left;
+    }
+    #work .head h2 {
+      font-size: clamp(1.25rem, 8vw, 1.75rem) !important;
+      line-height: 1.1;
+      text-align: left;
+      white-space: nowrap;
+    }
+    #work .head p + h2 {
+      margin-top: 4px;
+    }
+    #work .head .shrink-0 > p {
+      font-size: 10px;
+    }
+    #work .head a {
+      font-size: 9px;
+      padding: 2px 6px;
+      letter-spacing: 0.08em;
+    }
+    #work .card {
+      width: clamp(220px, 88vw, 420px);
+    }
+    #work .dot.on {
+      width: 24px;
+    }
+    #work .head {
+      z-index: 350;
     }
   }
   .ruler-v {
