@@ -5,7 +5,7 @@
 - **Type check**: `npx tsc --noEmit`
 - **Lint**: `npx eslint .`
 - **Build**: `npx next build`
-- **Dev**: `npx next dev --experimental-https` (HTTPS enabled via `--experimental-https` flag using self-signed cert from mkcert, serves at `https://localhost:3000`)
+- **Dev**: `npm run dev` (serves HTTPS on all interfaces at port `3000`; `certificates/lan.pem` and `certificates/lan-key.pem` are local, ignored mkcert files with SANs for `192.168.100.4`, `localhost`, and loopback addresses)
 
 ## Environment
 
@@ -349,3 +349,13 @@ The homepage `Work` section (`src/app/sections/Work.tsx`) currently highlights `
 - GitHub URL (only the actual repo, not a fork or unrelated project)
 
 If a field cannot be confidently verified, either omit it or describe it accurately as prepared/scaffolded (e.g. "schema prepared, not yet wired").
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

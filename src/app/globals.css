@@ -954,7 +954,7 @@
       0 0 0 1px rgba(59, 130, 246, calc(var(--a, 0) * 0.55)),
       0 0 calc(var(--a, 0) * 46px) rgba(59, 130, 246, calc(var(--a, 0) * 0.2)),
       0 34px 80px -34px rgba(0, 0, 0, 0.38);
-    will-change: transform, opacity, filter;
+    will-change: transform, opacity;
     backface-visibility: hidden;
     cursor: pointer;
   }

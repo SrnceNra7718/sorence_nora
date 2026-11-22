@@ -179,6 +179,11 @@ export default function Work() {
       ? matchMedia("(max-width: 640px)").matches
       : false,
   );
+  const smallRef = useRef(
+    typeof matchMedia === "function"
+      ? matchMedia("(max-width: 1024px)").matches
+      : false,
+  );
   const curRef = useRef(0);
   const tgtRef = useRef(0);
   const activeIdxRef = useRef(-1);
@@ -245,7 +250,6 @@ export default function Work() {
     stage.style.setProperty("--yoff", `${dimRef.current.yOff}px`);
 
     const vhs = 100 + (N - 1) * 90;
-    section.style.height = `${vhs}vh`;
     section.style.height = `${vhs}svh`;
 
     const vb = `${-W / 2} ${-H / 2} ${W} ${H}`;
@@ -303,7 +307,7 @@ export default function Work() {
       el.style.opacity = (fade * (0.28 + 0.72 * Math.pow(face, 0.8))).toFixed(
         3,
       );
-      el.style.filter = mobileRef.current
+      el.style.filter = smallRef.current
         ? "none"
         : face > 0.92
           ? "none"
@@ -325,6 +329,7 @@ export default function Work() {
       linksRef.current.forEach((l, k) => {
         if (l) l.tabIndex = k === idx ? 0 : -1;
       });
+      setActiveProjectIndex(idx);
 
       if (!first && !reduceRef.current) {
         const ping = pingRef.current;
@@ -358,8 +363,7 @@ export default function Work() {
 
   const tickRef = useRef(() => {
     rafRef.current = 0;
-    tgtRef.current = getTargetRef.current();
-    curRef.current = reduceRef.current || mobileRef.current
+    curRef.current = reduceRef.current
       ? tgtRef.current
       : curRef.current + (tgtRef.current - curRef.current) * 0.1;
     if (Math.abs(tgtRef.current - curRef.current) < 0.0008)
@@ -376,24 +380,14 @@ export default function Work() {
   useEffect(() => {
     measureRef.current();
     curRef.current = getTargetRef.current();
+    tgtRef.current = curRef.current;
     renderRef.current(curRef.current);
-
-    // Throttled state sync for active project (drives image cycling only).
-    // Kept out of the render loop to avoid React re-renders every frame.
-    let syncTicking = false;
-    const scheduleSync = () => {
-      if (!syncTicking) {
-        syncTicking = true;
-        requestAnimationFrame(() => {
-          setActiveProjectIndex(activeIdxRef.current);
-          syncTicking = false;
-        });
-      }
-    };
 
     const mq = matchMedia("(prefers-reduced-motion: reduce)");
     const mobileMq = matchMedia("(max-width: 640px)");
+    const smallMq = matchMedia("(max-width: 1024px)");
     mobileRef.current = mobileMq.matches;
+    smallRef.current = smallMq.matches;
     const onReduceChange = () => {
       reduceRef.current = mq.matches;
     };
@@ -401,19 +395,29 @@ export default function Work() {
       mobileRef.current = mobileMq.matches;
       kickRef.current();
     };
+    const onSmallChange = () => {
+      smallRef.current = smallMq.matches;
+      kickRef.current();
+    };
     mq.addEventListener("change", onReduceChange);
     mobileMq.addEventListener("change", onMobileChange);
+    smallMq.addEventListener("change", onSmallChange);
 
     const onScroll = () => {
-      kickRef.current();
-      scheduleSync();
+      const target = getTargetRef.current();
+      if (target !== tgtRef.current) {
+        tgtRef.current = target;
+        kickRef.current();
+      }
     };
     const onResize = () => {
       measureRef.current();
+      tgtRef.current = getTargetRef.current();
       kickRef.current();
     };
     const onLoad = () => {
       measureRef.current();
+      tgtRef.current = getTargetRef.current();
       kickRef.current();
     };
 
@@ -431,6 +435,7 @@ export default function Work() {
       removeEventListener("load", onLoad);
       mq.removeEventListener("change", onReduceChange);
       mobileMq.removeEventListener("change", onMobileChange);
+      smallMq.removeEventListener("change", onSmallChange);
     };
   }, []);
 
