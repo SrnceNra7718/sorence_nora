@@ -1552,8 +1552,8 @@ export async function getClearanceStatus(studentId: string) {
     title: "TypeScript Strict Mode: Patterns I Use in Every Project",
     description:
       "How I use TypeScript strict mode, safer compiler options, discriminated unions, and runtime validation to catch bugs early and keep frontend codebases maintainable.",
-    datePublished: "2024-09-01",
-    dateModified: "2024-09-01",
+    datePublished: "2026-12-01",
+    dateModified: "2026-12-01",
     author: "Sorence Nora",
     tag: "TypeScript",
     tags: ["TypeScript", "Frontend Development", "Architecture", "Type Safety"],
@@ -1787,8 +1787,8 @@ export function StatusBadge({
     title: "Real-Time Data Patterns with Supabase and Next.js",
     description:
       "A practical approach to combining server-rendered initial data with Supabase Realtime subscriptions in Next.js dashboards, including channel cleanup, event handling, and data consistency.",
-    datePublished: "2024-09-10",
-    dateModified: "2024-09-10",
+    datePublished: "2026-12-05",
+    dateModified: "2026-12-05",
     author: "Sorence Nora",
     tag: "Backend Integration",
     tags: ["Supabase", "Next.js", "TypeScript", "React", "Realtime"],
@@ -2016,8 +2016,8 @@ export function LiveOrders({ initialOrders }: LiveOrdersProps) {
     title: "Scroll-Reveal Animations with Framer Motion",
     description:
       "How I build subtle, accessible, and performant scroll-reveal animations with Framer Motion in React and Next.js without distracting from the content.",
-    datePublished: "2024-09-18",
-    dateModified: "2024-09-18",
+    datePublished: "2026-12-09",
+    dateModified: "2026-12-09",
     author: "Sorence Nora",
     tag: "Animation",
     tags: [
@@ -2271,8 +2271,8 @@ export function AccessibleReveal({
     title: "SEO with JSON-LD Structured Data in Next.js",
     description:
       "How I add accurate Schema.org JSON-LD, metadata, canonical URLs, and article and breadcrumb structured data to Next.js pages to help search engines understand website content.",
-    datePublished: "2024-09-25",
-    dateModified: "2024-09-25",
+    datePublished: "2026-12-12",
+    dateModified: "2026-12-12",
     author: "Sorence Nora",
     tag: "SEO",
     tags: ["Next.js", "SEO", "Frontend Development", "JSON-LD", "Schema.org"],
@@ -2545,8 +2545,8 @@ export function ArticleJsonLd(props: ArticleJsonLdProps) {
     title: "Type-Safe Forms with React Hook Form and Zod",
     description:
       "How I build accessible, maintainable forms with React Hook Form and Zod, sharing validation rules between the UI and server while keeping TypeScript types aligned with real input data.",
-    datePublished: "2024-10-02",
-    dateModified: "2024-10-02",
+    datePublished: "2026-12-16",
+    dateModified: "2026-12-16",
     author: "Sorence Nora",
     tag: "Forms",
     tags: ["React Hook Form", "Zod", "TypeScript", "React", "Form Validation"],
