@@ -1011,7 +1011,13 @@ const contactSchema = z.object({
     dateModified: "2024-07-10",
     author: "Sorence Nora",
     tag: "Project Case Study",
-    tags: ["Next.js", "Tailwind CSS", "TypeScript", "Framer Motion", "Case Study"],
+    tags: [
+      "Next.js",
+      "Tailwind CSS",
+      "TypeScript",
+      "Framer Motion",
+      "Case Study",
+    ],
     readingTime: "7 min read",
     ogImage: "/forProject_Section/yenzhen-tailoring/homepage_pagev3.png",
     content: [
@@ -1124,7 +1130,8 @@ const contactSchema = z.object({
         type: "image",
         src: "/forProject_Section/yenzhen-tailoring/products_page.png",
         alt: "Yenzhen Tailoring product catalog page showing a responsive grid of custom sportswear items with category filters",
-        caption: "The product catalog uses category filtering to make a large collection easier to browse.",
+        caption:
+          "The product catalog uses category filtering to make a large collection easier to browse.",
       },
       {
         type: "paragraph",
@@ -1134,7 +1141,8 @@ const contactSchema = z.object({
         type: "image",
         src: "/forProject_Section/yenzhen-tailoring/gallery_page.png",
         alt: "Yenzhen Tailoring finished works gallery displaying completed custom sportswear projects in a responsive image grid with lightbox",
-        caption: "Completed projects are presented in a gallery designed for quick browsing and closer inspection.",
+        caption:
+          "Completed projects are presented in a gallery designed for quick browsing and closer inspection.",
       },
       {
         type: "heading",
@@ -1149,7 +1157,8 @@ const contactSchema = z.object({
         type: "image",
         src: "/forProject_Section/yenzhen-tailoring/homepage_pagev3.png",
         alt: "Yenzhen Tailoring homepage hero section with the brand name, tagline, and calls to action for browsing products and team packages",
-        caption: "The homepage introduces the brand and routes visitors toward products, packages, and inquiries.",
+        caption:
+          "The homepage introduces the brand and routes visitors toward products, packages, and inquiries.",
       },
       {
         type: "paragraph",
@@ -1159,7 +1168,8 @@ const contactSchema = z.object({
         type: "image",
         src: "/forProject_Section/yenzhen-tailoring/homepage_mobilev2.png",
         alt: "Yenzhen Tailoring homepage rendered on a mobile viewport showing the responsive layout",
-        caption: "The mobile layout keeps the hero, navigation, and primary calls to action accessible.",
+        caption:
+          "The mobile layout keeps the hero, navigation, and primary calls to action accessible.",
       },
       {
         type: "heading",
@@ -1233,7 +1243,8 @@ const contactSchema = z.object({
 
   "student-clearance-monitor-case-study": {
     slug: "student-clearance-monitor-case-study",
-    title: "Building the Student Clearance Monitor: A Next.js & Supabase Case Study",
+    title:
+      "Building the Student Clearance Monitor: A Next.js & Supabase Case Study",
     description:
       "How I built a real-time student clearance system for my OJT project using Next.js App Router, TypeScript, and Supabase. From problem to implementation.",
     datePublished: "2024-06-01",
@@ -1414,11 +1425,11 @@ export async function getClearanceStatus(studentId: string) {
       },
       {
         type: "paragraph",
-        text: "I default to Server Components and only mark a component with \"use client\" when it needs interactivity — form handling, mouse tracking, animations. This keeps the initial JavaScript bundle small and improves time-to-interactive.",
+        text: 'I default to Server Components and only mark a component with "use client" when it needs interactivity — form handling, mouse tracking, animations. This keeps the initial JavaScript bundle small and improves time-to-interactive.',
       },
       {
         type: "callout",
-        text: "Rule of thumb: if the component uses useState, useEffect, or event handlers that update state, it needs \"use client\". Everything else can stay a Server Component.",
+        text: 'Rule of thumb: if the component uses useState, useEffect, or event handlers that update state, it needs "use client". Everything else can stay a Server Component.',
       },
       {
         type: "heading",
@@ -1533,6 +1544,1290 @@ export async function getClearanceStatus(studentId: string) {
       {
         type: "paragraph",
         text: "On smaller screens, less essential elements are hidden with hidden md:flex or reordered with flex order utilities. The core content — the data table or form — always comes first.",
+      },
+    ],
+  },
+  "typescript-strict-mode-patterns": {
+    slug: "typescript-strict-mode-patterns",
+    title: "TypeScript Strict Mode: Patterns I Use in Every Project",
+    description:
+      "How I use TypeScript strict mode, safer compiler options, discriminated unions, and runtime validation to catch bugs early and keep frontend codebases maintainable.",
+    datePublished: "2024-09-01",
+    dateModified: "2024-09-01",
+    author: "Sorence Nora",
+    tag: "TypeScript",
+    tags: ["TypeScript", "Frontend Development", "Architecture", "Type Safety"],
+    readingTime: "7 min read",
+    ogImage: "/og-image.svg",
+    content: [
+      {
+        type: "paragraph",
+        text: "TypeScript becomes most valuable when it helps prevent invalid states instead of simply adding type annotations to JavaScript. In my projects, I enable strict checking from the beginning and use types to make component contracts, API responses, and application state easier to understand. The goal is not to make every line complicated with generics. It is to make incorrect assumptions visible while the code is being written.",
+      },
+      {
+        type: "paragraph",
+        text: "This approach is especially useful in applications with forms, dashboards, reusable components, and data coming from APIs or databases. A small mismatch in a product, order, or user record can otherwise travel through several components before becoming a runtime bug.",
+      },
+      {
+        type: "heading",
+        text: "Start with strict compiler settings",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "The strict option enables a group of checks that make TypeScript less permissive. I also consider additional compiler options that expose common assumptions around array access and optional properties. These settings may require fixing older code, but that work creates a much more predictable foundation.",
+      },
+      {
+        type: "code",
+        language: "json",
+        filename: "tsconfig.json",
+        code: `{
+  "compilerOptions": {
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true
+  }
+}`,
+      },
+      {
+        type: "list",
+        items: [
+          "strict — enables important checks such as strictNullChecks and noImplicitAny.",
+          "noUncheckedIndexedAccess — makes indexed array and record access account for missing values.",
+          "exactOptionalPropertyTypes — distinguishes an omitted property from a property explicitly assigned undefined.",
+          "noImplicitOverride — helps make intentional class method overrides explicit.",
+          "noFallthroughCasesInSwitch — catches accidental switch-case fallthrough.",
+        ],
+      },
+      {
+        type: "callout",
+        text: "Enable strictness early in a project. Turning it on after a large application has grown can create a substantial cleanup task, so I prefer to establish the rules before adding many features.",
+      },
+      {
+        type: "heading",
+        text: "Handle nullable values explicitly",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "With strictNullChecks enabled, a value that may be missing must be handled before it is used. Instead of relying on non-null assertions everywhere, I prefer an early return, a fallback, or a clear branch that communicates what should happen when data is unavailable.",
+      },
+      {
+        type: "code",
+        language: "typescript",
+        filename: "user-profile.ts",
+        code: `interface User {
+  id: string;
+  name: string;
+  email?: string;
+}
+
+function getContactLabel(user: User | null): string {
+  if (!user) {
+    return "Guest";
+  }
+
+  return user.email ?? "Email not provided";
+}`,
+      },
+      {
+        type: "paragraph",
+        text: "Optional chaining is useful when a nested value is genuinely optional, while nullish coalescing provides a fallback only for null or undefined. I avoid replacing every access with optional chaining automatically: required data should still be validated and treated as required.",
+      },
+      {
+        type: "heading",
+        text: "Use unions to model real application states",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "A group of loosely related booleans can allow impossible combinations. For example, isLoading, hasError, and isComplete could all become true at the same time. A discriminated union describes the valid states directly and lets TypeScript narrow the available properties in each branch.",
+      },
+      {
+        type: "code",
+        language: "typescript",
+        filename: "request-state.ts",
+        code: `type RequestState<T> =
+  | { status: "idle" }
+  | { status: "loading" }
+  | { status: "success"; data: T }
+  | { status: "error"; message: string };
+
+function renderMessage<T>(state: RequestState<T>): string {
+  switch (state.status) {
+    case "idle":
+      return "Ready to load";
+    case "loading":
+      return "Loading...";
+    case "success":
+      return "Request completed";
+    case "error":
+      return state.message;
+    default: {
+      const exhaustiveCheck: never = state;
+      return exhaustiveCheck;
+    }
+  }
+}`,
+      },
+      {
+        type: "callout",
+        text: "Discriminated unions are particularly useful for API requests, multi-step forms, payment states, and workflows where only certain values are valid at each stage.",
+      },
+      {
+        type: "heading",
+        text: "Avoid any and define useful boundaries",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "The any type disables checking at the point where it is used and can spread uncertainty into other parts of the application. I use unknown when a value has not been validated yet, then narrow it with a type guard or schema before using it. This is a safer boundary for values from local storage, third-party APIs, and untrusted input.",
+      },
+      {
+        type: "code",
+        language: "typescript",
+        filename: "safe-parsing.ts",
+        code: `function isStringArray(value: unknown): value is string[] {
+  return (
+    Array.isArray(value) &&
+    value.every((item: unknown) => typeof item === "string")
+  );
+}
+
+function readLabels(value: unknown): string[] {
+  if (!isStringArray(value)) {
+    return [];
+  }
+
+  return value;
+}`,
+      },
+      {
+        type: "heading",
+        text: "Type API data at the boundary",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "A TypeScript interface does not validate JSON at runtime. If an API response is malformed, a type assertion will not protect the application. I keep request and response types close to the service layer and use runtime validation when data crosses a trust boundary. This separates what the compiler knows from what the application has actually verified.",
+      },
+      {
+        type: "list",
+        items: [
+          "Define clear request and response types for service functions.",
+          "Treat external JSON as unknown until it has been checked.",
+          "Use a runtime schema library when the response shape is important or complex.",
+          "Normalize API data in one place rather than repeating defensive checks throughout the UI.",
+          "Keep UI components focused on rendering already-understood data.",
+        ],
+      },
+      {
+        type: "heading",
+        text: "Make component props precise",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "Reusable components benefit from small, explicit prop interfaces. I avoid passing an entire database record when a component only needs an identifier and a display label. Narrow props reduce coupling and make components easier to test, reuse, and refactor.",
+      },
+      {
+        type: "code",
+        language: "tsx",
+        filename: "status-badge.tsx",
+        code: `type Status = "pending" | "approved" | "rejected";
+
+interface StatusBadgeProps {
+  status: Status;
+  label: string;
+}
+
+export function StatusBadge({
+  status,
+  label,
+}: StatusBadgeProps) {
+  return (
+    <span data-status={status}>
+      {label}
+    </span>
+  );
+}`,
+      },
+      {
+        type: "heading",
+        text: "Patterns I apply during code review",
+        level: 2,
+      },
+      {
+        type: "list",
+        items: [
+          "Remove unnecessary any types and replace them with concrete types or unknown.",
+          "Check array lookups and object access for missing values.",
+          "Prefer narrowing and early returns over non-null assertions.",
+          "Use literal unions for finite statuses instead of unrestricted strings.",
+          "Keep type definitions aligned with actual runtime data.",
+          "Avoid overengineering types that make simple code harder to understand.",
+        ],
+      },
+      {
+        type: "heading",
+        text: "Conclusion",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "Strict TypeScript is not about writing the largest possible type system. It is about making assumptions explicit and catching mistakes close to where they are introduced. By enabling strict compiler options, modeling states with unions, validating external data, and keeping component contracts focused, I can build applications that are easier to maintain as features and teams grow.",
+      },
+    ],
+  },
+
+  "supabase-realtime-data-patterns": {
+    slug: "supabase-realtime-data-patterns",
+    title: "Real-Time Data Patterns with Supabase and Next.js",
+    description:
+      "A practical approach to combining server-rendered initial data with Supabase Realtime subscriptions in Next.js dashboards, including channel cleanup, event handling, and data consistency.",
+    datePublished: "2024-09-10",
+    dateModified: "2024-09-10",
+    author: "Sorence Nora",
+    tag: "Backend Integration",
+    tags: ["Supabase", "Next.js", "TypeScript", "React", "Realtime"],
+    readingTime: "8 min read",
+    ogImage: "/og-image.svg",
+    content: [
+      {
+        type: "paragraph",
+        text: "Dashboards and operational tools often need to reflect changes as soon as they happen. A staff member might update a record while another person is viewing the same list, and stale information can lead to duplicated work or incorrect decisions. Supabase Realtime provides a way to listen for database changes and update connected interfaces without repeatedly polling the database.",
+      },
+      {
+        type: "paragraph",
+        text: "In a Next.js application, I prefer a hybrid approach: load the initial data through the server, then use a small Client Component to subscribe to relevant changes. This keeps the first render useful while adding live updates only where interaction requires them.",
+      },
+      {
+        type: "heading",
+        text: "Separate initial loading from live updates",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "Server Components are a good place to load the initial state because the page can render with data already available. A Client Component can then receive that initial data and manage the subscription lifecycle. This avoids making the entire page a Client Component just because one table needs live updates.",
+      },
+      {
+        type: "code",
+        language: "tsx",
+        filename: "app/orders/page.tsx",
+        code: `import { createClient } from "@/lib/supabase/server";
+import { LiveOrders } from "@/components/live-orders";
+
+export default async function OrdersPage() {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+    .from("orders")
+    .select("id, status, customer_name, updated_at")
+    .order("updated_at", { ascending: false });
+
+  if (error) {
+    throw new Error("Unable to load orders");
+  }
+
+  return <LiveOrders initialOrders={data ?? []} />;
+}`,
+      },
+      {
+        type: "callout",
+        text: "The server and browser Supabase clients have different responsibilities. Use the server-side client for server data access and the browser client for subscriptions that run inside Client Components. Follow the authentication and cookie-handling pattern recommended by your Supabase setup.",
+      },
+      {
+        type: "heading",
+        text: "Subscribe to database changes",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "The subscription belongs in a Client Component because it depends on browser-side effects and must be cleaned up when the component unmounts. The example below listens for changes to a specific table and removes the channel during cleanup so the component does not leave unused subscriptions behind.",
+      },
+      {
+        type: "code",
+        language: "tsx",
+        filename: "components/live-orders.tsx",
+        code: `"use client";
+
+import { useEffect, useState } from "react";
+import { createClient } from "@/lib/supabase/client";
+
+interface Order {
+  id: string;
+  status: string;
+  customer_name: string;
+  updated_at: string;
+}
+
+interface LiveOrdersProps {
+  initialOrders: Order[];
+}
+
+export function LiveOrders({ initialOrders }: LiveOrdersProps) {
+  const [orders, setOrders] = useState(initialOrders);
+
+  useEffect(() => {
+    const supabase = createClient();
+
+    const channel = supabase
+      .channel("orders-changes")
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "orders",
+        },
+        (payload) => {
+          if (payload.eventType === "INSERT") {
+            const newOrder = payload.new as Order;
+            setOrders((current) => [
+              newOrder,
+              ...current.filter((order) => order.id !== newOrder.id),
+            ]);
+          }
+
+          if (payload.eventType === "UPDATE") {
+            const updatedOrder = payload.new as Order;
+            setOrders((current) =>
+              current.map((order) =>
+                order.id === updatedOrder.id ? updatedOrder : order
+              )
+            );
+          }
+
+          if (payload.eventType === "DELETE") {
+            const deletedId = String(payload.old.id);
+            setOrders((current) =>
+              current.filter((order) => order.id !== deletedId)
+            );
+          }
+        }
+      )
+      .subscribe();
+
+    return () => {
+      void supabase.removeChannel(channel);
+    };
+  }, []);
+
+  return (
+    <ul>
+      {orders.map((order) => (
+        <li key={order.id}>
+          {order.customer_name} — {order.status}
+        </li>
+      ))}
+    </ul>
+  );
+}`,
+      },
+      {
+        type: "paragraph",
+        text: "This example illustrates the event flow, but production applications should generate database types from the Supabase schema and validate or map event payloads before treating them as trusted application records. The exact payload shape also depends on the table configuration and the event being received.",
+      },
+      {
+        type: "heading",
+        text: "Configure Realtime deliberately",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "A client subscription will only receive the events that the project is configured to publish and that the connected user is permitted to read. Enable the relevant table for Realtime in the Supabase project configuration, review Row Level Security policies, and test subscriptions with users that have different access levels.",
+      },
+      {
+        type: "list",
+        items: [
+          "Enable Realtime for only the tables that need live updates.",
+          "Use Row Level Security to control which records each authenticated user can access.",
+          "Subscribe to a narrow set of tables and events instead of listening to everything.",
+          "Avoid placing service-role credentials in browser code.",
+          "Confirm that the client has the expected authentication session before relying on private data events.",
+        ],
+      },
+      {
+        type: "heading",
+        text: "Handle initial data and subscription timing",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "A common edge case occurs when a record changes between the initial server query and the moment the browser subscription becomes active. For interfaces where missing an event would be costly, consider a refresh or reconciliation query after the subscription is established. You can also provide a manual refresh action and periodically revalidate data as a fallback.",
+      },
+      {
+        type: "callout",
+        text: "Realtime events are a notification mechanism, not a replacement for a reliable source of truth. For critical workflows, reconcile the displayed state with the database and make update operations safe to retry.",
+      },
+      {
+        type: "heading",
+        text: "Choose between patching state and refetching",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "For a simple list, applying INSERT, UPDATE, and DELETE events directly to local state can feel immediate and reduce unnecessary requests. However, if an update changes sorting, pagination, aggregate totals, or related records, a targeted refetch may be safer than trying to reproduce all database logic in the browser.",
+      },
+      {
+        type: "list",
+        items: [
+          "Patch local state when the event maps cleanly to one visible record.",
+          "Refetch when an update affects sorting, filters, pagination, or derived totals.",
+          "Deduplicate inserts by primary key because the same logical record may already be present.",
+          "Represent connection and loading states so users know when the view may be stale.",
+          "Use optimistic updates only when rollback behavior is clearly defined.",
+        ],
+      },
+      {
+        type: "heading",
+        text: "Keep subscriptions scoped and clean",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "A subscription should exist only while the relevant interface needs it. If the user changes a selected project, organization, or record identifier, the old channel should be removed and a new channel created with the updated filter. Always return a cleanup function from the effect and avoid creating channels during render.",
+      },
+      {
+        type: "heading",
+        text: "Key challenges",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "The main challenge is keeping server-rendered data, browser state, and database events consistent. Another challenge is access control: a subscription that works for an administrator may correctly return fewer events for a regular user because of Row Level Security. These behaviors need to be tested as part of the application rather than treated as frontend-only concerns.",
+      },
+      {
+        type: "heading",
+        text: "Conclusion",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "Combining server-loaded initial data with scoped Supabase Realtime subscriptions gives Next.js dashboards a useful balance of fast first renders and responsive updates. Keep subscriptions inside focused Client Components, clean up channels, enforce database permissions, and reconcile data when correctness matters more than minimizing requests.",
+      },
+    ],
+  },
+
+  "framer-motion-scroll-reveals": {
+    slug: "framer-motion-scroll-reveals",
+    title: "Scroll-Reveal Animations with Framer Motion",
+    description:
+      "How I build subtle, accessible, and performant scroll-reveal animations with Framer Motion in React and Next.js without distracting from the content.",
+    datePublished: "2024-09-18",
+    dateModified: "2024-09-18",
+    author: "Sorence Nora",
+    tag: "Animation",
+    tags: [
+      "Framer Motion",
+      "React",
+      "Next.js",
+      "UI Animation",
+      "Accessibility",
+    ],
+    readingTime: "6 min read",
+    ogImage: "/og-image.svg",
+    content: [
+      {
+        type: "paragraph",
+        text: "Motion can make a website feel more polished, but animation should support the content rather than compete with it. One effect I use selectively is scroll reveal: an element starts slightly offset or transparent and transitions into its normal position as it enters the viewport.",
+      },
+      {
+        type: "paragraph",
+        text: "Framer Motion, now commonly documented as Motion for React, provides declarative animation APIs that fit naturally into React components. With whileInView and viewport options, it is possible to create these effects without manually calculating scroll positions for every element.",
+      },
+      {
+        type: "heading",
+        text: "Install and create a reusable reveal component",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "I prefer to centralize common reveal behavior in a small component. This keeps transition timing consistent across sections and avoids repeating animation configuration throughout the application.",
+      },
+      {
+        type: "code",
+        language: "tsx",
+        filename: "components/scroll-reveal.tsx",
+        code: `"use client";
+
+import { motion, type Variants } from "framer-motion";
+import type { ReactNode } from "react";
+
+interface ScrollRevealProps {
+  children: ReactNode;
+  className?: string;
+  delay?: number;
+}
+
+const revealVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 24,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.55,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+export function ScrollReveal({
+  children,
+  className,
+  delay = 0,
+}: ScrollRevealProps) {
+  return (
+    <motion.div
+      className={className}
+      variants={revealVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ delay }}
+    >
+      {children}
+    </motion.div>
+  );
+}`,
+      },
+      {
+        type: "paragraph",
+        text: "The component uses a small vertical offset and opacity transition. The viewport amount controls how much of the element should be visible before the animation starts, while once prevents the reveal from replaying every time the visitor scrolls away and back.",
+      },
+      {
+        type: "callout",
+        text: "Keep the movement restrained. A small offset and a duration around half a second usually provide enough feedback without making the page feel slow.",
+      },
+      {
+        type: "heading",
+        text: "Reveal multiple elements with staggered timing",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "For a group of cards, a staggered animation can create a natural reading sequence. Instead of assigning a separate delay to every child manually, parent and child variants can coordinate the timing.",
+      },
+      {
+        type: "code",
+        language: "tsx",
+        filename: "components/reveal-grid.tsx",
+        code: `"use client";
+
+import { motion } from "framer-motion";
+
+const container = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.12,
+    },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 18 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.45 },
+  },
+};
+
+export function RevealGrid() {
+  return (
+    <motion.div
+      variants={container}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.15 }}
+      className="grid gap-6 md:grid-cols-3"
+    >
+      {["Design", "Development", "Performance"].map((title) => (
+        <motion.article key={title} variants={item}>
+          <h3>{title}</h3>
+          <p>Focused content for this section.</p>
+        </motion.article>
+      ))}
+    </motion.div>
+  );
+}`,
+      },
+      {
+        type: "heading",
+        text: "Use the right animation for the content",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "Not every section needs the same entrance. A heading may use a subtle fade, a card can move upward a few pixels, and a large image may benefit from a gentle scale transition. The important part is consistency: animations should feel like one design system rather than a collection of unrelated effects.",
+      },
+      {
+        type: "list",
+        items: [
+          "Use opacity and transform for simple entrance effects.",
+          "Keep travel distances short so content does not appear to fly across the screen.",
+          "Use stagger only for related groups, such as cards or list items.",
+          "Avoid animating large blocks of text line by line unless it serves a clear purpose.",
+          "Do not hide essential information behind an animation that may fail to run.",
+        ],
+      },
+      {
+        type: "heading",
+        text: "Respect reduced-motion preferences",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "Some visitors prefer reduced motion because of vestibular sensitivity or personal accessibility settings. Motion provides the useReducedMotion hook so an interface can reduce or remove non-essential movement when the operating system requests it.",
+      },
+      {
+        type: "code",
+        language: "tsx",
+        filename: "components/accessible-reveal.tsx",
+        code: `"use client";
+
+import { motion, useReducedMotion } from "framer-motion";
+import type { ReactNode } from "react";
+
+export function AccessibleReveal({
+  children,
+}: {
+  children: ReactNode;
+}) {
+  const shouldReduceMotion = useReducedMotion();
+
+  return (
+    <motion.div
+      initial={
+        shouldReduceMotion
+          ? false
+          : { opacity: 0, y: 20 }
+      }
+      whileInView={
+        shouldReduceMotion
+          ? undefined
+          : { opacity: 1, y: 0 }
+      }
+      viewport={{ once: true }}
+    >
+      {children}
+    </motion.div>
+  );
+}`,
+      },
+      {
+        type: "callout",
+        text: "Accessibility should be part of the animation design, not a patch added at the end. The page must remain understandable and usable when motion is reduced or JavaScript is unavailable.",
+      },
+      {
+        type: "heading",
+        text: "Performance considerations in Next.js",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "Animation components need client-side JavaScript, so I isolate them instead of marking an entire page as a Client Component. Keep static content and layout in Server Components where possible, and wrap only the elements that genuinely need animation.",
+      },
+      {
+        type: "list",
+        items: [
+          "Prefer transform and opacity because they generally avoid layout recalculation.",
+          "Avoid attaching expensive work to every scroll event.",
+          "Do not animate dozens of large elements simultaneously.",
+          "Use lazy loading and optimized image dimensions for media-heavy sections.",
+          "Test on lower-powered mobile devices, not only a desktop development machine.",
+          "Check the page with reduced motion enabled.",
+        ],
+      },
+      {
+        type: "heading",
+        text: "Common mistakes to avoid",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "A frequent mistake is adding motion to every heading, paragraph, icon, and button. This creates unnecessary delay and makes it harder to scan the page. Another is using large offsets or long durations that cause visitors to wait for content. I also avoid making important navigation or form controls depend on a reveal animation.",
+      },
+      {
+        type: "heading",
+        text: "Conclusion",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "Scroll reveals work best when they are subtle, consistent, and optional. By creating reusable variants, using viewport detection, respecting reduced-motion preferences, and isolating client-side animation components, I can add visual polish without compromising usability or the performance benefits of the Next.js App Router.",
+      },
+    ],
+  },
+
+  "seo-json-ld-nextjs": {
+    slug: "seo-json-ld-nextjs",
+    title: "SEO with JSON-LD Structured Data in Next.js",
+    description:
+      "How I add accurate Schema.org JSON-LD, metadata, canonical URLs, and article and breadcrumb structured data to Next.js pages to help search engines understand website content.",
+    datePublished: "2024-09-25",
+    dateModified: "2024-09-25",
+    author: "Sorence Nora",
+    tag: "SEO",
+    tags: ["Next.js", "SEO", "Frontend Development", "JSON-LD", "Schema.org"],
+    readingTime: "7 min read",
+    ogImage: "/og-image.svg",
+    content: [
+      {
+        type: "paragraph",
+        text: "Search engine optimization is not only about choosing keywords and writing page titles. Search engines also need to understand what a page represents, who published it, and how it relates to the rest of a website. Structured data provides machine-readable context that can help search engines interpret that information.",
+      },
+      {
+        type: "paragraph",
+        text: "JSON-LD is a format recommended by Google for expressing structured data. In Next.js, it can be generated from the same content data used to render a page, which helps keep metadata and schema consistent. Structured data does not guarantee rich results or higher rankings; it simply makes eligible page information easier for supported search systems to interpret.",
+      },
+      {
+        type: "heading",
+        text: "Start with the Next.js Metadata API",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "Before adding JSON-LD, make sure each route has a meaningful title, description, canonical URL, and social sharing metadata. The Metadata API is the built-in way to define this information in the App Router. For dynamic routes, generate metadata from the same record used to render the page.",
+      },
+      {
+        type: "code",
+        language: "tsx",
+        filename: "app/blog/[slug]/page.tsx",
+        code: `import type { Metadata } from "next";
+import { blogPosts } from "@/data/blog";
+
+interface PageProps {
+  params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const post = blogPosts.find((item) => item.slug === slug);
+
+  if (!post) {
+    return {
+      title: "Article not found",
+    };
+  }
+
+  const canonicalUrl = \`https://example.com/blog/\${post.slug}\`;
+
+  return {
+    title: post.title,
+    description: post.description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title: post.title,
+      description: post.description,
+      url: canonicalUrl,
+      type: "article",
+      images: [post.ogImage],
+    },
+  };
+}`,
+      },
+      {
+        type: "callout",
+        text: "Replace example.com with the real production domain and ensure ogImage resolves to an absolute, publicly accessible URL when generating social metadata.",
+      },
+      {
+        type: "heading",
+        text: "Create Article structured data",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "An Article schema can describe the headline, description, author, publication date, modification date, image, and canonical page URL. These values should match the visible article. Do not add ratings, reviews, or other properties that are not genuinely present on the page.",
+      },
+      {
+        type: "code",
+        language: "tsx",
+        filename: "components/article-json-ld.tsx",
+        code: `interface ArticleJsonLdProps {
+  title: string;
+  description: string;
+  url: string;
+  image: string;
+  datePublished: string;
+  dateModified: string;
+  author: string;
+}
+
+export function ArticleJsonLd(props: ArticleJsonLdProps) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: props.title,
+    description: props.description,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": props.url,
+    },
+    image: [props.image],
+    datePublished: props.datePublished,
+    dateModified: props.dateModified,
+    author: {
+      "@type": "Person",
+      name: props.author,
+    },
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(jsonLd).replace(/</g, "\\\\u003c"),
+      }}
+    />
+  );
+}`,
+      },
+      {
+        type: "paragraph",
+        text: "The example escapes less-than characters before embedding serialized JSON. This is a useful defensive measure when structured data contains text that could otherwise be interpreted as HTML. Keep the schema object as data and serialize it rather than manually concatenating JSON strings.",
+      },
+      {
+        type: "heading",
+        text: "Add BreadcrumbList structured data",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "Breadcrumbs describe the hierarchy that leads to the current page. For a blog article, a simple path might be Home, Blog, and the current article. The structured data should reflect navigation that visitors can also see on the page.",
+      },
+      {
+        type: "code",
+        language: "typescript",
+        filename: "lib/breadcrumb-json-ld.ts",
+        code: `export function createBreadcrumbJsonLd(
+  title: string,
+  articleUrl: string
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://example.com",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: "https://example.com/blog",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: title,
+        item: articleUrl,
+      },
+    ],
+  };
+}`,
+      },
+      {
+        type: "heading",
+        text: "Describe the website author or publisher",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "A Person or Organization entity can describe the author or publisher behind a website. For a personal developer portfolio, Person may be appropriate when the site is genuinely authored and maintained by an individual. Keep the name, URL, and profile links consistent with the visible About or author information.",
+      },
+      {
+        type: "list",
+        items: [
+          "Use Article for editorial posts and technical tutorials.",
+          "Use BreadcrumbList when the page has a visible breadcrumb hierarchy.",
+          "Use Person for an individual author when that accurately describes the publisher.",
+          "Use Organization for a business or organization publishing the content.",
+          "Use WebSite for site-level information where it adds useful context.",
+          "Do not add schema properties solely to target a rich result if the visible page does not support them.",
+        ],
+      },
+      {
+        type: "heading",
+        text: "Render JSON-LD from the page data",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "The most maintainable pattern is to generate structured data from the article record rather than maintaining a second set of hard-coded values. This reduces the chance that the visible title, date, author, and schema drift apart when an article is edited.",
+      },
+      {
+        type: "code",
+        language: "tsx",
+        filename: "app/blog/[slug]/page.tsx",
+        code: `export default async function BlogPostPage({
+  params,
+}: PageProps) {
+  const { slug } = await params;
+  const post = blogPosts.find((item) => item.slug === slug);
+
+  if (!post) {
+    return <main>Article not found</main>;
+  }
+
+  const url = \`https://example.com/blog/\${post.slug}\`;
+
+  return (
+    <main>
+      <ArticleJsonLd
+        title={post.title}
+        description={post.description}
+        url={url}
+        image={\`https://example.com\${post.ogImage}\`}
+        datePublished={post.datePublished}
+        dateModified={post.dateModified}
+        author={post.author}
+      />
+      <article>
+        <h1>{post.title}</h1>
+        {/* Render the article content here */}
+      </article>
+    </main>
+  );
+}`,
+      },
+      {
+        type: "heading",
+        text: "Validate structured data before publishing",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "A page can render valid JSON while still containing inaccurate or unsupported schema properties. After deployment, test representative URLs with Google's Rich Results Test and Schema.org's validator. Review warnings, confirm that required properties are present for the intended result type, and check that the rendered page and structured data describe the same content.",
+      },
+      {
+        type: "list",
+        items: [
+          "Confirm the JSON-LD script is present in the rendered HTML.",
+          "Check that URLs use the canonical production domain.",
+          "Use valid ISO date strings for publication and modification dates.",
+          "Ensure images are crawlable and resolve successfully.",
+          "Match author and headline values to visible page content.",
+          "Revalidate after changing the schema or page template.",
+        ],
+      },
+      {
+        type: "callout",
+        text: "Structured data is a way to describe content, not a shortcut to rankings. Accurate metadata, useful writing, crawlable pages, performance, and a good user experience remain essential.",
+      },
+      {
+        type: "heading",
+        text: "Conclusion",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "JSON-LD fits naturally into a Next.js content workflow when it is generated from the same data that powers the page. I use the Metadata API for titles and canonical URLs, Article schema for editorial content, and BreadcrumbList for page hierarchy. Keeping the data accurate and validating the final output makes the implementation easier to maintain and more useful to search engines.",
+      },
+    ],
+  },
+
+  "react-hook-form-zod-validation": {
+    slug: "react-hook-form-zod-validation",
+    title: "Type-Safe Forms with React Hook Form and Zod",
+    description:
+      "How I build accessible, maintainable forms with React Hook Form and Zod, sharing validation rules between the UI and server while keeping TypeScript types aligned with real input data.",
+    datePublished: "2024-10-02",
+    dateModified: "2024-10-02",
+    author: "Sorence Nora",
+    tag: "Forms",
+    tags: ["React Hook Form", "Zod", "TypeScript", "React", "Form Validation"],
+    readingTime: "8 min read",
+    ogImage: "/og-image.svg",
+    content: [
+      {
+        type: "paragraph",
+        text: "Forms are one of the most important points of interaction in a web application. They collect contact details, booking requests, quote information, and other data that the rest of the system depends on. A form that only checks whether fields are empty is not enough: it should guide users, provide clear feedback, and ensure the submitted data matches what the backend expects.",
+      },
+      {
+        type: "paragraph",
+        text: "React Hook Form and Zod work well together because each library has a focused responsibility. React Hook Form manages field state and submission with minimal re-rendering, while Zod defines the validation rules and can infer TypeScript types from the schema.",
+      },
+      {
+        type: "heading",
+        text: "Define one validation schema",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "I start by describing valid form data in a Zod schema. The schema becomes the source of truth for required fields, formats, limits, and custom validation. It can then be reused by the form resolver and, where appropriate, the server-side submission handler.",
+      },
+      {
+        type: "code",
+        language: "typescript",
+        filename: "lib/validation/contact-schema.ts",
+        code: `import { z } from "zod";
+
+export const contactSchema = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(2, "Name must contain at least 2 characters")
+    .max(80, "Name is too long"),
+  email: z
+    .string()
+    .trim()
+    .email("Enter a valid email address"),
+  phone: z
+    .string()
+    .trim()
+    .optional(),
+  message: z
+    .string()
+    .trim()
+    .min(10, "Message must contain at least 10 characters")
+    .max(2000, "Message is too long"),
+});
+
+export type ContactFormValues = z.infer<typeof contactSchema>;`,
+      },
+      {
+        type: "paragraph",
+        text: "The inferred ContactFormValues type stays aligned with the schema. If a field becomes required or its validation changes, TypeScript can help identify the places that need updating. This avoids maintaining a separate interface that slowly drifts away from the actual validation rules.",
+      },
+      {
+        type: "heading",
+        text: "Connect Zod to React Hook Form",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "The zodResolver connects the schema to React Hook Form. Each field can display its own validation message, and handleSubmit only calls the valid submission callback when the resolver accepts the data.",
+      },
+      {
+        type: "code",
+        language: "tsx",
+        filename: "components/contact-form.tsx",
+        code: `"use client";
+
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  contactSchema,
+  type ContactFormValues,
+} from "@/lib/validation/contact-schema";
+
+export function ContactForm() {
+  const [serverMessage, setServerMessage] = useState("");
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+  } = useForm<ContactFormValues>({
+    resolver: zodResolver(contactSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      message: "",
+    },
+  });
+
+  async function onSubmit(values: ContactFormValues) {
+    setServerMessage("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+
+      if (!response.ok) {
+        throw new Error("Unable to send your message");
+      }
+
+      setServerMessage("Your message has been sent.");
+      reset();
+    } catch {
+      setServerMessage("Something went wrong. Please try again.");
+    }
+  }
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} noValidate>
+      <label htmlFor="name">Name</label>
+      <input id="name" {...register("name")} />
+      {errors.name && <p role="alert">{errors.name.message}</p>}
+
+      <label htmlFor="email">Email</label>
+      <input id="email" type="email" {...register("email")} />
+      {errors.email && <p role="alert">{errors.email.message}</p>}
+
+      <label htmlFor="phone">Phone (optional)</label>
+      <input id="phone" {...register("phone")} />
+
+      <label htmlFor="message">Message</label>
+      <textarea id="message" {...register("message")} />
+      {errors.message && <p role="alert">{errors.message.message}</p>}
+
+      <button type="submit" disabled={isSubmitting}>
+        {isSubmitting ? "Sending..." : "Send message"}
+      </button>
+
+      <p aria-live="polite">{serverMessage}</p>
+    </form>
+  );
+}`,
+      },
+      {
+        type: "callout",
+        text: "Client-side validation improves the user experience, but it is not a security boundary. Always validate submitted data again on the server before saving it or calling another service.",
+      },
+      {
+        type: "heading",
+        text: "Validate again in a Next.js Route Handler",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "A browser request can be modified or sent without using the form interface. The Route Handler should parse the request body as untrusted input and run the same schema before processing it. This ensures the backend does not rely on client-side validation.",
+      },
+      {
+        type: "code",
+        language: "typescript",
+        filename: "app/api/contact/route.ts",
+        code: `import { NextResponse } from "next/server";
+import { contactSchema } from "@/lib/validation/contact-schema";
+
+export async function POST(request: Request) {
+  const body: unknown = await request.json();
+  const result = contactSchema.safeParse(body);
+
+  if (!result.success) {
+    return NextResponse.json(
+      {
+        message: "Please check the submitted fields.",
+        errors: result.error.flatten().fieldErrors,
+      },
+      { status: 400 }
+    );
+  }
+
+  const contact = result.data;
+
+  // Save the validated contact or send it to a trusted service.
+  // Add rate limiting and abuse protection for public endpoints.
+
+  return NextResponse.json(
+    { message: "Message received" },
+    { status: 201 }
+  );
+}`,
+      },
+      {
+        type: "paragraph",
+        text: "safeParse returns a result object instead of throwing for ordinary validation failures. The server can return a clear client error for invalid input and continue with the parsed data only when validation succeeds. Production handlers should also handle malformed JSON, unexpected database failures, rate limits, and spam protection.",
+      },
+      {
+        type: "heading",
+        text: "Understand input types and transformed values",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "Some schemas transform values while parsing. For example, a form may collect a number as a string from an HTML input and convert it to a number for the backend. In those cases, Zod distinguishes the input type from the parsed output type. React Hook Form can model both types so the form fields and submitted values remain accurate.",
+      },
+      {
+        type: "code",
+        language: "typescript",
+        filename: "lib/validation/quote-schema.ts",
+        code: `import { z } from "zod";
+
+export const quoteSchema = z.object({
+  quantity: z
+    .string()
+    .regex(/^\\\\d+$/, "Enter a whole number")
+    .transform(Number)
+    .pipe(z.number().int().min(1).max(10000)),
+});
+
+export type QuoteFormInput = z.input<typeof quoteSchema>;
+export type QuoteFormOutput = z.output<typeof quoteSchema>;`,
+      },
+      {
+        type: "paragraph",
+        text: "The input type represents what the form controls provide, while the output type represents the validated and transformed value. This distinction is useful for quantities, dates, numeric prices, and normalized strings.",
+      },
+      {
+        type: "heading",
+        text: "Build accessible validation feedback",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "Good validation is not only about rejecting incorrect values. Users need to know which field needs attention and how to fix it. Associate labels with inputs, connect error text with aria-describedby, mark invalid fields with aria-invalid, and announce submission status without relying only on colour.",
+      },
+      {
+        type: "list",
+        items: [
+          "Use a real label for every form control.",
+          "Show concise messages next to the field that needs correction.",
+          "Set aria-invalid when a field has an error.",
+          "Connect the input to its error message with aria-describedby.",
+          "Use aria-live for asynchronous success and failure feedback.",
+          "Disable duplicate submission while a request is in progress.",
+          "Preserve user input when a server error occurs.",
+        ],
+      },
+      {
+        type: "heading",
+        text: "Organize larger and multi-step forms",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "For quote builders and booking flows, I separate schemas by step or domain and compose them when the complete form is submitted. Each step can validate only the fields needed to continue, while the final server submission validates the complete payload. This keeps each component focused and makes complex forms easier to maintain.",
+      },
+      {
+        type: "list",
+        items: [
+          "Group related fields into reusable form sections.",
+          "Keep schema definitions outside the component so they are not recreated on every render.",
+          "Use shared field components only when they improve consistency without hiding important accessibility behavior.",
+          "Validate the current step before moving forward.",
+          "Validate the complete payload again on the server.",
+          "Keep server-only secrets and privileged database operations out of browser code.",
+        ],
+      },
+      {
+        type: "heading",
+        text: "Common mistakes to avoid",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "One common mistake is assuming that a TypeScript type validates data at runtime. It does not. Another is duplicating validation rules in the UI and API until they disagree. I also avoid displaying raw server exceptions to users, trusting hidden inputs, or using a disabled button as the only protection against duplicate requests.",
+      },
+      {
+        type: "heading",
+        text: "Conclusion",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        text: "React Hook Form and Zod provide a strong foundation for forms that are easier to build, validate, and maintain. React Hook Form manages interaction state, Zod defines the data contract, and server-side parsing protects the application at the API boundary. When these pieces share one clear schema and accessible feedback pattern, forms become more predictable for both developers and users.",
       },
     ],
   },

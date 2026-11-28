@@ -123,7 +123,13 @@ export const blogPosts: BlogPost[] = [
     dateModified: "2024-07-10",
     author: "Sorence Nora",
     tag: "Project Case Study",
-    tags: ["Next.js", "Tailwind CSS", "TypeScript", "Framer Motion", "Case Study"],
+    tags: [
+      "Next.js",
+      "Tailwind CSS",
+      "TypeScript",
+      "Framer Motion",
+      "Case Study",
+    ],
     readingTime: "7 min read",
     ogImage: "/forProject_Section/yenzhen-tailoring/homepage_pagev3.png",
   },
@@ -166,6 +172,73 @@ export const blogPosts: BlogPost[] = [
     tags: ["Tailwind CSS", "Responsive Design", "CSS"],
     readingTime: "4 min read",
     ogImage: "/forVlog_Section/RespWebDes.png",
+  },
+  {
+    slug: "typescript-strict-mode-patterns",
+    title: "TypeScript Strict Mode: Patterns I Use in Every Project",
+    description:
+      "How enabling strict mode and a handful of compiler flags catches bugs early and keeps large TypeScript codebases maintainable.",
+    datePublished: "2024-09-01",
+    dateModified: "2024-09-01",
+    author: "Sorence Nora",
+    tag: "TypeScript",
+    tags: ["TypeScript", "Frontend Development", "Architecture"],
+    readingTime: "5 min read",
+    ogImage: "/forVlog_Section/TypeScript Strict Mode Best Practices.png",
+  },
+  {
+    slug: "supabase-realtime-data-patterns",
+    title: "Real-Time Data Patterns with Supabase and Next.js",
+    description:
+      "How I wire Supabase real-time subscriptions into Next.js server and client components for live dashboards.",
+    datePublished: "2024-09-10",
+    dateModified: "2024-09-10",
+    author: "Sorence Nora",
+    tag: "Backend Integration",
+    tags: ["Supabase", "Next.js", "TypeScript", "React"],
+    readingTime: "6 min read",
+    ogImage:
+      "/forVlog_Section/Real-Time Data Patterns with Supabase & Next.js.png",
+  },
+  {
+    slug: "framer-motion-scroll-reveals",
+    title: "Scroll-Reveal Animations with Framer Motion",
+    description:
+      "Building tasteful, performant scroll-reveal transitions that enhance rather than distract.",
+    datePublished: "2024-09-18",
+    dateModified: "2024-09-18",
+    author: "Sorence Nora",
+    tag: "Animation",
+    tags: ["Framer Motion", "React", "Next.js"],
+    readingTime: "4 min read",
+    ogImage: "/forVlog_Section/Scroll-Reveal Animations with Framer Motion.png",
+  },
+  {
+    slug: "seo-json-ld-nextjs",
+    title: "SEO with JSON-LD Structured Data in Next.js",
+    description:
+      "How I add Article, Breadcrumb, and Person structured data to Next.js pages for better search visibility.",
+    datePublished: "2024-09-25",
+    dateModified: "2024-09-25",
+    author: "Sorence Nora",
+    tag: "SEO",
+    tags: ["Next.js", "SEO", "Frontend Development"],
+    readingTime: "5 min read",
+    ogImage: "/forVlog_Section/SEO with JSON-LD in Next.js.png",
+  },
+  {
+    slug: "react-hook-form-zod-validation",
+    title: "Type-Safe Forms with React Hook Form and Zod",
+    description:
+      "Building validated, accessible forms with shared schemas between client and server.",
+    datePublished: "2024-10-02",
+    dateModified: "2024-10-02",
+    author: "Sorence Nora",
+    tag: "Forms",
+    tags: ["React Hook Form", "Zod", "TypeScript", "React"],
+    readingTime: "6 min read",
+    ogImage:
+      "/forVlog_Section/Type-Safe Forms with React Hook Form and Zod.png",
   },
 ];
 

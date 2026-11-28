@@ -114,8 +114,9 @@ const Navbar = () => {
       const path = pathname as string;
       const matched = navLinks.find(
         (l) =>
-          l.path === path ||
-          (path.startsWith("/projects/") && l.label === "WORK"),
+           l.path === path ||
+           (path.startsWith("/projects/") && l.label === "WORK") ||
+           (path.startsWith("/blog/") && l.label === "BLOG"),
       );
       if (matched) {
         moveHighlight(matched.target);
@@ -135,8 +136,9 @@ const Navbar = () => {
       return activeTarget === link.target;
     }
     return (
-      link.path === pathname ||
-      (link.path === "/projects" && pathname?.startsWith("/projects/"))
+       link.path === pathname ||
+       (link.path === "/projects" && pathname?.startsWith("/projects/")) ||
+       (link.path === "/blog" && pathname?.startsWith("/blog/"))
     );
   };
 
